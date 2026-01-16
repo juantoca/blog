@@ -37,10 +37,13 @@ const isExternalLink = (href: string) => {
         transition:persist="logo-light"
       />
      <!-- <span class="hidden min-[400px]:block">{SITE.title}</span> -->
-    
-     <SocialIcons links={SOCIAL_LINKS} />
-
     </Link>
+
+
+    <div class="absolute left-1/2 transform -translate-x-1/2">
+      <SocialIcons links={SOCIAL_LINKS} />
+    </div>
+    
     <div class="flex items-center gap-2 md:gap-4">
       <nav class="hidden items-center gap-4 text-sm sm:gap-6 md:flex">
         {NAV_LINKS.map((item) => {
