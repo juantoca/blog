@@ -3,6 +3,8 @@ import Link from '@/components/Link.astro'
 import ThemeToggle from '@/components/ThemeToggle.astro'
 import MobileMenu from '@/components/ui/mobile-menu'
 import SearchButton from '@/components/react/SearchButton'
+import SocialIcons from './SocialIcons.astro'
+import { SOCIAL_LINKS, NAV_LINKS, SITE } from '@/consts'
 import { NAV_LINKS } from '@/consts'
 import { Icon } from 'astro-icon/components'
 
@@ -35,6 +37,9 @@ const isExternalLink = (href: string) => {
         transition:persist="logo-light"
       />
      <!-- <span class="hidden min-[400px]:block">{SITE.title}</span> -->
+    
+     <SocialIcons links={SOCIAL_LINKS} />
+
     </Link>
     <div class="flex items-center gap-2 md:gap-4">
       <nav class="hidden items-center gap-4 text-sm sm:gap-6 md:flex">

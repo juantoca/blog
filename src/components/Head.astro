@@ -104,41 +104,5 @@ const ogImage = image || (cleanPathname ? new URL(`/og${cleanPathname}.png`, Ast
   <!-- Font Preloading to prevent layout shifts -->
   <link rel="preload" href="/fonts/GeistVF.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="preload" href="/fonts/GeistMonoVF.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  
-  <!-- Resource Hints for Performance -->
-  {ANALYTICS.google && (
-    <>
-      <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-      <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
-    </>
-  )}
-  {UMAMI.websiteId && (
-    <>
-      <link rel="dns-prefetch" href="https://cloud.umami.is" />
-      <link rel="preconnect" href="https://cloud.umami.is" crossorigin />
-    </>
-  )}
-  <!-- Prefetch search index for faster search -->
-  <link rel="prefetch" href="/api/search-index.json" as="fetch" crossorigin="anonymous" />
-  
-  <!-- Google Analytics -->
-  {ANALYTICS.google && (
-    <>
-      <script is:inline define:vars={{ gaId: ANALYTICS.google }}>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', gaId);
-      </script>
-      <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS.google}`}></script>
-    </>
-  )}
-  
-  <ClientRouter />
-  <!-- Umami Analytics -->
-  {UMAMI.websiteId && (
-    <script is:inline defer src="https://cloud.umami.is/script.js" define:vars={{ websiteId: UMAMI.websiteId }} data-website-id={UMAMI.websiteId}></script>
-  )}
-
   <slot />
 </head>
