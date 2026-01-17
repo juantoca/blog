@@ -1,12 +1,12 @@
 import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
-  title: 'Your Blog Name',
+  title: 'Juan Toca',
   description:
-    'A brief description of your blog. This will be used in meta tags and social sharing.',
-  href: 'https://yourdomain.com',
-  author: 'your-author-id',
-  locale: 'en-US',
+    'My own personal blog were I post about engineering matters or other topics',
+  href: 'https://juantoca.net',
+  author: 'juantoca',
+  locale: 'es-ES',
   featuredPostCount: 2,
   postsPerPage: 6,
 }
@@ -24,16 +24,16 @@ export const NAV_LINKS: SocialLink[] = [
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    href: 'https://github.com/username',
+    href: 'https://github.com/juantoca',
     label: 'GitHub',
   },
   {
-    href: 'https://twitter.com/username',
-    label: 'Twitter',
+    href: 'mailto:juantocamateo17@gmail.com',
+    label: 'Email',
   },
   {
-    href: 'mailto:your@email.com',
-    label: 'Email',
+    href: 'https://www.linkedin.com/in/juantocamateo/',
+    label: 'LinkedIn',
   },
   {
     href: '/rss.xml',
@@ -48,11 +48,4 @@ export const ICON_MAP: IconMap = {
   Twitter: 'lucide:twitter',
   Email: 'lucide:mail',
   RSS: 'lucide:rss',
-}
-
-// Newsletter consent text (centralized for GDPR compliance)
-export const NEWSLETTER_CONSENT_TEXT = {
-  text: 'I agree to receive newsletter emails.',
-  privacyLink: '/privacy',
-  privacyText: 'Privacy Policy',
 }
