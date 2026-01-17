@@ -1,4 +1,21 @@
-import type { IconMap, SocialLink, Site } from '@/types'
+import type { IconMap, SocialLink, Site, Language } from '@/types'
+
+// Default language - this will be used for URLs without language prefix
+export const DEFAULT_LANGUAGE = 'es'
+
+// Supported languages configuration
+export const LANGUAGES: Record<string, Language> = {
+  es: {
+    code: 'es',
+    name: 'Español',
+    locale: 'es-ES',
+  },
+  en: {
+    code: 'en',
+    name: 'English',
+    locale: 'en-US',
+  },
+}
 
 export const SITE: Site = {
   title: 'Juan Toca',
