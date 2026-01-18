@@ -4,12 +4,11 @@ import ThemeToggle from '@/components/ThemeToggle.astro'
 import MobileMenu from '@/components/ui/mobile-menu'
 import SearchButton from '@/components/react/SearchButton'
 import SocialIcons from './SocialIcons.astro'
-import { SOCIAL_LINKS, NAV_LINKS, SITE } from '@/consts'
-import { NAV_LINKS } from '@/consts'
+import { SOCIAL_LINKS, NAV_LINKS } from '@/consts'
 import { Icon } from 'astro-icon/components'
 import LanguageSwitcher from '@/components/LanguageSwitcher.astro'
 
-import { getLanguageFromUrl, getLocalizedUrl, getTranslation } from '@/lib/i18n'
+import { getLanguageFromUrl } from '@/lib/i18n'
 
 const currentLanguage = getLanguageFromUrl(Astro.url.pathname)
 const currentPath = Astro.url.pathname

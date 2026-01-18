@@ -106,4 +106,14 @@ export default defineConfig({
     ],
     remarkPlugins: [remarkMath, remarkEmoji],
   },
+  i18n : {
+    locales: ["es", "en"],
+    defaultLocale: "en",
+    fallback: {
+      es: "en"
+    },
+    routing: {
+      fallbackType: "rewrite"
+    }
+  }
 })

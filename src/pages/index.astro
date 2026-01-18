@@ -8,6 +8,7 @@ import { Icon } from 'astro-icon/components'
 import { getRecentPosts } from '@/lib/data-utils'
 import { SOCIAL_LINKS, ICON_MAP, SITE } from '@/consts'
 import type { SocialLink } from '@/types'
+import { getLocalizedUrl, getLanguageFromUrl} from '@/lib/i18n'
 
 // Error handling for fetching recent posts
 let latestPosts: Awaited<ReturnType<typeof getRecentPosts>> = []
@@ -83,7 +84,7 @@ const websiteSchema = {
           
           <!-- CTA Buttons -->
           <div class="flex flex-wrap items-center gap-3 pt-2">
-            <Link href="/blog" class={buttonVariants({ variant: 'default', size: 'lg' })}>
+            <Link href={getLocalizedUrl("/blog", getLanguageFromUrl(Astro.url.pathname))} class={buttonVariants({ variant: 'default', size: 'lg' })}>
               Read the blog
               <Icon name="lucide:arrow-right" class="size-4" />
             </Link>

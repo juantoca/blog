@@ -1,4 +1,4 @@
-import { DEFAULT_LANGUAGE, LANGUAGES, SITE_TRANSLATIONS } from '@/consts'
+import { DEFAULT_LANGUAGE, LANGUAGES} from '@/consts'
 import type { Language } from '@/types'
 
 /**
@@ -97,17 +97,6 @@ export function getLanguageFromUrl(pathname: string): string {
 }
 
 /**
- * Get localized site information
- */
-export function getLocalizedSite(language: string) {
-  const baseTranslations = SITE_TRANSLATIONS[language] || SITE_TRANSLATIONS[DEFAULT_LANGUAGE]
-  return {
-    ...baseTranslations,
-    locale: LANGUAGES[language]?.locale || LANGUAGES[DEFAULT_LANGUAGE].locale
-  }
-}
-
-/**
  * Generate alternate language URLs for a given path
  */
 export function getAlternateLanguageUrls(basePath: string): Record<string, string> {
@@ -162,12 +151,4 @@ export const UI_TRANSLATIONS = {
     'language.switch': 'Switch language',
     'language.current': 'Current language',
   }
-}
-
-/**
- * Get translated text for UI elements
- */
-export function getTranslation(key: string, language: string = DEFAULT_LANGUAGE): string {
-  const translations = UI_TRANSLATIONS[language] || UI_TRANSLATIONS[DEFAULT_LANGUAGE]
-  return translations[key] || key
 }

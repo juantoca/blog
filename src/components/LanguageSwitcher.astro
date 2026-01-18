@@ -1,7 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components'
-import { getAvailableLanguages, getLanguageFromUrl, getLocalizedUrl, getTranslation } from '@/lib/i18n'
-import { DEFAULT_LANGUAGE } from '@/consts'
+import { getAvailableLanguages, getLanguageFromUrl, getLocalizedUrl } from '@/lib/i18n'
 
 interface Props {
   
@@ -32,7 +31,6 @@ const basePath = getBasePathForTranslation(currentPath)
 <div class={`relative ${className || ''}`}>
   <button
     class="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
-    aria-label={getTranslation('language.switch', currentLanguage)}
     aria-expanded="false"
     aria-haspopup="true"
     data-language-switcher
