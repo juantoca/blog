@@ -19,6 +19,10 @@ export function getLanguageFromId(id: string): string {
   return DEFAULT_LANGUAGE
 }
 
+export function localizeUrl(url: string, astro: any){
+  return getLocalizedUrl(url, getLanguageFromUrl(astro.originPathname))
+}
+
 /**
  * Get the slug without language prefix
  * Examples:
@@ -46,11 +50,6 @@ export function getSlugWithoutLanguage(id: string): string {
 export function getLocalizedUrl(path: string, language: string): string {
   // Remove leading slash for consistent handling
   const cleanPath = path.startsWith('/') ? path.slice(1) : path
-  
-  // If it's the default language, don't add prefix
-  if (language === DEFAULT_LANGUAGE) {
-    return `/${cleanPath}`
-  }
   
   // Add language prefix
   return `/${language}/${cleanPath}`
@@ -88,7 +87,6 @@ export function isValidLanguage(language: string): boolean {
 export function getLanguageFromUrl(pathname: string): string {
   const segments = pathname.split('/').filter(Boolean)
   const firstSegment = segments[0]
-  
   if (firstSegment && isValidLanguage(firstSegment)) {
     return firstSegment
   }

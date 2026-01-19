@@ -8,7 +8,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
 import { Icon } from 'astro-icon/components'
-import { SITE } from '@/consts'
+import {localizeUrl} from '@/lib/i18n'
 
 export interface BreadcrumbItem {
   href?: string
@@ -51,7 +51,7 @@ const breadcrumbSchema = {
 <Breadcrumb>
   <BreadcrumbList>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/">
+      <BreadcrumbLink href={localizeUrl("/", Astro)}>
         <Icon name="lucide:home" class="size-4 shrink-0" />
       </BreadcrumbLink>
     </BreadcrumbItem>
@@ -70,7 +70,7 @@ const breadcrumbSchema = {
                 </span>
               </BreadcrumbPage>
             ) : (
-              <BreadcrumbLink href={item.href}>
+              <BreadcrumbLink href={localizeUrl(item.href, Astro)}>
                 <span class="flex items-center gap-x-2">
                   {item.icon && (
                     <Icon name={item.icon} class="size-4 shrink-0" />
