@@ -13,7 +13,7 @@ import {localizeUrl} from '@/lib/i18n'
 // Error handling for fetching recent posts
 let latestPosts: Awaited<ReturnType<typeof getRecentPosts>> = []
 try {
-  latestPosts = await getRecentPosts(2)
+  latestPosts = await getRecentPosts(2, Astro.currentLocale)
 } catch (error) {
   console.error('Error fetching recent posts:', error)
 }

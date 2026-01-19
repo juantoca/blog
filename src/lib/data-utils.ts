@@ -129,8 +129,9 @@ export async function getPostsByTag(
 
 export async function getRecentPosts(
   count: number,
+  lang: string
 ): Promise<CollectionEntry<'blog'>[]> {
-  const posts = await getAllPosts()
+  const posts = await getAllPostsAndSubpostsLocale(lang)
   return posts.slice(0, count)
 }
 
