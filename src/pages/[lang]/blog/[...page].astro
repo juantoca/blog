@@ -5,16 +5,29 @@ import PageHead from '@/components/PageHead.astro'
 import PaginationComponent from '@/components/ui/pagination'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
-import { getAllPosts, groupPostsByYear } from '@/lib/data-utils'
+import { getAllPostsAndSubpostsLocale, groupPostsByYear } from '@/lib/data-utils'
 import type { PaginateFunction } from 'astro'
+
+import { i18n } from "astro:config/client";
+import { toCodes } from "astro:i18n";
+
 
 export async function getStaticPaths({
   paginate,
 }: {
   paginate: PaginateFunction
 }) {
-  const allPosts = await getAllPosts()
-  return paginate(allPosts, { pageSize: SITE.postsPerPage })
+
+  var pages = [] 
+
+  const locales: [] = toCodes(i18n!.locales)
+
+  for(var l in locales){
+    const allPosts = await getAllPostsAndSubpostsLocale(locales[l])
+    const pagination =  paginate(allPosts, { pageSize: SITE.postsPerPage, params : {lang: locales[l]}})
+    pages = pages.concat(pagination)
+  }
+  return pages
 }
 
 const { page } = Astro.props

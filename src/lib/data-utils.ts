@@ -5,11 +5,9 @@ export async function getAllAuthors(): Promise<CollectionEntry<'authors'>[]> {
   return await getCollection('authors')
 }
 
+
 export async function getAllPosts(): Promise<CollectionEntry<'blog'>[]> {
-  const posts = await getCollection('blog')
-  return posts
-    .filter((post) => !post.data.draft && !isSubpost(post.id))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  return (await getAllPostsAndSubposts()).filter((post) => !isSubpost(post.id));
 }
 
 export async function getAllPostsAndSubposts(): Promise<
@@ -21,13 +19,29 @@ export async function getAllPostsAndSubposts(): Promise<
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 }
 
-export async function getAllProjects(): Promise<CollectionEntry<'projects'>[]> {
-  const projects = await getCollection('projects')
-  return projects.sort((a, b) => {
-    const dateA = a.data.startDate?.getTime() || 0
-    const dateB = b.data.startDate?.getTime() || 0
-    return dateB - dateA
-  })
+export async function getAllPostsAndSubpostsLocale(lang: string): Promise<
+  CollectionEntry<'blog'>[]
+> {
+  var posts_by_locale = {
+    en : {}
+  }
+  posts_by_locale[lang] = {}
+  const posts = await getAllPostsAndSubposts()
+  posts.forEach(
+    (post) => {
+      const [post_lang, ...slug] = post.id.split("/")
+      if(["en", lang].indexOf(post_lang) > -1){
+        post.id = slug.join("/")
+        posts_by_locale[post_lang][slug] = post
+      }
+    } 
+  )
+
+  var returneo = {
+    ...posts_by_locale.en,
+    ...posts_by_locale[lang]
+  }
+  return Object.values(returneo).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
 }
 
 export async function getAllTags(): Promise<Map<string, number>> {

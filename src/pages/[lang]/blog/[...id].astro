@@ -31,11 +31,17 @@ import { render } from 'astro:content'
 
 export async function getStaticPaths() {
   const posts = await getAllPostsAndSubposts()
-  return posts.map((post) => ({
-    params: { id: post.id },
-    props: post,
-  }))
+
+  return posts.map((post) => {
+    const [lang, ...slug] = post.id.split('/');
+    return ({
+      params: { id: slug.join("/"), lang: lang },
+      props: post,
+  })})
 }
+
+
+const { lang, id } = Astro.params;
 
 const post = Astro.props
 const currentPostId = Astro.params.id

@@ -10,7 +10,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher.astro'
 
 import {localizeUrl} from '@/lib/i18n'
 
-const currentPath = Astro.url.pathname
+const currentPath = Astro.originPathname
 
 const isExternalLink = (href: string) => {
   return href.startsWith('http')
