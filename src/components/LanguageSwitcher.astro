@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { currentPath, class: className } = Astro.props
-const currentLanguage = getLanguageFromUrl(Astro.url.pathname)
+const currentLanguage = getLanguageFromUrl(Astro.originPathname)
 const languages = getAvailableLanguages()
 
 // Convert current path to language-agnostic version
