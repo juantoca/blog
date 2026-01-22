@@ -21,24 +21,12 @@ const isExternalLink = (href: string) => {
   <div class="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-4 p-4">
     <Link href={localizeUrl("/", Astro)} class="flex shrink-0 items-center gap-2 text-xl font-medium" data-astro-reload>
       <img 
-        src="/static/logo.svg" 
-        alt="Logo" 
-        class="size-8 dark:block hidden" 
-        width="32" 
-        height="32"
+        src="/static/face.png" 
+        alt="index" 
+        width="64" 
+        height="64"
         loading="eager"
         fetchpriority="high"
-        transition:persist="logo-dark"
-      />
-      <img 
-        src="/static/logod.svg" 
-        alt="Logo" 
-        class="size-8 dark:hidden block" 
-        width="32" 
-        height="32"
-        loading="eager"
-        fetchpriority="high"
-        transition:persist="logo-light"
       />
      <!-- <span class="hidden min-[400px]:block">{SITE.title}</span> -->
     </Link>
