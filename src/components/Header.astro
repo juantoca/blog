@@ -34,13 +34,23 @@ const isExternalLink = (href: string) => {
         alt="index"
         width="64"
         height="64"
+        class="hidden min-[400px]:block"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <img
+        src="/static/face.png"
+        alt="index"
+        width="48"
+        height="48"
+        class="hidden max-[400px]:block"
         loading="eager"
         fetchpriority="high"
       />
       <!-- <span class="hidden min-[400px]:block">{SITE.title}</span> -->
     </Link>
 
-    <div class="flex-item items-left hidden min-[450px]:block">
+    <div class="flex-item items-left hidden min-[460px]:block">
       <SocialIcons links={SOCIAL_LINKS} />
     </div>
 
@@ -80,7 +90,11 @@ const isExternalLink = (href: string) => {
       </div>
       <SearchButton client:idle />
       <LanguageSwitcher currentPath={currentPath} class="md:block" />
-      <MobileMenu client:idle transition:persist />
+      <MobileMenu client:idle client:only="react" transition:persist >
+        <div class="flex-item items-left hidden max-[460px]:block social-icons-mobile-menu">
+          <SocialIcons links={SOCIAL_LINKS} />
+        </div>
+      </MobileMenu>
       <ThemeToggle transition:persist />
     </div>
   </div>

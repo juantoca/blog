@@ -5,12 +5,15 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuPortal
 } from '@/components/ui/dropdown-menu'
 import { NAV_LINKS } from '@/consts'
 import { Menu, ExternalLink } from 'lucide-react'
+import { getLanguageFromUrl, getLocalizedUrl } from '@/lib/i18n'
 
 const MobileMenu = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const language = getLanguageFromUrl(window.location.href)
 
   useEffect(() => {
     const handleViewTransitionStart = () => {
@@ -43,13 +46,14 @@ const MobileMenu = ({ children }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-background">
+        {children}
         {NAV_LINKS.map((item) => {
           const isExternal = isExternalLink(item.href)
           const isInsideLink = item.label.toLowerCase() === 'inside'
           return (
-            <DropdownMenuItem key={item.href} asChild>
+            <DropdownMenuItem key={getLocalizedUrl(item.href, language)} asChild>
               <a
-                href={item.href}
+                href={getLocalizedUrl(item.href, language)}
                 target={isExternal ? '_blank' : '_self'}
                 rel={isExternal ? 'noopener noreferrer' : undefined}
                 className={`flex w-full items-center gap-2 text-lg font-medium capitalize ${
@@ -72,7 +76,6 @@ const MobileMenu = ({ children }) => {
             </DropdownMenuItem>
           )
         })}
-        {children}
       </DropdownMenuContent>
     </DropdownMenu>
   )
