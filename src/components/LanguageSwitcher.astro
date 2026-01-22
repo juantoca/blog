@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components'
 import { getAvailableLanguages, getLanguageFromUrl, getLocalizedUrl } from '@/lib/i18n'
+import { Button } from '@/components/ui/button'
 
 interface Props {
   
@@ -28,19 +29,15 @@ const getBasePathForTranslation = (path: string) => {
 const basePath = getBasePathForTranslation(currentPath)
 ---
 
-<div class={`relative ${className || ''}`}>
-  <button
-    class="flex items-center gap-2 px-3 py-2 text-sm rounded-md hover:bg-muted transition-colors"
+ <Button
+    className="relative size-9 border md:border-0 md:bg-transparent md:hover:bg-muted md:-my-2 md:-me-2 md:size-8"
     aria-expanded="false"
     aria-haspopup="true"
+    variant="outline"
+    size="icon"
     data-language-switcher
   >
-    <Icon name="lucide:globe" class="size-4" />
-    <span class="font-medium">
-      {languages.find(lang => lang.code === currentLanguage)?.name}
-    </span>
-    <Icon name="lucide:chevron-down" class="size-4" />
-  </button>
+    <Icon name="lucide:globe" class="h-5 w-5 md:h-4 md:w-4" />
   
   <div 
     class="absolute right-0 top-full mt-2 min-w-[160px] bg-background border rounded-md shadow-lg z-50 opacity-0 invisible transition-all duration-200"
@@ -66,7 +63,7 @@ const basePath = getBasePathForTranslation(currentPath)
       </a>
     ))}
   </div>
-</div>
+</Button>
 
 <script is:inline>
   function initLanguageSwitcher() {

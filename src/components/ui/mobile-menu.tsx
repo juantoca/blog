@@ -9,7 +9,7 @@ import {
 import { NAV_LINKS } from '@/consts'
 import { Menu, ExternalLink } from 'lucide-react'
 
-const MobileMenu = () => {
+const MobileMenu = ({children}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -57,6 +57,7 @@ const MobileMenu = () => {
             </DropdownMenuItem>
           )
         })}
+        {children}
       </DropdownMenuContent>
     </DropdownMenu>
   )
