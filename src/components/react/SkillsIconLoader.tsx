@@ -91,4 +91,3 @@ export const iconMap: { [key: string]: IconType } = {
 export function getIcon(logo: string): IconType {
   return iconMap[logo] || FaQuestionCircle
 }
-

@@ -33,7 +33,7 @@ const isExternal = external || href.startsWith('http')
     'inline-block transition-colors duration-300 ease-in-out',
     underline &&
       'underline decoration-muted-foreground underline-offset-[3px] hover:decoration-foreground',
-    className
+    className,
   )}
   {...rest}
   data-internal-link={!isExternal ? 'true' : undefined}

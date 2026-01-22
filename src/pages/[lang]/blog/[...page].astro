@@ -5,26 +5,30 @@ import PageHead from '@/components/PageHead.astro'
 import PaginationComponent from '@/components/ui/pagination'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
-import { getAllPostsAndSubpostsLocale, groupPostsByYear } from '@/lib/data-utils'
+import {
+  getAllPostsAndSubpostsLocale,
+  groupPostsByYear,
+} from '@/lib/data-utils'
 import type { PaginateFunction } from 'astro'
 
-import { i18n } from "astro:config/client";
-import { toCodes } from "astro:i18n";
-
+import { i18n } from 'astro:config/client'
+import { toCodes } from 'astro:i18n' // @ts-ignore
 
 export async function getStaticPaths({
   paginate,
 }: {
   paginate: PaginateFunction
 }) {
-
-  var pages = [] 
+  var pages = []
 
   const locales: [] = toCodes(i18n!.locales)
 
-  for(var l in locales){
+  for (var l in locales) {
     const allPosts = await getAllPostsAndSubpostsLocale(locales[l])
-    const pagination =  paginate(allPosts, { pageSize: SITE.postsPerPage, params : {lang: locales[l]}})
+    const pagination = paginate(allPosts, {
+      pageSize: SITE.postsPerPage,
+      params: { lang: locales[l] },
+    })
     pages = pages.concat(pagination)
   }
   return pages
@@ -49,7 +53,7 @@ const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
     {
       years.map((year) => (
         <section class="flex flex-col">
-          <div class="text-muted-foreground/60 text-xs font-medium uppercase tracking-wider mb-2.5 mt-6 first:mt-0">
+          <div class="text-muted-foreground/60 mt-6 mb-2.5 text-xs font-medium tracking-wider uppercase first:mt-0">
             {year}
           </div>
           <ul class="flex flex-col gap-2">

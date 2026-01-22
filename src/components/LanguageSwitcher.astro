@@ -1,10 +1,13 @@
 ---
-import { Icon } from 'astro-icon/components'
-import { getAvailableLanguages, getLanguageFromUrl, getLocalizedUrl } from '@/lib/i18n'
 import { Button } from '@/components/ui/button'
+import {
+  getAvailableLanguages,
+  getLanguageFromUrl,
+  getLocalizedUrl,
+} from '@/lib/i18n'
+import { Icon } from 'astro-icon/components'
 
 interface Props {
-  
   currentPath: string
   class?: string
 }
@@ -17,51 +20,51 @@ const languages = getAvailableLanguages()
 const getBasePathForTranslation = (path: string) => {
   const segments = path.split('/').filter(Boolean)
   const firstSegment = segments[0]
-  
+
   // If first segment is a language, remove it
-  if (languages.some(lang => lang.code === firstSegment)) {
+  if (languages.some((lang) => lang.code === firstSegment)) {
     return '/' + segments.slice(1).join('/')
   }
-  
+
   return path
 }
 
 const basePath = getBasePathForTranslation(currentPath)
 ---
 
- <Button
-    className="relative size-9 border md:border-0 md:bg-transparent md:hover:bg-muted md:-my-2 md:-me-2 md:size-8"
-    aria-expanded="false"
-    aria-haspopup="true"
-    variant="outline"
-    size="icon"
-    data-language-switcher
-  >
-    <Icon name="lucide:globe" class="h-5 w-5 md:h-4 md:w-4" />
-  
-  <div 
-    class="absolute right-0 top-full mt-2 min-w-[160px] bg-background border rounded-md shadow-lg z-50 opacity-0 invisible transition-all duration-200"
+<Button
+  className="md:hover:bg-muted relative size-9 border md:-my-2 md:-me-2 md:size-8 md:border-0 md:bg-transparent"
+  aria-expanded="false"
+  aria-haspopup="true"
+  variant="outline"
+  size="icon"
+  data-language-switcher
+>
+  <Icon name="lucide:globe" class="h-5 w-5 md:h-4 md:w-4" />
+
+  <div
+    class="bg-background invisible absolute top-full right-0 z-50 mt-2 min-w-[160px] rounded-md border opacity-0 shadow-lg transition-all duration-200"
     data-language-menu
   >
-    {languages.map((language) => (
-      <a
-        href={getLocalizedUrl(basePath, language.code)}
-        class={`flex items-center gap-3 px-4 py-3 text-sm hover:bg-muted transition-colors first:rounded-t-md last:rounded-b-md ${
-          language.code === currentLanguage 
-            ? 'bg-muted font-medium' 
-            : ''
-        }`}
-        data-language={language.code}
-      >
-        <span class="text-muted-foreground text-xs font-mono uppercase">
-          {language.code}
-        </span>
-        <span>{language.name}</span>
-        {language.code === currentLanguage && (
-          <Icon name="lucide:check" class="size-4 ml-auto text-primary" />
-        )}
-      </a>
-    ))}
+    {
+      languages.map((language) => (
+        <a
+          href={getLocalizedUrl(basePath, language.code)}
+          class={`hover:bg-muted flex items-center gap-3 px-4 py-3 text-sm transition-colors first:rounded-t-md last:rounded-b-md ${
+            language.code === currentLanguage ? 'bg-muted font-medium' : ''
+          }`}
+          data-language={language.code}
+        >
+          <span class="text-muted-foreground font-mono text-xs uppercase">
+            {language.code}
+          </span>
+          <span>{language.name}</span>
+          {language.code === currentLanguage && (
+            <Icon name="lucide:check" class="text-primary ml-auto size-4" />
+          )}
+        </a>
+      ))
+    }
   </div>
 </Button>
 
@@ -69,17 +72,17 @@ const basePath = getBasePathForTranslation(currentPath)
   function initLanguageSwitcher() {
     const switcher = document.querySelector('[data-language-switcher]')
     const menu = document.querySelector('[data-language-menu]')
-    
+
     if (!switcher || !menu) {
       // Retry after a short delay if elements aren't ready
       setTimeout(initLanguageSwitcher, 50)
       return
     }
-    
+
     let isOpen = false
     let clickOutsideHandler = null
     let keydownHandler = null
-    
+
     const toggleMenu = () => {
       isOpen = !isOpen
       if (isOpen) {
@@ -92,7 +95,7 @@ const basePath = getBasePathForTranslation(currentPath)
         switcher.setAttribute('aria-expanded', 'false')
       }
     }
-    
+
     const closeMenu = () => {
       if (isOpen) {
         isOpen = false
@@ -101,14 +104,14 @@ const basePath = getBasePathForTranslation(currentPath)
         switcher.setAttribute('aria-expanded', 'false')
       }
     }
-    
+
     // Button click handler
     switcher.addEventListener('click', (e) => {
       e.preventDefault()
       e.stopPropagation()
       toggleMenu()
     })
-    
+
     // Close menu when clicking outside
     clickOutsideHandler = (e) => {
       if (!switcher.contains(e.target) && !menu.contains(e.target)) {
@@ -116,12 +119,12 @@ const basePath = getBasePathForTranslation(currentPath)
       }
     }
     document.addEventListener('click', clickOutsideHandler)
-    
+
     // Prevent menu from closing when clicking inside it
     menu.addEventListener('click', (e) => {
       e.stopPropagation()
     })
-    
+
     // Close menu on escape
     keydownHandler = (e) => {
       if (e.key === 'Escape') {
@@ -129,18 +132,18 @@ const basePath = getBasePathForTranslation(currentPath)
       }
     }
     document.addEventListener('keydown', keydownHandler)
-    
+
     // Set initial aria-expanded state
     switcher.setAttribute('aria-expanded', 'false')
   }
-  
+
   // Initialize immediately if DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initLanguageSwitcher)
   } else {
     initLanguageSwitcher()
   }
-  
+
   // Also handle Astro page navigation
   document.addEventListener('astro:page-load', initLanguageSwitcher)
 </script>

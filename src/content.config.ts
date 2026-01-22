@@ -4,14 +4,14 @@ import { defineCollection, z } from 'astro:content'
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: z.object({
-      title: z.string(),
-      description: z.string(),
-      date: z.coerce.date(),
-      order: z.number().optional(),
-      tags: z.array(z.string()).optional(),
-      authors: z.array(z.string()).optional(),
-      draft: z.boolean().optional(),
-    }),
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    order: z.number().optional(),
+    tags: z.array(z.string()).optional(),
+    authors: z.array(z.string()).optional(),
+    draft: z.boolean().optional(),
+  }),
 })
 
 const authors = defineCollection({
@@ -44,4 +44,4 @@ const projects = defineCollection({
     }),
 })
 
-export const collections = { "blog": blog }
+export const collections = { blog: blog }

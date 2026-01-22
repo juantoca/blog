@@ -86,7 +86,7 @@ const Skills: React.FC = () => {
   }, [])
 
   return (
-    <div className="z-30 mt-12 flex w-full flex-col max-w-[calc(100vw-5rem)] mx-auto lg:max-w-full">
+    <div className="z-30 mx-auto mt-12 flex w-full max-w-[calc(100vw-5rem)] flex-col lg:max-w-full">
       <div className="space-y-2">
         {categoryGroups.map((group, groupIndex) => (
           <InfiniteScroll

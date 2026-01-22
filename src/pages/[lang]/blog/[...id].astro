@@ -10,7 +10,6 @@ import TOCSidebar from '@/components/TOCSidebar.astro'
 import { badgeVariants } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import Layout from '@/layouts/Layout.astro'
-import { SITE } from '@/consts'
 import {
   getAdjacentPosts,
   getAllPostsAndSubposts,
@@ -33,15 +32,15 @@ export async function getStaticPaths() {
   const posts = await getAllPostsAndSubposts()
 
   return posts.map((post) => {
-    const [lang, ...slug] = post.id.split('/');
-    return ({
-      params: { id: slug.join("/"), lang: lang },
+    const [lang, ...slug] = post.id.split('/')
+    return {
+      params: { id: slug.join('/'), lang: lang },
       props: post,
-  })})
+    }
+  })
 }
 
-
-const { lang, id } = Astro.params;
+const { lang, id } = Astro.params
 
 const post = Astro.props
 const currentPostId = Astro.params.id
@@ -71,7 +70,11 @@ try {
 const isCurrentSubpost = isSubpost(currentPostId)
 
 // Error handling for navigation and metadata
-let navigation: Awaited<ReturnType<typeof getAdjacentPosts>> = { newer: null, older: null, parent: null }
+let navigation: Awaited<ReturnType<typeof getAdjacentPosts>> = {
+  newer: null,
+  older: null,
+  parent: null,
+}
 let parentPost: Awaited<ReturnType<typeof getParentPost>> = null
 let hasChildPosts = false
 let subpostCount = 0
@@ -247,9 +250,9 @@ try {
                       {tag}
                     </a>
                     {tooltip && (
-                      <span class="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-3 w-max max-w-xs rounded-md bg-gray-900 dark:bg-gray-50 px-3 py-2 text-xs text-white dark:text-gray-900 shadow-xl border border-gray-700 dark:border-gray-200 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all duration-200 z-[100]">
+                      <span class="pointer-events-none invisible absolute bottom-full left-1/2 z-[100] mb-3 w-max max-w-xs -translate-x-1/2 rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-xs text-white opacity-0 shadow-xl transition-all duration-200 group-hover:visible group-hover:opacity-100 dark:border-gray-200 dark:bg-gray-50 dark:text-gray-900">
                         {tooltip}
-                        <span class="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-gray-900 dark:border-t-gray-50"></span>
+                        <span class="absolute top-full left-1/2 h-0 w-0 -translate-x-1/2 border-t-[6px] border-r-[6px] border-l-[6px] border-t-gray-900 border-r-transparent border-l-transparent dark:border-t-gray-50" />
                       </span>
                     )}
                   </div>
@@ -292,9 +295,7 @@ try {
       olderPost={navigation.older}
       parentPost={isCurrentSubpost ? navigation.parent : undefined}
     />
-
   </section>
-
 
   <Button
     variant="outline"

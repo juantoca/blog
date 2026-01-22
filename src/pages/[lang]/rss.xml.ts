@@ -8,7 +8,7 @@ import { toCodes } from "astro:i18n";
 
 export async function getStaticPaths() {
 
-  var pages = [] 
+  var pages: [] = []
 
   const locales: [] = toCodes(i18n!.locales)
 

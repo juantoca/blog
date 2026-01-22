@@ -8,20 +8,24 @@ interface Props {
   image?: string
 }
 
-const { 
-  title = SITE.title, 
+const {
+  title = SITE.title,
   description = SITE.description,
-  image
+  image,
 } = Astro.props
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href
 const cleanPathname = Astro.url.pathname.replace(/\/$/, '')
-const ogImage = image || (cleanPathname ? new URL(`/og${cleanPathname}.png`, Astro.site).href : new URL('/og-default.png', Astro.site).href)
+const ogImage =
+  image ||
+  (cleanPathname
+    ? new URL(`/og${cleanPathname}.png`, Astro.site).href
+    : new URL('/og-default.png', Astro.site).href)
 ---
 
 <head>
   <script is:inline>
-    (function () {
+    ;(function () {
       const theme =
         localStorage.getItem('theme') ||
         (window.matchMedia('(prefers-color-scheme: dark)').matches
@@ -41,20 +45,30 @@ const ogImage = image || (cleanPathname ? new URL(`/og${cleanPathname}.png`, Ast
 
   <!-- Primary Meta Tags (deduplicated) -->
   <meta name="title" content={title} />
-  {(() => {
-    const desc = description && description.length > 160 ? `${description.slice(0, 157)}…` : description
-    return <meta name="description" content={desc} />
-  })()}
+  {
+    (() => {
+      const desc =
+        description && description.length > 160
+          ? `${description.slice(0, 157)}…`
+          : description
+      return <meta name="description" content={desc} />
+    })()
+  }
   <link rel="canonical" href={canonicalURL} />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={title} />
-  {(() => {
-    const desc = description && description.length > 160 ? `${description.slice(0, 157)}…` : description
-    return <meta property="og:description" content={desc} />
-  })()}
+  {
+    (() => {
+      const desc =
+        description && description.length > 160
+          ? `${description.slice(0, 157)}…`
+          : description
+      return <meta property="og:description" content={desc} />
+    })()
+  }
   <meta property="og:image" content={ogImage} />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -63,10 +77,15 @@ const ogImage = image || (cleanPathname ? new URL(`/og${cleanPathname}.png`, Ast
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content={canonicalURL} />
   <meta name="twitter:title" content={title} />
-  {(() => {
-    const desc = description && description.length > 160 ? `${description.slice(0, 157)}…` : description
-    return <meta name="twitter:description" content={desc} />
-  })()}
+  {
+    (() => {
+      const desc =
+        description && description.length > 160
+          ? `${description.slice(0, 157)}…`
+          : description
+      return <meta name="twitter:description" content={desc} />
+    })()
+  }
   <meta name="twitter:image" content={ogImage} />
 
   <meta name="HandheldFriendly" content="True" />
@@ -99,9 +118,21 @@ const ogImage = image || (cleanPathname ? new URL(`/og${cleanPathname}.png`, Ast
   />
 
   <Favicons />
-  
+
   <!-- Font Preloading to prevent layout shifts -->
-  <link rel="preload" href="/fonts/GeistVF.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="/fonts/GeistMonoVF.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+  <link
+    rel="preload"
+    href="/fonts/GeistVF.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
+  <link
+    rel="preload"
+    href="/fonts/GeistMonoVF.woff2"
+    as="font"
+    type="font/woff2"
+    crossorigin="anonymous"
+  />
   <slot />
 </head>
