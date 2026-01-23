@@ -1,45 +1,11 @@
 import { DEFAULT_LANGUAGE, LANGUAGES} from '@/consts'
 import type { Language } from '@/types'
 
-/**
- * Get language from a post ID or path
- * Examples:
- * - "hello-world" -> "es" (default)
- * - "en/hello-world" -> "en"
- * - "es/hello-world" -> "es"
- */
-export function getLanguageFromId(id: string): string {
-  const parts = id.split('/')
-  const firstPart = parts[0]
-  
-  if (firstPart in LANGUAGES) {
-    return firstPart
-  }
-  
-  return DEFAULT_LANGUAGE
-}
 
 export function localizeUrl(url: string, astro: any){
   return getLocalizedUrl(url, getLanguageFromUrl(astro.originPathname))
 }
 
-/**
- * Get the slug without language prefix
- * Examples:
- * - "hello-world" -> "hello-world"
- * - "en/hello-world" -> "hello-world"
- * - "es/deep/nested/post" -> "deep/nested/post"
- */
-export function getSlugWithoutLanguage(id: string): string {
-  const parts = id.split('/')
-  const firstPart = parts[0]
-  
-  if (firstPart in LANGUAGES) {
-    return parts.slice(1).join('/')
-  }
-  
-  return id
-}
 
 /**
  * Get language-specific URL
@@ -55,14 +21,6 @@ export function getLocalizedUrl(path: string, language: string): string {
   return `/${language}/${cleanPath}`
 }
 
-
-/**
- * Get the base slug for finding translations
- * This removes both language prefix and handles nested paths
- */
-export function getBaseSlug(id: string): string {
-  return getSlugWithoutLanguage(id)
-}
 
 /**
  * Get available languages list
@@ -94,18 +52,7 @@ export function getLanguageFromUrl(pathname: string): string {
   return DEFAULT_LANGUAGE
 }
 
-/**
- * Generate alternate language URLs for a given path
- */
-export function getAlternateLanguageUrls(basePath: string): Record<string, string> {
-  const alternates: Record<string, string> = {}
-  
-  Object.keys(LANGUAGES).forEach(lang => {
-    alternates[lang] = getLocalizedUrl(basePath, lang)
-  })
-  
-  return alternates
-}
+
 
 /**
  * Common UI translations
