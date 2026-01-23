@@ -22,3 +22,8 @@ export type Language = {
   name: string
   locale: string
 }
+
+export type Translations = {
+  en: string
+  es: string
+}

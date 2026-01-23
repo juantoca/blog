@@ -1,5 +1,5 @@
 import { DEFAULT_LANGUAGE, LANGUAGES} from '@/consts'
-import type { Language } from '@/types'
+import type { Language, Translation, Translations } from '@/types'
 
 
 export function localizeUrl(url: string, astro: any){
@@ -52,6 +52,10 @@ export function getLanguageFromUrl(pathname: string): string {
   return DEFAULT_LANGUAGE
 }
 
+export function localizeString(astro: any, translations: Translations){
+  const language = getLanguageFromUrl(astro.originPathname)
+  return translations[language]
+}
 
 
 /**

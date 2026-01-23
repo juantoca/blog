@@ -6,7 +6,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getRecentPosts } from '@/lib/data-utils'
-import { localizeUrl } from '@/lib/i18n'
+import { localizeUrl, localizeString } from '@/lib/i18n'
 import { Icon } from 'astro-icon/components'
 
 // Error handling for fetching recent posts
@@ -93,7 +93,10 @@ const websiteSchema = {
               class="text-muted-foreground mt-4 max-w-xl text-base leading-relaxed md:text-lg"
               style="min-height: 3rem;"
             >
-              {SITE.description}
+            {localizeString(Astro, {
+              en: SITE.description,
+              es: "Un blog sobre ingeniería, proyectos, mi vida, el universo y el todo"
+            })}
             </p>
           </div>
 
@@ -103,17 +106,22 @@ const websiteSchema = {
               href={localizeUrl('/blog', Astro)}
               class={buttonVariants({ variant: 'default', size: 'lg' })}
             >
-              Read the blog
+            {localizeString(Astro, {
+              en: "Read the blog",
+              es: "¡Al blog!"
+            })}
               <Icon name="lucide:arrow-right" class="size-4" />
             </Link>
             <Link
               href={localizeUrl('/about', Astro)}
               class={buttonVariants({ variant: 'outline', size: 'lg' })}
             >
-              About me
+            {localizeString(Astro, {
+              en: "Who am I?",
+              es: "¿Quién soy?"
+            })}
             </Link>
           </div>
-
         </div>
       </div>
     </div>
@@ -125,10 +133,10 @@ const websiteSchema = {
       <section class="mt-12">
         <div class="mb-6 flex items-center justify-between">
           <div>
-            <h2 class="mb-2 text-2xl font-semibold">Latest from the blog</h2>
-            <p class="text-muted-foreground text-sm">
-              Recent insights and articles
-            </p>
+            <h2 class="mb-2 text-2xl font-semibold">{localizeString(Astro, {
+              en: "Latest posts",
+              es: "Lo último de lo último"
+            })}</h2>
           </div>
           <Link
             href={localizeUrl('/blog', Astro)}
@@ -137,18 +145,14 @@ const websiteSchema = {
               ' hidden items-center gap-1.5 sm:flex'
             }
           >
-            View all
+            {localizeString(Astro, {
+              en: "All posts",
+              es: "Todos los posts"
+            })}
             <Icon name="lucide:arrow-right" class="size-4" />
           </Link>
         </div>
 
-        <div class="space-y-2">
-          {latestPosts.map((post) => (
-            <article>
-              <BlogCard entry={post} />
-            </article>
-          ))}
-        </div>
 
         <article class="mt-2 sm:hidden">
           <Link
@@ -166,7 +170,10 @@ const websiteSchema = {
               <div class="min-w-0 flex-1">
                 <div class="flex items-center gap-2">
                   <span class="text-foreground group-hover:text-primary text-sm font-semibold transition-colors">
-                    View all posts
+                    {localizeString(Astro, {
+                      en: "All posts",
+                      es: "Todos los posts"
+                    })}
                   </span>
                   <Icon
                     name="lucide:arrow-right"
@@ -174,13 +181,18 @@ const websiteSchema = {
                     aria-hidden="true"
                   />
                 </div>
-                <p class="text-muted-foreground mt-0.5 text-xs">
-                  Explore all articles and tutorials
-                </p>
               </div>
             </div>
           </Link>
         </article>
+
+        <div class="space-y-2">
+          {latestPosts.map((post) => (
+            <article>
+              <BlogCard entry={post} />
+            </article>
+          ))}
+        </div>
       </section>
     )
   }

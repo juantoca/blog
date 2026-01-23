@@ -20,7 +20,7 @@ export const LANGUAGES: Record<string, Language> = {
 export const SITE: Site = {
   title: 'Juan Toca',
   description:
-    'My own personal blog were I post about engineering matters or other topics',
+    'A blog on engineering, projects, life, the universe and everything',
   href: 'https://juantoca.net',
   author: 'juantoca',
   locale: 'es-ES',
