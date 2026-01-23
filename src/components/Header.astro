@@ -8,7 +8,7 @@ import { NAV_LINKS, SOCIAL_LINKS } from '@/consts'
 import { Icon } from 'astro-icon/components'
 import SocialIcons from './SocialIcons.astro'
 
-import { localizeUrl } from '@/lib/i18n'
+import { localizeString, localizeUrl } from '@/lib/i18n'
 
 const currentPath = Astro.originPathname
 
@@ -69,7 +69,18 @@ const isExternalLink = (href: string) => {
                     : 'text-foreground/60 hover:text-foreground/80 flex items-center gap-1.5 capitalize transition-colors'
                 }
               >
-                <span>{item.label}</span>
+                <span>{
+                  localizeString(Astro, {
+                      "Blog": {
+                        en: "Blog",
+                        es: "Blog"
+                      },
+                      "About": {
+                        en: "About me",
+                        es: "Sobre mi"
+                      }
+                    }[item.label])
+                }</span>
                 {isExternal && (
                   <Icon
                     name="lucide:external-link"
