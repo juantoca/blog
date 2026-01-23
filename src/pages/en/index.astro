@@ -2,19 +2,17 @@
 import BlogCard from '@/components/BlogCard.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
-import SocialIcons from '@/components/SocialIcons.astro'
 import { buttonVariants } from '@/components/ui/button'
-import { ICON_MAP, SITE, SOCIAL_LINKS } from '@/consts'
+import { SITE } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
 import { getRecentPosts } from '@/lib/data-utils'
 import { localizeUrl } from '@/lib/i18n'
-import type { SocialLink } from '@/types'
 import { Icon } from 'astro-icon/components'
 
 // Error handling for fetching recent posts
 let latestPosts: Awaited<ReturnType<typeof getRecentPosts>> = []
 try {
-  latestPosts = await getRecentPosts(2, Astro.currentLocale)
+  latestPosts = await getRecentPosts(4, Astro.currentLocale)
 } catch (error) {
   console.error('Error fetching recent posts:', error)
 }
@@ -89,7 +87,6 @@ const websiteSchema = {
               class="text-4xl leading-[1.1] font-bold tracking-tight sm:text-5xl md:text-6xl"
               style="font-variation-settings: 'wght' 700;"
             >
-              Welcome to<br class="hidden sm:block" />
               <span class="text-primary">{SITE.title}</span>
             </h1>
             <p
@@ -117,12 +114,6 @@ const websiteSchema = {
             </Link>
           </div>
 
-          <!-- Social Icons -->
-          <div class="pt-2">
-            <ul class="flex flex-wrap items-center gap-2" role="list">
-              <SocialIcons links={SOCIAL_LINKS}/>
-            </ul>
-          </div>
         </div>
       </div>
     </div>
@@ -193,65 +184,4 @@ const websiteSchema = {
       </section>
     )
   }
-
-  <!-- CTA Section -->
-  <section class="mt-12 sm:mt-24">
-    <div class="mx-auto max-w-2xl">
-      <div class="relative mb-12">
-        <div class="absolute inset-0 flex items-center" aria-hidden="true">
-          <div class="border-border w-full border-t"></div>
-        </div>
-        <div class="relative flex justify-center">
-          <div
-            class="bg-background border-border flex items-center gap-2.5 rounded-full border px-4 py-2 shadow-sm"
-          >
-            <span class="relative flex h-1.5 w-1.5">
-              <span
-                class="bg-primary absolute inline-flex h-full w-full animate-ping rounded-full opacity-75"
-              ></span>
-              <span
-                class="bg-primary relative inline-flex h-1.5 w-1.5 rounded-full"
-              ></span>
-            </span>
-            <span
-              class="text-muted-foreground text-xs font-medium tracking-wider uppercase"
-              >Available</span
-            >
-          </div>
-        </div>
-      </div>
-
-      <div class="space-y-6 text-center">
-        <div class="space-y-2">
-          <h2
-            class="text-foreground text-4xl leading-tight font-semibold tracking-tight sm:text-5xl md:text-6xl"
-          >
-            Let's connect
-          </h2>
-        </div>
-        <p
-          class="text-muted-foreground mx-auto max-w-xl text-lg leading-relaxed sm:text-xl"
-        >
-          Have questions or want to collaborate? Feel free to reach out!
-        </p>
-        <div class="pt-4">
-          {
-            SOCIAL_LINKS.find((link) => link.label === 'Email') && (
-              <Link
-                href={SOCIAL_LINKS.find((link) => link.label === 'Email')!.href}
-                class="group bg-foreground text-background hover:bg-foreground/90 focus-visible:ring-ring inline-flex items-center gap-2.5 rounded-lg px-7 py-3.5 text-base font-medium transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
-              >
-                <Icon name="lucide:mail" class="size-4" />
-                <span>Get in touch</span>
-                <Icon
-                  name="lucide:arrow-right"
-                  class="size-4 transition-transform group-hover:translate-x-1"
-                />
-              </Link>
-            )
-          }
-        </div>
-      </div>
-    </div>
-  </section>
 </Layout>
