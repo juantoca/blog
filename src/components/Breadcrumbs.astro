@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
-import { localizeUrl } from '@/lib/i18n'
+import { localizeUrl, localizeString } from '@/lib/i18n'
 import { Icon } from 'astro-icon/components'
 
 export interface BreadcrumbItem {
@@ -27,7 +27,7 @@ const breadcrumbItems = [
   {
     '@type': 'ListItem',
     position: 1,
-    name: 'Home',
+    name: localizeString(Astro, {en: 'Home', es: 'Inicio'}),
     item: new URL('/', Astro.site).href,
   },
   ...items.map((item, index) => ({
