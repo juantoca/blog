@@ -7,7 +7,6 @@ import MobileMenu from '@/components/ui/mobile-menu'
 import { NAV_LINKS, SOCIAL_LINKS } from '@/consts'
 import { Icon } from 'astro-icon/components'
 import SocialIcons from './SocialIcons.astro'
-import ReactSocialIcons from '@/components/react/SocialIcons'
 
 import { localizeUrl } from '@/lib/i18n'
 
@@ -93,9 +92,10 @@ const isExternalLink = (href: string) => {
       <LanguageSwitcher currentPath={currentPath} class="md:block" />
       <MobileMenu client:idle client:only="react" transition:persist >
         <div class="flex-item items-left hidden max-[460px]:block social-icons-mobile-menu">
-          <ReactSocialIcons links={SOCIAL_LINKS}/>
+          <SocialIcons links={SOCIAL_LINKS} />
         </div>
       </MobileMenu>
+
       <ThemeToggle transition:persist />
     </div>
   </div>

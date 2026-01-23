@@ -2,6 +2,7 @@
 import BlogCard from '@/components/BlogCard.astro'
 import Link from '@/components/Link.astro'
 import PageHead from '@/components/PageHead.astro'
+import SocialIcons from '@/components/SocialIcons.astro'
 import { buttonVariants } from '@/components/ui/button'
 import { ICON_MAP, SITE, SOCIAL_LINKS } from '@/consts'
 import Layout from '@/layouts/Layout.astro'
@@ -119,32 +120,7 @@ const websiteSchema = {
           <!-- Social Icons -->
           <div class="pt-2">
             <ul class="flex flex-wrap items-center gap-2" role="list">
-              {
-                SOCIAL_LINKS.map(({ href, label }: SocialLink) => (
-                  <li>
-                    <Link
-                      href={href}
-                      aria-label={label}
-                      title={label}
-                      class={
-                        buttonVariants({ variant: 'outline', size: 'icon' }) +
-                        ' bg-background/80 backdrop-blur-sm'
-                      }
-                      external={
-                        href.startsWith('http') || href.startsWith('mailto:')
-                      }
-                    >
-                      <Icon
-                        name={
-                          ICON_MAP[label as keyof typeof ICON_MAP] ||
-                          'lucide:message-circle-question'
-                        }
-                        class="size-4"
-                      />
-                    </Link>
-                  </li>
-                ))
-              }
+              <SocialIcons links={SOCIAL_LINKS}/>
             </ul>
           </div>
         </div>
