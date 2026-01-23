@@ -83,16 +83,16 @@ let combinedReadingTime: string | null = null
 let tocSections: Awaited<ReturnType<typeof getTOCSections>> = []
 
 try {
-  navigation = await getAdjacentPosts(currentPostId)
-  parentPost = isCurrentSubpost ? await getParentPost(currentPostId) : null
-  hasChildPosts = await hasSubposts(currentPostId)
-  subpostCount = !isCurrentSubpost ? await getSubpostCount(currentPostId) : 0
-  postReadingTime = await getPostReadingTime(currentPostId)
+  navigation = await getAdjacentPosts(currentPostId, lang)
+  parentPost = isCurrentSubpost ? await getParentPost(currentPostId, lang) : null
+  hasChildPosts = await hasSubposts(currentPostId, lang)
+  subpostCount = !isCurrentSubpost ? await getSubpostCount(currentPostId, lang) : 0
+  postReadingTime = await getPostReadingTime(currentPostId, lang)
   combinedReadingTime =
     hasChildPosts && !isCurrentSubpost
-      ? await getCombinedReadingTime(currentPostId)
+      ? await getCombinedReadingTime(currentPostId, lang)
       : null
-  tocSections = await getTOCSections(currentPostId)
+  tocSections = await getTOCSections(currentPostId, lang)
 } catch (error) {
   console.error('Error fetching post metadata:', error)
   // Continue with default values - page will still render
