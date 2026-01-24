@@ -7,6 +7,7 @@ import {
 
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from '@/components/ui/button'
+import { localizeStringFromLanguage } from '@/lib/i18n'
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
@@ -72,6 +73,7 @@ function PaginationLink({
 function PaginationPrevious({
   className,
   isDisabled,
+  lang,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) {
   return (
@@ -83,7 +85,7 @@ function PaginationPrevious({
       {...props}
     >
       <ChevronLeftIcon />
-      <span className="hidden sm:block">Previous</span>
+      <span className="hidden sm:block">{localizeStringFromLanguage(lang, {en: "Previous", es: "Anterior"})}</span>
     </PaginationLink>
   )
 }
@@ -91,6 +93,7 @@ function PaginationPrevious({
 function PaginationNext({
   className,
   isDisabled,
+  lang,
   ...props
 }: React.ComponentProps<typeof PaginationLink>) {
   return (
@@ -101,7 +104,7 @@ function PaginationNext({
       isDisabled={isDisabled}
       {...props}
     >
-      <span className="hidden sm:block">Next</span>
+      <span className="hidden sm:block">{localizeStringFromLanguage(lang, {en: "Next", es: "Siguiente"})}</span>
       <ChevronRightIcon />
     </PaginationLink>
   )
@@ -109,6 +112,7 @@ function PaginationNext({
 
 function PaginationEllipsis({
   className,
+  lang,
   ...props
 }: React.ComponentProps<'span'>) {
   return (
@@ -119,7 +123,7 @@ function PaginationEllipsis({
       {...props}
     >
       <MoreHorizontalIcon className="size-4" />
-      <span className="sr-only">More pages</span>
+      <span className="sr-only">{localizeStringFromLanguage(lang, {en: "More pages", es: "Más páginas"})}</span>
     </span>
   )
 }
@@ -128,6 +132,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   baseUrl,
+  lang
 }) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
@@ -143,6 +148,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
           <PaginationPrevious
             href={currentPage > 1 ? getPageUrl(currentPage - 1) : undefined}
             isDisabled={currentPage === 1}
+            lang={lang}
           />
         </PaginationItem>
 
@@ -169,6 +175,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
               currentPage < totalPages ? getPageUrl(currentPage + 1) : undefined
             }
             isDisabled={currentPage === totalPages}
+            lang = {lang}
           />
         </PaginationItem>
       </PaginationContent>
@@ -180,6 +187,7 @@ interface PaginationProps {
   currentPage: number
   totalPages: number
   baseUrl: string
+  lang: string
 }
 
 export default PaginationComponent

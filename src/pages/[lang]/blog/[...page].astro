@@ -9,6 +9,7 @@ import {
   getAllPostsAndSubpostsLocale,
   groupPostsByYear,
 } from '@/lib/data-utils'
+import { getLanguageFromUrl, localizeString } from '@/lib/i18n'
 import type { PaginateFunction } from 'astro'
 
 import { i18n } from 'astro:config/client'
@@ -45,7 +46,7 @@ const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
   <Breadcrumbs
     items={[
       { label: 'Blog', href: '/blog', icon: 'lucide:library-big' },
-      { label: `Page ${page.currentPage}`, icon: 'lucide:book-copy' },
+      { label: `${localizeString(Astro, {en: "Page", es: "Página"})} ${page.currentPage}`, icon: 'lucide:book-copy' },
     ]}
   />
 
@@ -73,6 +74,7 @@ const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a))
       currentPage={page.currentPage}
       totalPages={page.lastPage}
       baseUrl="/blog/"
+      lang={getLanguageFromUrl(Astro.originPathname)}
       client:idle
     />
   </div>
