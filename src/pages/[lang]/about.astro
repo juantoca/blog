@@ -1,0 +1,46 @@
+---
+import Breadcrumbs from '@/components/Breadcrumbs.astro'
+import PageHead from '@/components/PageHead.astro'
+import { SITE } from '@/consts'
+import Layout from '@/layouts/Layout.astro'
+
+// Person Schema for About page
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: SITE.title,
+  url: SITE.href,
+  description: SITE.description,
+}
+
+export async function getStaticPaths() {
+
+  return [
+    {params: { lang: "en" }},
+    {params: { lang: "es" }}
+  ]
+}
+
+const { lang } = Astro.params
+
+import { Content as ContentEN } from "./about/en.mdx"
+import { Content as ContentES } from "./about/es.mdx"
+
+const content = {en: ContentEN, es: ContentEN}[lang] 
+
+---
+
+<Layout class="max-w-3xl">
+  <PageHead slot="head" title="About" />
+
+  <!-- Person Schema for About page SEO -->
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+  <Breadcrumbs items={[{ label: 'About', icon: 'lucide:user' }]} />
+
+  <section class="flex flex-col gap-8">
+    {
+      lang== "en" ? <ContentEN/> : <ContentES>
+    }
+  </section>
+</Layout>
