@@ -1,0 +1,17 @@
+<div id='har-view'></div>
+
+<script type='text/javascript' src='/static/posts/mapa-catastro/har/scripts/mustache.js'></script>
+<script type='text/javascript' src='/static/posts/mapa-catastro/har/scripts/jquery.min.js'></script>
+<script type='text/javascript' src='/static/posts/mapa-catastro/har/scripts/jquery-ui.min.js'></script>
+<script type='text/javascript' src='/static/posts/mapa-catastro/har/scripts/har-viewer.js'></script>
+<script src="/static/posts/mapa-catastro/har/catastro-peticiones.har" is:inline></script>
+<link rel='stylesheet' href='/static/posts/mapa-catastro/har/css/jquery-ui.css'/>
+<link rel='stylesheet' href='/static/posts/mapa-catastro/har/css/har-viewer.css'/>
+<script type='text/javascript'>
+            $(document).ready(function () {
+                $('#har-view').HarView();
+                var har = $('#har-view').data('HarView');
+                har.render(jason);
+            })
+</script>
+
