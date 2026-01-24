@@ -234,7 +234,7 @@ export async function getSubpostCount(parentId: string, lang: string): Promise<n
 
 export async function getCombinedReadingTime(postId: string, lang: string): Promise<string> {
   const post = await getPostById(postId, lang)
-  if (!post) return readingTime(0)
+  if (!post) return readingTime(0, lang)
 
   let totalWords = calculateWordCountFromHtml(post.body)
 
@@ -245,15 +245,15 @@ export async function getCombinedReadingTime(postId: string, lang: string): Prom
     }
   }
 
-  return readingTime(totalWords)
+  return readingTime(totalWords, lang)
 }
 
 export async function getPostReadingTime(postId: string, lang:string): Promise<string> {
   const post = await getPostById(postId, lang)
-  if (!post) return readingTime(0)
+  if (!post) return readingTime(0, lang)
 
   const wordCount = calculateWordCountFromHtml(post.body)
-  return readingTime(wordCount)
+  return readingTime(wordCount, lang)
 }
 
 export type TOCHeading = {

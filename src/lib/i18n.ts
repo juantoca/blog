@@ -57,6 +57,10 @@ export function localizeString(astro: any, translations: Translations){
   return translations[language]
 }
 
+export function localizeStringFromLanguage(language: string, translations: Translations){
+  return translations[language]
+}
+
 
 /**
  * Common UI translations

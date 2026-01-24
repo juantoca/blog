@@ -5,7 +5,7 @@ import {
   isSubpost,
   parseAuthors,
 } from '@/lib/data-utils'
-import { localizeUrl } from '@/lib/i18n'
+import { getLanguageFromUrl, localizeUrl } from '@/lib/i18n'
 import { formatDate, getTagVariant } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 import type { CollectionEntry } from 'astro:content'
@@ -15,11 +15,13 @@ interface Props {
   entry: CollectionEntry<'blog'>
 }
 
+
+const lang = getLanguageFromUrl(Astro.originPathname)
 const { entry } = Astro.props
-const formattedDate = formatDate(entry.data.date)
-const readTime = await getCombinedReadingTime(entry.id)
+const formattedDate = formatDate(entry.data.date, lang)
+const readTime = await getCombinedReadingTime(entry.id, lang)
 const authors = await parseAuthors(entry.data.authors ?? [])
-const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id) : 0
+const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id, lang) : 0
 ---
 
 <Link
