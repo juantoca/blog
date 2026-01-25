@@ -7,7 +7,7 @@ import {
 
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { localizeStringFromLanguage } from '@/lib/i18n'
+import { getLocalizedUrl, localizeStringFromLanguage } from '@/lib/i18n'
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
@@ -155,7 +155,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
         {pages.map((page) => (
           <PaginationItem key={page}>
             <PaginationLink
-              href={getPageUrl(page)}
+              href={getLocalizedUrl(getPageUrl(page), lang)}
               isActive={page === currentPage}
             >
               {page}
