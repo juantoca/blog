@@ -8,7 +8,7 @@ import { NAV_LINKS, SOCIAL_LINKS } from '@/consts'
 import { Icon } from 'astro-icon/components'
 import SocialIcons from './SocialIcons.astro'
 
-import { localizeString, localizeUrl } from '@/lib/i18n'
+import { getLanguageFromUrl, localizeString, localizeUrl } from '@/lib/i18n'
 
 const currentPath = Astro.originPathname
 
@@ -70,16 +70,7 @@ const isExternalLink = (href: string) => {
                 }
               >
                 <span>{
-                  localizeString(Astro, {
-                      "Blog": {
-                        en: "Blog",
-                        es: "Blog"
-                      },
-                      "About": {
-                        en: "About me",
-                        es: "Sobre mi"
-                      }
-                    }[item.label])
+                  localizeString(Astro, item.translations)
                 }</span>
                 {isExternal && (
                   <Icon
@@ -101,7 +92,7 @@ const isExternalLink = (href: string) => {
       </div>
       <SearchButton client:idle />
       <LanguageSwitcher currentPath={currentPath} class="md:block" />
-      <MobileMenu client:idle client:only="react" transition:persist >
+      <MobileMenu language={getLanguageFromUrl(currentPath)} client:idle client:only="react" transition:persist>
         <div class="flex-item items-left hidden max-[460px]:block social-icons-mobile-menu">
           <SocialIcons links={SOCIAL_LINKS} />
         </div>

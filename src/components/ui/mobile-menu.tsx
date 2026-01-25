@@ -9,11 +9,10 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { NAV_LINKS } from '@/consts'
 import { Menu, ExternalLink } from 'lucide-react'
-import { getLanguageFromUrl, getLocalizedUrl } from '@/lib/i18n'
+import { getLocalizedUrl, localizeString, localizeStringFromLanguage } from '@/lib/i18n'
 
-const MobileMenu = ({ children }) => {
+const MobileMenu = ({ language, children }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const language = getLanguageFromUrl(window.location.href)
 
   useEffect(() => {
     const handleViewTransitionStart = () => {
@@ -65,7 +64,7 @@ const MobileMenu = ({ children }) => {
                 }`}
                 onClick={() => setIsOpen(false)}
               >
-                <span>{item.label}</span>
+                <span>{localizeStringFromLanguage(language, item.translations)}</span>
                 {isExternal && (
                   <ExternalLink
                     className={`h-4 w-4 flex-shrink-0 opacity-80 ${isInsideLink ? 'text-primary' : ''}`}
