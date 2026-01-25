@@ -23,8 +23,8 @@ export async function getStaticPaths() {
 
 const { lang } = Astro.params
 
-import { Content as ContentEN } from "./about/en.mdx"
-import { Content as ContentES } from "./about/es.mdx"
+import { Content as ContentEN } from "./_about/en.mdx"
+import { Content as ContentES } from "./_about/es.mdx"
 
 const content = {en: ContentEN, es: ContentEN}[lang] 
 
