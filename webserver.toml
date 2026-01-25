@@ -1,0 +1,6 @@
+[advanced]
+
+[[advanced.redirects]]
+source = "/"
+destination = "/en/"
+kind = 301

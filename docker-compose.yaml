@@ -1,0 +1,8 @@
+services:
+  blog:
+    image: joseluisq/static-web-server:2.40.1
+    volumes:
+      - ./dist:/public:ro
+      - ./webserver.toml:/sws.toml:ro
+    ports:
+      - 1234:80
