@@ -4,5 +4,8 @@ services:
     volumes:
       - ./dist:/public:ro
       - ./webserver.toml:/sws.toml:ro
+    command:
+      - "-w"
+      - "/sws.toml"
     ports:
       - 1234:80
