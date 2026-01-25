@@ -10,10 +10,14 @@ export const { getStaticPaths, GET } = await OGImageRoute({
   // The keys of this object are used to generate the path for that image.
   // In this example, we generate one image at `/open-graph/example.png`.
   pages: {
-   'default': {
+   '/en/default': {
      title: 'Juan Toca',
-     description: 'A blog on engineering, life, the universe and everything',
-   }
+     description: 'A blog on engineering, life, the universe and everything.',
+   },
+   '/es/default': {
+    title: 'Juan Toca',
+    description: 'Un blog sobre ingeniería, la vida, el universo y el todo.',
+  }
   },
 
   // For each page, this callback will be used to customize the OpenGraph image.
