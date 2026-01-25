@@ -15,7 +15,6 @@ on:
 jobs:
   cd:
     runs-on: ubuntu-22.04
-    if: ${{ github.ref_name == 'main' }}
     steps:
         - name: Cloning repo
           uses: actions/checkout@v6
