@@ -25,7 +25,9 @@ jobs:
           uses: actions/setup-node@v6
 
         - name: Build website
-          run: npm run build
+          run: |
+            npm install
+            npm run build
 
         - name: Cleanup previous deployment
           uses: appleboy/ssh-action@v1
