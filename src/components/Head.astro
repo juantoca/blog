@@ -14,13 +14,11 @@ const {
   image,
 } = Astro.props
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site).href
-const cleanPathname = Astro.url.pathname.replace(/\/$/, '')
+const canonicalURL = new URL(Astro.originPathname, Astro.site).href
+const cleanPathname = Astro.originPathname.replace(/\/$/, '')
+console.log(cleanPathname)
 const ogImage =
-  image ||
-  (cleanPathname
-    ? new URL(`/og${cleanPathname}.png`, Astro.site).href
-    : new URL('/og-default.png', Astro.site).href)
+  image || new URL('/og/default.png', Astro.site).href
 ---
 
 <head>
