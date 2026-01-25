@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components'
+import { localizeString } from "@/lib/i18n"
 
 // Experience Timeline - Customize with your own experience
 type ExperienceItem = {
@@ -14,36 +15,39 @@ type ExperienceItem = {
 // Customize your experience here
 const experience: ExperienceItem[] = [
   {
-    role: 'Your Current Role',
-    company: 'Current Company',
-    period: '2022 - Present',
+    role: 'AI Backend Engineer',
+    company: 'Sony Semiconductors Group(Midokura)',
+    period: '2022 - 2025',
     current: true,
-    icon: 'lucide:briefcase',
-    key: 'Brief description of your current role and key achievements • Add more details about your responsibilities and accomplishments',
+    icon: 'lucide:database',
+    key: localizeString(Astro, {
+      en: "I worked in the AITRIOS project, developing and operating ETL pipelines and training services for artificial vision models.",
+      es: "Trabajé en el proyecto AITRIOS, desarrollando y operando pipelines ETL y servicios de entrenamiento de modelos de visión artificial."
+    }),
   },
   {
-    role: 'Previous Role',
-    company: 'Previous Company',
-    period: '2020 - 2022',
-    icon: 'lucide:server',
-    key: 'Description of your previous role and achievements • Highlight key projects or responsibilities you had in this position',
-  },
-  {
-    role: 'Earlier Role',
-    company: 'Earlier Company',
-    period: '2018 - 2020',
-    icon: 'lucide:code',
-    key: 'Description of your earlier role and achievements • Show your career progression and growth over time',
-  },
+    role: 'AI Developer',
+    company: 'Siali Technologies S.L.',
+    period: '2021 - 2022',
+    icon: 'lucide:brain-cog',
+    key: localizeString(Astro, {
+      en: "I trained, deployed and monitored visual inspection AI models for companies like Acciona and the automotive sector for quality control and safety assurance.",
+      es: "Entrené, desplegué y monitoricé modelos de IA de inspección visual para compañías como Acciona y el sector automotriz para control de calidad y prevención de riesgos laborales."
+    }),
+  }
 ]
 ---
 
 <!-- Experience Timeline -->
 <section class="mt-8">
   <div class="mb-6">
-    <h2 class="mb-2 text-2xl font-semibold">Experience</h2>
+    <h2 class="mb-2 text-2xl font-semibold">{localizeString(Astro,  {en: "Experience", es: "Experiencia"})}</h2>
     <p class="text-muted-foreground text-sm">
-      Professional journey and achievements
+
+      {localizeString(Astro, {
+        en: "Professional journey and achievements",
+        es: "Carrera profesional y logros"
+      })}
     </p>
   </div>
 
