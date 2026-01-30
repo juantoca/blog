@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    viewBox="-24.103756 0 96.415024 96.415024"
    version="1.1"
    id="svg1"
+   transform-origin="center"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   transform-origin="center">
+   xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs1" />
   <g
      id="layer1"
      transform="translate(-60.033611,-26.401487)">
-     <path
-       style="fill:none;fill-rule:evenodd;stroke:var(--foreground);stroke-width:0.9;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="M 84.565506,26.945231 C 67.801632,27.008294 60.543034,73.620963 60.543034,87.091347 l -0.08462,35.361893 24.181826,0.007 M 84.435364,26.945213 C 101.19922,27.012967 108.44477,73.627666 108.441,87.09805 l 0.0747,35.36191 -24.181822,2.4e-4"
+    <path
+       style="fill-rule:evenodd;stroke-width:0.9;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+       d="M 84.57,26.95 C 67.8,27.01 60.54,73.62 60.54,87.09 l -0.08,35.36 24.18,0.01 M 84.57,26.95 c 16.76,0.06 23.87,46.68 23.87,60.15 l 0.07,35.36 H 84.64"
        id="path1"
+       fill="var(--foreground)"
        transform="translate(0.02627528,-0.09372976)" />
   </g>
 </svg>
