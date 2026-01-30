@@ -6,7 +6,9 @@ draft: false
 ---
 
 import Boat from "@/content/blog/en/2026-01-26_sailgp/boat.svg"
-import RotatableSvg from "@/components/RotatableSvg.astro"
+import Wind from "@/content/blog/en/2026-01-26_sailgp/wind-pattern.svg"
+import RotatableSvg from "@/content/blog/en/2026-01-26_sailgp/_components/RotatableSvg.astro"
+import "@/content/blog/en/2026-01-26_sailgp/_styles/animations.css"
 
 Hace unos meses, [Cantabria económica](https://www.cantabriaeconomica.com/circulo-empresarial-cantabria-economica/santander-seria-el-sitio-ideal-para-acoger-una-copa-america/)
 publicó un artículo discutiendo si Santander sería una buena sede para
@@ -26,11 +28,13 @@ Uno de los conocimientos vitales en navegación a vela es comprender como afecta
 
 <RotatableSvg>
   <svg
-   weight="200"
-   height="200"
+   weight="100%"
+   height="100%"
    version="1.1"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
+   xmlns:svg="http://www.w3.org/2000/svg"
+   class="svg-animation">
+        <Wind width="100%" height="100%"/>
         <Boat class="svg-wrapper"/>
   </svg>
 </RotatableSvg>
