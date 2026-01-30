@@ -7,7 +7,8 @@ draft: false
 
 import Boat from "@/content/blog/en/2026-01-26_sailgp/boat.svg"
 import Wind from "@/content/blog/en/2026-01-26_sailgp/wind-pattern.svg"
-import RotatableSvg from "@/content/blog/en/2026-01-26_sailgp/_components/RotatableSvg.astro"
+import AnimationWrapper from "@/content/blog/en/2026-01-26_sailgp/_components/AnimationWrapper.astro"
+import WindSlider from "@/content/blog/en/2026-01-26_sailgp/_components/WindSlider.astro"
 import "@/content/blog/en/2026-01-26_sailgp/_styles/animations.css"
 
 Hace unos meses, [Cantabria económica](https://www.cantabriaeconomica.com/circulo-empresarial-cantabria-economica/santander-seria-el-sitio-ideal-para-acoger-una-copa-america/)
@@ -26,7 +27,7 @@ del viento a recibir multas de tráfico al pillarnos los radares :wink:.
 
 Uno de los conocimientos vitales en navegación a vela es comprender como afecta el viento a nuestra embarcación.
 
-<RotatableSvg>
+<AnimationWrapper>
   <svg
    weight="100%"
    height="100%"
@@ -37,4 +38,6 @@ Uno de los conocimientos vitales en navegación a vela es comprender como afecta
         <Wind width="100%" height="100%" opacity="30%"/>
         <Boat class="svg-wrapper"/>
   </svg>
-</RotatableSvg>
+  <WindSlider/>
+  <WindSlider/>
+</AnimationWrapper>

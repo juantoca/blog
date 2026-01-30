@@ -1,0 +1,5 @@
+---
+import Slider from "@/content/blog/en/2026-01-26_sailgp/_components/Slider.astro"
+const{...rest} = Astro.props
+---
+<Slider variable="wind-direction" formatString="{0}deg" min="0" max="360" value="0" {...rest}/>
