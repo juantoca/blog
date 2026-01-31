@@ -1,7 +1,14 @@
 :root {
-    --boat-color: #6e3a02;
-    --sail-color: var(--color-foreground);
+  --boat-color: #6e3a02;
+  --sail-color: var(--color-foreground);
 
-    --wind-direction: 90deg;
+  --wind-direction: 90deg;
+  --sail-angle: 0deg;
 }
 
+#mast-sail {
+  transform-box: fill-box;
+  transform-origin: 50% 9%;
+  transform: rotate(var(--sail-angle));
+  transition: transform 0.1s linear;
+}
