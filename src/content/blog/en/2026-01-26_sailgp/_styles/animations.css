@@ -1,3 +1,7 @@
 :root {
-    --wind-direction: 90deg
+    --boat-color: #6e3a02;
+    --sail-color: var(--color-foreground);
+
+    --wind-direction: 90deg;
 }
+

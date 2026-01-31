@@ -11,10 +11,14 @@
      id="layer1"
      transform="translate(-60.033611,-26.401487)">
     <path
-       style="fill-rule:evenodd;stroke-width:0.9;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
-       d="M 84.57,26.95 C 67.8,27.01 60.54,73.62 60.54,87.09 l -0.08,35.36 24.18,0.01 M 84.57,26.95 c 16.76,0.06 23.87,46.68 23.87,60.15 l 0.07,35.36 H 84.64"
        id="path1"
-       fill="var(--foreground)"
-       transform="translate(0.02627528,-0.09372976)" />
+       fill="var(--boat-color)"
+       transform="translate(0.02627528,-0.09372976)"
+       d="M 84.57,26.95 C 67.8,27.01 60.54,73.62 60.54,87.09 l -0.08,35.36 24.18,0.01 M 84.57,26.95 c 16.76,0.06 23.87,46.68 23.87,60.15 l 0.07,35.36 H 84.64"
+       style="fill-rule:evenodd;stroke-width:0.9;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       id="mast-sail"
+       fill="var(--sail-color)"
+       d="M 84.57,55 C 87,55 87,60 86.5,60 L 86,110 L 83.14,110 L 82.64,60 C 82.14,60 82.14,55 84.57,55 Z" />
   </g>
 </svg>
