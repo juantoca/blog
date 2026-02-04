@@ -10,6 +10,7 @@ import Wind from '@/content/blog/en/2026-01-26_sailgp/wind-pattern.svg'
 import AnimationWrapper from '@/content/blog/en/2026-01-26_sailgp/_components/AnimationWrapper.astro'
 import WindSlider from '@/content/blog/en/2026-01-26_sailgp/_components/WindSlider.astro'
 import SailSlider from '@/content/blog/en/2026-01-26_sailgp/_components/SailSlider.astro'
+import SailDeformer from '@/content/blog/en/2026-01-26_sailgp/_components/SailDeformer.astro'
 import '@/content/blog/en/2026-01-26_sailgp/_styles/animations.css'
 
 Hace unos meses, [Cantabria económica](https://www.cantabriaeconomica.com/circulo-empresarial-cantabria-economica/santander-seria-el-sitio-ideal-para-acoger-una-copa-america/)
@@ -40,7 +41,8 @@ Uno de los conocimientos vitales en navegación a vela es comprender como afecta
     <Wind width="100%" height="100%" opacity="30%" />
     <Boat class="svg-wrapper" />
   </svg>
-  
+
   <WindSlider />
-  <SailSlider />
+    <SailSlider />
+  <SailDeformer />
 </AnimationWrapper>
