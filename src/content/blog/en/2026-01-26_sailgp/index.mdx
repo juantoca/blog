@@ -11,6 +11,7 @@ import AnimationWrapper from '@/content/blog/en/2026-01-26_sailgp/_components/An
 import WindSlider from '@/content/blog/en/2026-01-26_sailgp/_components/WindSlider.astro'
 import SailSlider from '@/content/blog/en/2026-01-26_sailgp/_components/SailSlider.astro'
 import SailDeformer from '@/content/blog/en/2026-01-26_sailgp/_components/SailDeformer.astro'
+import Tooltip from '@/components/ui/tooltip/Tooltip'
 import '@/content/blog/en/2026-01-26_sailgp/_styles/animations.css'
 
 Hace unos meses, [Cantabria económica](https://www.cantabriaeconomica.com/circulo-empresarial-cantabria-economica/santander-seria-el-sitio-ideal-para-acoger-una-copa-america/)
@@ -28,6 +29,13 @@ del viento a recibir multas de tráfico al pillarnos los radares :wink:.
 # ¿Nuestro motor? El viento
 
 Uno de los conocimientos vitales en navegación a vela es comprender como afecta el viento a nuestra embarcación.
+Empecemos con un poco de nomenclatura básica sobre los rumbos:
+
+
+<Tooltip client:idle>
+  <u slot="trigger">Miau</u>
+  <p slot="content">Jorl</p>
+</Tooltip>
 
 <AnimationWrapper>
   <svg
