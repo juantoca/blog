@@ -65,8 +65,6 @@ const articleSchema = {
 <meta name="description" content={description} />
 <link rel="canonical" href={postUrl} />
 
-{isSubpost(post.id) && <meta name="robots" content="noindex" />}
-
 <!-- Enhanced Open Graph tags for AI/GEO optimization -->
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
