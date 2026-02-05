@@ -11,6 +11,7 @@ import AnimationWrapper from '@/content/blog/en/2026-01-26_sailgp/_components/An
 import WindSlider from '@/content/blog/en/2026-01-26_sailgp/_components/WindSlider.astro'
 import SailSlider from '@/content/blog/en/2026-01-26_sailgp/_components/SailSlider.astro'
 import SailDeformer from '@/content/blog/en/2026-01-26_sailgp/_components/SailDeformer.astro'
+import Concept from '@/content/blog/en/2026-01-26_sailgp/_components/Concept.astro'
 import Tooltip from '@/components/ui/tooltip/Tooltip'
 import '@/content/blog/en/2026-01-26_sailgp/_styles/animations.css'
 
@@ -32,10 +33,7 @@ Uno de los conocimientos vitales en navegación a vela es comprender como afecta
 Empecemos con un poco de nomenclatura básica sobre los rumbos:
 
 
-<Tooltip client:idle>
-  <u slot="trigger">Miau</u>
-  <p slot="content">Jorl</p>
-</Tooltip>
+<Concept concept="Miau" explanation="Jorl"/>
 
 <AnimationWrapper>
   <svg

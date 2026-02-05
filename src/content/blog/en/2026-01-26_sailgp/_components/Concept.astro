@@ -1,0 +1,10 @@
+---
+import Tooltip from "@/components/ui/tooltip/Tooltip"
+
+const {concept, explanation} = Astro.props
+---
+
+<Tooltip client:idle>
+  <u slot="trigger">{concept}</u>
+  <p slot="content">{explanation}</p>
+</Tooltip>
