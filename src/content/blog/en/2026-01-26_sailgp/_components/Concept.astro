@@ -1,10 +1,27 @@
 ---
 import Tooltip from "@/components/ui/tooltip/Tooltip"
+import {getLanguageFromUrl} from "@/lib/i18n.ts"
 
-const {concept, explanation} = Astro.props
+const {concept} = Astro.props
+
+const lang = getLanguageFromUrl(Astro.originPathname)
+
+const concepts = {
+  en: {
+    "barlovento": "Dirección o rumbo desde dónde viene el viento"
+  },
+  es: {
+    "barlovento": "Dirección o rumbo desde dónde viene el viento"
+  }
+}
+
+function hola(){
+  throw "Hola"
+}
+
 ---
 
 <Tooltip client:idle>
   <u slot="trigger">{concept}</u>
-  <p slot="content">{explanation}</p>
+  <p slot="content">{concepts[lang][concept] ? concepts[lang][concept] : hola()}</p>
 </Tooltip>
