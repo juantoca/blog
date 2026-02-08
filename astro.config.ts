@@ -76,6 +76,17 @@ export default defineConfig({
     // Type assertion needed due to Vite plugin type incompatibility between Astro and @tailwindcss/vite
     // This is the recommended approach per Astro documentation for Vite plugins
     plugins: [tailwindcss() as any],
+    build: {
+      rollupOptions: {
+        output: {
+          // Instruct Vite to bundle react components in a single component.
+          // This reduces roundtrips and webpage loading cascading
+          manualChunks(id) {
+            return "bundle"
+          },
+        },
+      },
+    },
   },
   server: {
     port: 1234,
