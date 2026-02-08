@@ -129,5 +129,8 @@ export default defineConfig({
       fallbackType: "rewrite",
       prefixDefaultLocale: true
     }
+  },
+  prefetch: {
+      prefetchAll: true
   }
 })
