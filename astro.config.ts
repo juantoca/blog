@@ -19,10 +19,70 @@ import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import tailwindcss from '@tailwindcss/vite'
 import mermaid from 'astro-mermaid'
 
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+// Custom integration to force preload of interactive islands
+function preloadInteractiveIslands() {
+  return {
+    name: 'preload-interactive-islands',
+    hooks: {
+      'astro:build:done': async ({ dir }) => {
+        const distDir = fileURLToPath(dir);
+        
+        // 1. Recursive function to find HTML files
+        async function getHtmlFiles(dir) {
+          const files = await fs.readdir(dir, { withFileTypes: true });
+          let htmlFiles = [];
+          for (const file of files) {
+            const fullPath = path.join(dir, file.name);
+            if (file.isDirectory()) {
+              htmlFiles = [...htmlFiles, ...(await getHtmlFiles(fullPath))];
+            } else if (file.name.endsWith('.html')) {
+              htmlFiles.push(fullPath);
+            }
+          }
+          return htmlFiles;
+        }
+
+        const htmlFiles = await getHtmlFiles(distDir);
+
+        // 2. Process each HTML file
+        for (const file of htmlFiles) {
+          let html = await fs.readFile(file, 'utf-8');
+          
+          // Find all island entry points (component-url attributes)
+          // Matches: component-url="/_astro/mobile-menu.Br_hJrjG.js"
+          const islandRegex = /(component-url|renderer-url)="([^"]+)"/g;
+          const matches = [...html.matchAll(islandRegex)];
+          
+          if (matches.length > 0) {
+            // Deduplicate URLs
+            const scripts = [...new Set(matches.map(m => m[2]))];
+            
+            // Create preload tags
+            const links = scripts
+              .map(src => `<link rel="modulepreload" href="${src}">`)
+              .join('');
+            
+            // Inject into <head>
+            html = html.replace('</head>', `${links}</head>`);
+            await fs.writeFile(file, html);
+            console.log(`Preloaded ${scripts.length} islands in ${path.relative(distDir, file)}`);
+          }
+        }
+      },
+    },
+  };
+}
+
+
 export default defineConfig({
   site: 'https://juantoca.net', // Update with your domain
   // Static output - API routes are handled by Cloudflare Pages Functions in /functions folder
   integrations: [
+    preloadInteractiveIslands(),
     mermaid(),
     expressiveCode({
       themes: ['github-light', 'github-dark'],
