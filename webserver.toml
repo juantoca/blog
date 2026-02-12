@@ -1,3 +1,6 @@
+[general]
+redirect-trailing-slash = false
+
 [advanced]
 
 [[advanced.redirects]]
