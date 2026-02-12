@@ -12,6 +12,7 @@ import rehypeKatex from 'rehype-katex'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkEmoji from 'remark-emoji'
 import remarkMath from 'remark-math'
+import Sonda from 'sonda/astro'; 
 
 import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-sections'
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
@@ -84,6 +85,7 @@ export default defineConfig({
   integrations: [
     preloadInteractiveIslands(),
     mermaid(),
+    Sonda(),
     expressiveCode({
       themes: ['github-light', 'github-dark'],
       plugins: [pluginCollapsibleSections(), pluginLineNumbers()],
@@ -137,11 +139,20 @@ export default defineConfig({
     // This is the recommended approach per Astro documentation for Vite plugins
     plugins: [tailwindcss() as any],
     build: {
+      sourcemap: true,
       rollupOptions: {
         output: {
           // Instruct Vite to bundle react components in a single component.
           // This reduces roundtrips and webpage loading cascading
           manualChunks(id) {
+
+            const excluded = ["mermaid", "lodash", "cytoscape", "katex"]
+
+            const v = excluded.filter((s) => id.includes(s)) 
+
+            if(v.length > 0){
+              return v[1]
+            }
             return "bundle"
           },
         },
