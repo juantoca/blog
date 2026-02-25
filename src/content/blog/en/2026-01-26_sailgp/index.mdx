@@ -36,7 +36,7 @@ Empecemos con un poco de nomenclatura básica sobre los rumbos:
 - <b>Empopado</b>: Es el rumbo que todos nos imaginamos cuando pensamos en un velero. 
 El viento nos llega desde la popa del barco y navegamos a favor del viento.
 - <b>De través</b>: Es el rumbo que tiene un barco cuando el viento le llega por su través,
-es decir, perpendicular a la dirección dónde se dirige.
+es decir, perpendicular a la dirección a dónde se dirige.
 - <b>Largo</b>: El rumbo intermedio entre una empopada y de través, es decir, recibimos el viento por 
 la aleta del barco.
 - <b>Ceñida</b>: Es el rumbo más antintiutivo. El barco avanza contra el viento recibiendolo por
@@ -48,8 +48,20 @@ Si os tenéis que quedar con algo de este artículo es que cuando Jack Sparrow d
 muy épico que quede, le está diciendo a su tripulación que pare el barco ya que van a aproar el barco y no 
 van a recibir nada de viento.
 
+Pero ¿cómo se comporta el barco en cada uno de los rumbos? El vector viento, el cuál es el que define cómo se moverá el barco, 
+se puede dividir en 3 componentes que facilitarán nuestro análisis. Tomándome cierta licencia de nomenclatura, las llamaremos
+componente de proa, componente de popa y componente de través:
 
-<Concept concept="barlovento"/>
+
+Como se puede observar, para producir el avance del barco necesitamos reducir al máximo las componentes de popa y través en los
+diferentes rumbos de tal manera que la componente de proa haga el barco avanzar. En rumbos cómo el de empopada no es especialmente
+problemático pero en el través y, especialmente en las ceñidas, estas componentes nos generan problemas ya que nos desvían demasiado
+el barco de la dirección deseada.
+
+La componente de popa es sencilla de explicar cómo se palia. Sencillamente, los barcos son anchos en la popa y se estrechan hacia
+la proa. Es decir, la popa es mucho menos hidrodinámica que la proa, generando mucha resistencia al avance y cancelando en gran medida
+la componente de popa. Sin embargo, la componente de través se merece su propia sección: 
+
 
 <AnimationWrapper>
   <svg
