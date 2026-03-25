@@ -13,6 +13,7 @@ import SailSlider from '@/content/blog/en/2026-01-26_sailgp/_components/SailSlid
 import SailDeformer from '@/content/blog/en/2026-01-26_sailgp/_components/SailDeformer.astro'
 import Concept from '@/content/blog/en/2026-01-26_sailgp/_components/Concept.astro'
 import Tooltip from '@/components/ui/tooltip/Tooltip'
+import LeewayAnimation from '@/content/blog/en/2026-01-26_sailgp/_components/LeewayAnimation.astro'
 import '@/content/blog/en/2026-01-26_sailgp/_styles/animations.css'
 
 Hace unos meses, [Cantabria económica](https://www.cantabriaeconomica.com/circulo-empresarial-cantabria-economica/santander-seria-el-sitio-ideal-para-acoger-una-copa-america/)
@@ -30,28 +31,29 @@ del viento a recibir multas de tráfico al pillarnos los radares :wink:.
 # ¿Nuestro motor? El viento
 
 ### Rumbos
+
 Uno de los conocimientos vitales en navegación a vela es comprender como afecta el viento a nuestra embarcación.
 Empecemos con un poco de nomenclatura básica sobre los rumbos:
 
-- <b>Empopado</b>: Es el rumbo que todos nos imaginamos cuando pensamos en un velero. 
-El viento nos llega desde la popa del barco y navegamos a favor del viento.
-- <b>De través</b>: Es el rumbo que tiene un barco cuando el viento le llega por su través,
-es decir, perpendicular a la dirección hacia dónde se dirige.
-- <b>Largo</b>: El rumbo intermedio entre una empopada y de través, es decir, recibimos el viento por 
-la aleta del barco.
-- <b>Ceñida</b>: Es el rumbo más antiintuitivo. El barco avanza contra el viento recibiéndolo por
-su amura, es decir, lo recibimos entre el través y la proa.
-- <b>Aproado</b>: En este rumbo no se puede avanzar. El viento nos llega desde la proa, es decir, la parte delantera
-del barco y llevamos rumbo a barlovento.
+- <b>Empopado</b>: Es el rumbo que todos nos imaginamos cuando pensamos en un
+  velero. El viento nos llega desde la popa del barco y navegamos a favor del
+  viento.
+- <b>De través</b>: Es el rumbo que tiene un barco cuando el viento le llega por
+  su través, es decir, perpendicular a la dirección hacia dónde se dirige.
+- <b>Largo</b>: El rumbo intermedio entre una empopada y de través, es decir,
+  recibimos el viento por la aleta del barco.
+- <b>Ceñida</b>: Es el rumbo más antiintuitivo. El barco avanza contra el viento
+  recibiéndolo por su amura, es decir, lo recibimos entre el través y la proa.
+- <b>Aproado</b>: En este rumbo no se puede avanzar. El viento nos llega desde
+  la proa, es decir, la parte delantera del barco y llevamos rumbo a barlovento.
 
 Si os tenéis que quedar con algo de este artículo es que cuando Jack Sparrow dice "poned rumbo a barlovento", por
-muy épico que quede, le está diciendo a su tripulación que pare el barco ya que van a aproar el barco y no 
+muy épico que quede, le está diciendo a su tripulación que pare el barco ya que van a aproar el barco y no
 van a recibir nada de viento.
 
-Pero ¿cómo se comporta el barco en cada uno de los rumbos? El vector fuerza, el cuál es el que define cómo se moverá el barco, 
+Pero ¿cómo se comporta el barco en cada uno de los rumbos? El vector fuerza, el cuál es el que define cómo se moverá el barco,
 se puede dividir en 3 componentes que facilitarán nuestro análisis. Tomándome cierta licencia de nomenclatura, las llamaremos
 componente de proa, componente de popa y componente de través:
-
 
 Como se puede observar, para producir el avance del barco necesitamos reducir al máximo las componentes de popa y través en los
 diferentes rumbos de tal manera que la componente de proa haga el barco avanzar. En rumbos cómo el de empopada no es especialmente
@@ -60,8 +62,7 @@ el barco de la dirección deseada.
 
 La componente de popa es sencilla de explicar cómo se palia. Sencillamente, los barcos son anchos en la popa y se estrechan hacia
 la proa. Es decir, la popa es mucho menos hidrodinámica que la proa, generando mucha resistencia al retroceso y cancelando, en gran medida,
-la componente de popa que empujaría el barco hacia atrás. Sin embargo, la componente de través se merece su propia sección: 
-
+la componente de popa que empujaría el barco hacia atrás. Sin embargo, la componente de través se merece su propia sección:
 
 <AnimationWrapper>
   <svg
@@ -83,93 +84,118 @@ la componente de popa que empujaría el barco hacia atrás. Sin embargo, la comp
 
 ### La orza y el escoramiento
 
-¿Cómo evitamos que la componente de través nos lleve el barco lejos de nuestro destino(abatimiento)? 
-La respuesta es la orza. Esta parte del barco es una prolongación submarina del barco que genera 
+¿Cómo evitamos que la componente de través nos lleve el barco lejos de nuestro destino(abatimiento)?
+La respuesta es la orza. Esta parte del barco es una prolongación submarina del barco que genera
 resistencia al movimiento lateral del barco. Sin embargo y como contrapartida, el barco se escora y,
 si no se controla, puede volcar.
 
+
+<LeewayAnimation />
+
 ¿Pero, si la orza es tan pequeña comparada con la vela, cómo es posible que oponga tanta resistencia
-al abatimiento? La respuesta es la diferencia de densidad entre los 2 fluidos: el aire/viento que 
-afecta sobre la vela y el agua que ejerce la resistencia sobre la orza. El peso de agua desplazada, 
+al abatimiento? La respuesta es la diferencia de densidad entre los 2 fluidos: el aire/viento que
+afecta sobre la vela y el agua que ejerce la resistencia sobre la orza. El peso de agua desplazada,
 aún teniendo poco volumen, sirve de contrapeso a la fuerza ejercida por el viento sobre la vela equilibrando
 la embarcación.
 
 ### El problema del viento aparente
 
-Habiendo paliado las dos componentes del viento de popa y través, ahora podemos concluir el rumbo más 
+Habiendo paliado las dos componentes del viento de popa y través, ahora podemos concluir el rumbo más
 rápido de la embarcación. Como es obvio, el rumbo más rápido es aquel que maximiza la componente de proa.
 Por tanto, podemos concluir que es cuando el barco está en empopada ¿no?
 
-No del todo, si observamos una regata de SailGP podemos ver que el rumbo que toman al quedar la 
+No del todo, si observamos una regata de SailGP podemos ver que el rumbo que toman al quedar la
 siguiente boya a sotavento es un largo y no una empopada:
 
-<div class="flex justify-center items-center">
-<iframe class="rounded-2xl ease-out overflow-hidden" width="560" height="315" src="https://www.youtube.com/embed/t79iQN49Q9A?si=K3R6vFtPUbBRmEnj&amp;start=120" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="flex items-center justify-center">
+  <iframe
+    class="overflow-hidden rounded-2xl ease-out"
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/t79iQN49Q9A?si=K3R6vFtPUbBRmEnj&amp;start=120"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
 </div>
 
-¿Por qué ocurre esto? Pues, cómo diría nuestro amigo Albert Einstein, todo es relativo. 
-Hasta ahora en nuestra explicación hemos hablado de la velocidad del viento absoluta, es decir, 
-asumiendo que el barco está inmovilizado. Sin embargo, la fuerza que ejerce el viento sobre 
-la embarcación depende de la velocidad del viento relativa a la velocidad de la embarcación llamado 
+¿Por qué ocurre esto? Pues, cómo diría nuestro amigo Albert Einstein, todo es relativo.
+Hasta ahora en nuestra explicación hemos hablado de la velocidad del viento absoluta, es decir,
+asumiendo que el barco está inmovilizado. Sin embargo, la fuerza que ejerce el viento sobre
+la embarcación depende de la velocidad del viento relativa a la velocidad de la embarcación llamado
 viento aparente.
 
-¿Esto qué significa? Que un barco que avanza a favor del viento va perdiendo viento aparente ya que 
+¿Esto qué significa? Que un barco que avanza a favor del viento va perdiendo viento aparente ya que
 este cada vez es menor al restar la velocidad del viento a la velocidad del barco. Y al revés, un barco que
 navega en contra del viento tiene un viento aparente cada vez más fuerte conforme su velocidad
 aumenta.
 
-Teniendo esto en cuenta, nos damos cuenta que dependiendo de la velocidad del viento absoluto y 
+Teniendo esto en cuenta, nos damos cuenta que dependiendo de la velocidad del viento absoluto y
 la velocidad de la embarcación nos interesa tomar un rumbo u otro para llegar a nuestro destino.
 Por ejemplo, si queremos llegar a un punto que nos queda en sotavento desde una posición en reposo,
-el rumbo óptimo será ganar velocidad con una empopada y, conforme vamos perdiendo viento aparente al 
+el rumbo óptimo será ganar velocidad con una empopada y, conforme vamos perdiendo viento aparente al
 ganar velocidad, orzar hacia un largo para seguir teniendo aparente y mantener una velocidad máxima
 mayor.
 
 Para representar estas velocidades máximas en función del viento, se utilizan los llamados diagramas
-polares, los cuáles son intrínsecos a cada modelo de barco. Usaremos como ejemplo medidas tomadas de 
+polares, los cuáles son intrínsecos a cada modelo de barco. Usaremos como ejemplo medidas tomadas de
 un J/80, uno de los barcos más comunes en la bahía de Santander
 (desgraciadamente, no he encontrado datos para el F50 o el AC75 :cry:):
 
+<iframe
+  width="100%"
+  height="2450px"
+  src="https://jieter.github.io/orc-data/site/#NOR/NOR477"
+></iframe>
 
-<iframe width="100%" height="2450px" src="https://jieter.github.io/orc-data/site/#NOR/NOR477"></iframe>
-
-(Créditos a [Jieter](https://github.com/jieter/orc-data/) por el software de visualización y a 
+(Créditos a [Jieter](https://github.com/jieter/orc-data/) por el software de visualización y a
 [orc.org](https://orc.org) por la recopilación de los datos)
 
-Como se puede ver, para llegar cuanto antes a un punto en sotavento, el rumbo más rápido no es 
+Como se puede ver, para llegar cuanto antes a un punto en sotavento, el rumbo más rápido no es
 una empopada por la pérdida de viento aparente sino un largo.
 
 Ahora, veamos el record de velocidad obtenido en la competición de SailGP:
 
-<div class="flex justify-center items-center">
-<iframe class="rounded-2xl ease-out overflow-hidden" width="560" height="315" src="https://www.youtube.com/embed/vAuNnZHo5nk?si=26bFVCiktylMfLPT&amp;start=27" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="flex items-center justify-center">
+  <iframe
+    class="overflow-hidden rounded-2xl ease-out"
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/vAuNnZHo5nk?si=26bFVCiktylMfLPT&amp;start=27"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
 </div>
 
 De manera bastante contraintuitiva ¡la velocidad más rápida se consigue con un viento de través!
 Siendo más precisos, la velocidad punta se consigue tras dejarse caer unos grados a favor del viento
-tras haber logrado acelerar estando de través. 
+tras haber logrado acelerar estando de través.
 
 Aunque parezca extraño, tras haber explicado como funciona el viento aparente y las componentes
 de la fuerza ¡Tiene todo el sentido! Al ir totalmente perpendiculares al viento, no perdemos viento al avanzar
 y por tanto la fuerza del viento se mantiene, idealmente, constante pudiendo conseguir, en nuestro simplificado
 modelo sin rozamiento dónde las vacas son esféricas y PI=3, la velocidad que queramos.
 
-
 # ¿El reto? El mar
 
-Ya hemos visto cómo exprimir al máximo la energía del viento jugando 
-con los rumbos y el viento aparente para generar la mayor fuerza posible. 
-Sin embargo, lamentablemente en el mundo real el rozamiento existe y 
+Ya hemos visto cómo exprimir al máximo la energía del viento jugando
+con los rumbos y el viento aparente para generar la mayor fuerza posible.
+Sin embargo, lamentablemente en el mundo real el rozamiento existe y
 existe un gran muro físico que nos frena: el mar.
 
 ### Resistencia al avance
 
-El agua es aproximadamente 800 veces más densa que el aire. Por mucha 
-fuerza que logremos capturar en nuestras velas, empujar el casco de un 
-barco a través de un fluido tan pesado genera un rozamiento colosal. 
+El agua es aproximadamente 800 veces más densa que el aire. Por mucha
+fuerza que logremos capturar en nuestras velas, empujar el casco de un
+barco a través de un fluido tan pesado genera un rozamiento colosal.
 
-Históricamente, la velocidad de un velero tradicional estaba condicionada 
-por su «velocidad de casco», un límite hidrodinámico en el que el barco queda 
+Históricamente, la velocidad de un velero tradicional estaba condicionada
+por su «velocidad de casco», un límite hidrodinámico en el que el barco queda
 atrapado por el propio tren de olas que genera al desplazarse.
 
 A medida que el barco acelera, la ola generada por su proa se hace cada vez más larga.
@@ -181,30 +207,28 @@ Al desplazarse el punto de carena, la popa se hunde drásticamente, obligando al
 a navegar perpetuamente "cuesta arriba" contra su propia ola y multiplicando de
 forma exponencial la resistencia al avance.
 
-Aunque los barcos más ligeros consiguen mitigar este efecto mediante el planeo 
-(deslizándose por encima de la superficie del agua en lugar de apartarla), la gran 
+Aunque los barcos más ligeros consiguen mitigar este efecto mediante el planeo
+(deslizándose por encima de la superficie del agua en lugar de apartarla), la gran
 superficie en contacto con el mar sigue frenando enormemente la embarcación.
 
 Entonces, si el roce con el agua es el problema... ¿por qué no evitar el agua?
 
 ### _Hydrofoil_
 
-Aquí es donde la espectacular ingeniería moderna entra en juego con los _hydrofoils_. 
-Si observas con atención los catamaranes F50 de SailGP o los monocascos AC75 de la Copa América, 
+Aquí es donde la espectacular ingeniería moderna entra en juego con los _hydrofoils_.
+Si observas con atención los catamaranes F50 de SailGP o los monocascos AC75 de la Copa América,
 verás unos grandes apéndices de carbono sumergidos en forma de 'L', 'T' o 'Y'.
 
-Su principio de funcionamiento es exactamente el mismo que el de las alas de un avión, pero aplicados 
-a un fluido mucho más denso. Conforme el barco acelera empujado por el viento, el flujo del agua atraviesa 
+Su principio de funcionamiento es exactamente el mismo que el de las alas de un avión, pero aplicados
+a un fluido mucho más denso. Conforme el barco acelera empujado por el viento, el flujo del agua atraviesa
 los perfiles asimétricos de los _foils_ generando una gran fuerza de sustentación hacia arriba.
 
-Al alcanzar cierta velocidad crítica, esta sustentación se vuelve mayor que el propio peso de la embarcación, 
-levantando el casco por completo y sacándolo fuera del agua. De un momento a otro, la resistencia hidrodinámica 
-se desploma drásticamente, ya que la única superficie en contacto con el mar pasa a ser la parte inferior de los 
+Al alcanzar cierta velocidad crítica, esta sustentación se vuelve mayor que el propio peso de la embarcación,
+levantando el casco por completo y sacándolo fuera del agua. De un momento a otro, la resistencia hidrodinámica
+se desploma drásticamente, ya que la única superficie en contacto con el mar pasa a ser la parte inferior de los
 propios _foils_ y las palas del timón.
 
-Gracias a esta reducción masiva del rozamiento, combinada con el efecto multiplicador del viento aparente que vimos 
-antes, el barco queda "liberado". El velero sigue acelerando hasta multiplicar por tres o por cuatro la velocidad del 
-viento real, catapultando a la tripulación hasta alcanzar la alucinante cifra de 100 km/h (casi 55 nudos) sobre la 
+Gracias a esta reducción masiva del rozamiento, combinada con el efecto multiplicador del viento aparente que vimos
+antes, el barco queda "liberado". El velero sigue acelerando hasta multiplicar por tres o por cuatro la velocidad del
+viento real, catapultando a la tripulación hasta alcanzar la alucinante cifra de 100 km/h (casi 55 nudos) sobre la
 superficie del océano. ¡Pura física trabajando en perfecta armonía!
-
-

@@ -6,9 +6,9 @@
   --sail-angle: 0deg;
 }
 
-#mast-sail {
+#mast-sail-container {
   transform-box: fill-box;
-  transform-origin: 50% 3%;
+  transform-origin: 50% 50%;
   transform: rotate(var(--sail-angle));
   transition: transform 0.1s linear;
 }
