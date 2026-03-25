@@ -253,3 +253,35 @@
 .pt-safe {
   padding-top: env(safe-area-inset-top, 0.75rem);
 }
+
+/* Mermaid inline SVG styles */
+.mermaid-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 0.5rem;
+}
+
+.mermaid-wrapper svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Light mode optional background tweak */
+html[data-theme='light'] .mermaid-wrapper {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Dark mode inversion for Mermaid inline SVGs generated in light mode */
+html[data-theme='dark'] .mermaid-wrapper svg {
+  filter: invert(0.93) hue-rotate(180deg);
+}
+
+/* Tweak the background color slightly differently since invert makes backgrounds bright */
+html[data-theme='dark'] .mermaid-wrapper {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 0.5rem;
+}

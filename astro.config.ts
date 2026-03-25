@@ -18,7 +18,8 @@ import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-s
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 
 import tailwindcss from '@tailwindcss/vite'
-import mermaid from 'astro-mermaid'
+import rehypeMermaid from 'rehype-mermaid'
+import { visit } from 'unist-util-visit'
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -79,12 +80,27 @@ function preloadInteractiveIslands() {
 }
 
 
+
+function escapeMermaid() {
+  return (tree) => {
+    visit(tree, 'code', (node, index, parent) => {
+      if (node.lang === 'mermaid') {
+        parent.children[index] = {
+          type: 'html',
+          value: `<div class="mermaid-wrapper">\n<pre><code class="language-mermaid">${node.value}</code></pre>\n</div>`
+        };
+      }
+    });
+  };
+}
+
 export default defineConfig({
+
   site: 'https://juantoca.net', // Update with your domain
   // Static output - API routes are handled by Cloudflare Pages Functions in /functions folder
   integrations: [
     preloadInteractiveIslands(),
-    mermaid(),
+
     Sonda(),
     expressiveCode({
       themes: ['github-light', 'github-dark'],
@@ -169,6 +185,7 @@ export default defineConfig({
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [
+      [rehypeMermaid, { strategy: 'inline-svg' }],
       [
         rehypeExternalLinks,
         {
@@ -188,7 +205,7 @@ export default defineConfig({
         },
       ],
     ],
-    remarkPlugins: [remarkMath, remarkEmoji],
+    remarkPlugins: [escapeMermaid, remarkMath, remarkEmoji],
   },
   i18n : {
     locales: ["es", "en"],
