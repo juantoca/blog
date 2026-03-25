@@ -48,7 +48,7 @@ Si os tenéis que quedar con algo de este artículo es que cuando Jack Sparrow d
 muy épico que quede, le está diciendo a su tripulación que pare el barco ya que van a aproar el barco y no 
 van a recibir nada de viento.
 
-Pero ¿cómo se comporta el barco en cada uno de los rumbos? El vector viento, el cuál es el que define cómo se moverá el barco, 
+Pero ¿cómo se comporta el barco en cada uno de los rumbos? El vector fuerza, el cuál es el que define cómo se moverá el barco, 
 se puede dividir en 3 componentes que facilitarán nuestro análisis. Tomándome cierta licencia de nomenclatura, las llamaremos
 componente de proa, componente de popa y componente de través:
 
@@ -59,7 +59,7 @@ problemático pero en el través y, especialmente en las ceñidas, estas compone
 el barco de la dirección deseada.
 
 La componente de popa es sencilla de explicar cómo se palia. Sencillamente, los barcos son anchos en la popa y se estrechan hacia
-la proa. Es decir, la popa es mucho menos hidrodinámica que la proa, generando mucha resistencia al avance y cancelando en gran medida
+la proa. Es decir, la popa es mucho menos hidrodinámica que la proa, generando mucha resistencia al avance y cancelando, en gran medida,
 la componente de popa. Sin embargo, la componente de través se merece su propia sección: 
 
 
@@ -83,7 +83,77 @@ la componente de popa. Sin embargo, la componente de través se merece su propia
 
 ### La orza y el escoramiento
 
+¿Cómo evitamos que la componente de través nos lleve el barco lejos de nuestro destino(abatimiento)? 
+La respuesta es la orza. Esta parte del barco es una prolongación submarina del barco que genera 
+resistencia al movimiento lateral del barco. Sin embargo y como contrapartida, el barco se escora y,
+si no se controla, puede volcar.
+
+¿Pero, si la orza es tan pequeña comparada con la vela, cómo es posible que oponga tanta resistencia
+al abatimiento? La respuesta es la diferencia de densidad entre los 2 fluidos: el aire/viento que 
+afecta sobre la vela y el agua que ejerce la resistencia sobre la orza. El peso de agua desplazada, 
+aún teniendo poco volumen, sirve de contrapeso a la fuerza ejercida por el viento sobre la vela equilibrando
+la embarcación.
+
 ### El problema del viento aparente
+
+Habiendo paliado las dos componentes del viento de popa y través, ahora podemos concluir el rumbo más 
+rápido de la embarcación. Como es obvio, el rumbo más rápido es aquel que maximiza la componente de proa.
+Por tanto, podemos concluir que es cuando el barco está en empopada ¿no?
+
+No del todo, si observamos una regata de SailGP podemos ver que el rumbo que toman al quedar la 
+siguiente boya a sotavento es un largo y no una empopada:
+
+<div class="flex justify-center items-center">
+<iframe class="rounded-2xl ease-out overflow-hidden" width="560" height="315" src="https://www.youtube.com/embed/t79iQN49Q9A?si=K3R6vFtPUbBRmEnj&amp;start=120" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+¿Por qué ocurre esto? Pues, cómo diría nuestro amigo Albert Einstein, todo es relativo. 
+Hasta ahora en nuestra explicación hemos hablado de la velocidad del viento absoluta, es decir, 
+asumiendo que el barco está inmovilizado. Sin embargo, la fuerza que ejerce el viento sobre 
+la embarcación depende de la velocidad del viento relativa a la velocidad de la embarcación llamado 
+viento aparente.
+
+¿Esto que significa? Que un barco que avanza a favor del viento va perdiendo viento ya que 
+este cada vez es más lento con respecto a la velocidad del barco. Y al revés, un barco que
+navega en contra del viento tiene un viento aparente cada vez más fuerte conforme su velocidad
+aumenta.
+
+Teniendo esto en cuenta, nos damos cuenta que dependiendo de la velocidad del viento absoluto y 
+la velocidad de la embarcación nos interesa tomar un rumbo u otro para llegar a nuestro destino.
+Por ejemplo, si queremos llegar a un punto que nos queda en sotavento desde una posición en reposo,
+el rumbo óptimo será ganar velocidad con una empopada y, conforme vamos perdiendo viento aparente al 
+ganar velocidad, orzar hacia un largo para seguir teniendo aparente y mantener una velocidad máxima
+mayor.
+
+Para representar estas velocidades máximas en función del viento, se utilizan los llamados diagramas
+polares, los cuáles son intrínsecos a cada modelo de barco. Usaremos como ejemplo medidas tomadas de 
+un J/80, uno de los barcos más comunes en la bahía de Santander
+(desgraciadamente, no he encontrado datos para el F50 o el AC75 :cry:):
+
+
+<iframe width="100%" height="2450px" src="https://jieter.github.io/orc-data/site/#NOR/NOR477"></iframe>
+
+(Créditos a [Jieter](https://github.com/jieter/orc-data/) por el software de visualización y a 
+[orc.org](https://orc.org) por la recopilación de los datos)
+
+Como se puede ver, para llegar cuanto antes a un punto en sotavento, el rumbo más rápido no es 
+una empopada por la pérdida de viento aparente sino un largo.
+
+Ahora, veamos el record de velocidad obtenido en la competición de SailGP:
+
+<div class="flex justify-center items-center">
+<iframe class="rounded-2xl ease-out overflow-hidden" width="560" height="315" src="https://www.youtube.com/embed/vAuNnZHo5nk?si=26bFVCiktylMfLPT&amp;start=27" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+De manera bastante contraintuitiva ¡la velocidad más rápida se consigue con un viento de través!
+Siendo más precisos, la velocidad punta se consigue tras dejarse caer unos grados a favor del viento
+tras haber logrado acelerar estando de través. 
+
+Aunque parezca extraño, tras haber explicado como funciona el viento aparente y las componentes
+de la fuerza ¡Tiene todo el sentido! Al ir totalmente perpendiculares al viento, no perdemos viento al avanzar
+y por tanto la fuerza del viento se mantiene, idealmente, constante pudiendo conseguir, en nuestro simplificado
+modelo sin rozamiento dónde las vacas son esféricas y PI=3, la velocidad que queramos.
+
 
 # ¿El reto? El mar
 
