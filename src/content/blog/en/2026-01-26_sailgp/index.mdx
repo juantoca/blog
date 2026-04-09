@@ -5,13 +5,9 @@ date: 2026-01-26
 draft: false
 ---
 
-import Boat from '@/content/blog/en/2026-01-26_sailgp/boat.svg'
-import Wind from '@/content/blog/en/2026-01-26_sailgp/wind-pattern.svg'
 import AnimationWrapper from '@/content/blog/en/2026-01-26_sailgp/_components/AnimationWrapper.astro'
-import WindSlider from '@/content/blog/en/2026-01-26_sailgp/_components/WindSlider.astro'
-import SailSlider from '@/content/blog/en/2026-01-26_sailgp/_components/SailSlider.astro'
 import SailDeformer from '@/content/blog/en/2026-01-26_sailgp/_components/SailDeformer.astro'
-import Concept from '@/content/blog/en/2026-01-26_sailgp/_components/Concept.astro'
+import PointsOfSail from '@/content/blog/en/2026-01-26_sailgp/_components/PointsOfSail.tsx'
 import Tooltip from '@/components/ui/tooltip/Tooltip'
 import LeewayAnimation from '@/content/blog/en/2026-01-26_sailgp/_components/LeewayAnimation.astro'
 import HeelingAnimation from '@/content/blog/en/2026-01-26_sailgp/_components/HeelingAnimation.astro'
@@ -67,20 +63,7 @@ la proa. Es decir, la popa es mucho menos hidrodinámica que la proa, generando 
 la componente de popa que empujaría el barco hacia atrás. Sin embargo, la componente de través se merece su propia sección:
 
 <AnimationWrapper>
-  <svg
-    weight="100%"
-    height="100%"
-    version="1.1"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:svg="http://www.w3.org/2000/svg"
-    class="svg-animation"
-  >
-    <Wind width="100%" height="100%" opacity="30%" />
-    <Boat class="svg-wrapper" />
-  </svg>
-
-  <WindSlider />
-    <SailSlider />
+  <PointsOfSail client:visible />
   <SailDeformer />
 </AnimationWrapper>
 
