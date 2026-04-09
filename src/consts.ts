@@ -33,17 +33,17 @@ export const NAV_LINKS: NavLink[] = [
     href: '/blog',
     label: 'Blog',
     translations: {
-      en: "Blog",
-      es: "Blog"
-    }
+      en: 'Blog',
+      es: 'Blog',
+    },
   },
   {
     href: '/about',
     label: 'About',
     translations: {
-      en: "About",
-      es: "Sobre mi"
-    }
+      en: 'About',
+      es: 'Sobre mi',
+    },
   },
 ]
 
@@ -51,7 +51,6 @@ export const SOCIAL_LINKS: SocialLink[] = [
   {
     href: 'https://github.com/juantoca',
     label: 'GitHub',
-
   },
   {
     href: 'mailto:juantocamateo17@gmail.com',

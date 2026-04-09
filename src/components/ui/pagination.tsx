@@ -85,7 +85,9 @@ function PaginationPrevious({
       {...props}
     >
       <ChevronLeftIcon />
-      <span className="hidden sm:block">{localizeStringFromLanguage(lang, {en: "Previous", es: "Anterior"})}</span>
+      <span className="hidden sm:block">
+        {localizeStringFromLanguage(lang, { en: 'Previous', es: 'Anterior' })}
+      </span>
     </PaginationLink>
   )
 }
@@ -104,7 +106,9 @@ function PaginationNext({
       isDisabled={isDisabled}
       {...props}
     >
-      <span className="hidden sm:block">{localizeStringFromLanguage(lang, {en: "Next", es: "Siguiente"})}</span>
+      <span className="hidden sm:block">
+        {localizeStringFromLanguage(lang, { en: 'Next', es: 'Siguiente' })}
+      </span>
       <ChevronRightIcon />
     </PaginationLink>
   )
@@ -123,7 +127,12 @@ function PaginationEllipsis({
       {...props}
     >
       <MoreHorizontalIcon className="size-4" />
-      <span className="sr-only">{localizeStringFromLanguage(lang, {en: "More pages", es: "Más páginas"})}</span>
+      <span className="sr-only">
+        {localizeStringFromLanguage(lang, {
+          en: 'More pages',
+          es: 'Más páginas',
+        })}
+      </span>
     </span>
   )
 }
@@ -132,7 +141,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
   currentPage,
   totalPages,
   baseUrl,
-  lang
+  lang,
 }) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
@@ -175,7 +184,7 @@ const PaginationComponent: React.FC<PaginationProps> = ({
               currentPage < totalPages ? getPageUrl(currentPage + 1) : undefined
             }
             isDisabled={currentPage === totalPages}
-            lang = {lang}
+            lang={lang}
           />
         </PaginationItem>
       </PaginationContent>

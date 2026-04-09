@@ -1,7 +1,7 @@
 ---
 import { SITE } from '@/consts'
-import Favicons from './Favicons.astro'
 import { getLanguageFromUrl } from '@/lib/i18n'
+import Favicons from './Favicons.astro'
 
 interface Props {
   title?: string
@@ -19,7 +19,11 @@ const canonicalURL = new URL(Astro.originPathname, Astro.site).href
 const cleanPathname = Astro.originPathname.replace(/\/$/, '')
 console.log(cleanPathname)
 const ogImage =
-  image || new URL(`/og/${getLanguageFromUrl(Astro.originPathname)}/default.png`, Astro.site).href
+  image ||
+  new URL(
+    `/og/${getLanguageFromUrl(Astro.originPathname)}/default.png`,
+    Astro.site,
+  ).href
 ---
 
 <head>

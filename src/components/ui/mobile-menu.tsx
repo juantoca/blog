@@ -5,11 +5,15 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuPortal
+  DropdownMenuPortal,
 } from '@/components/ui/dropdown-menu'
 import { NAV_LINKS } from '@/consts'
 import { Menu, ExternalLink } from 'lucide-react'
-import { getLocalizedUrl, localizeString, localizeStringFromLanguage } from '@/lib/i18n'
+import {
+  getLocalizedUrl,
+  localizeString,
+  localizeStringFromLanguage,
+} from '@/lib/i18n'
 
 const MobileMenu = ({ language, children }) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -50,7 +54,10 @@ const MobileMenu = ({ language, children }) => {
           const isExternal = isExternalLink(item.href)
           const isInsideLink = item.label.toLowerCase() === 'inside'
           return (
-            <DropdownMenuItem key={getLocalizedUrl(item.href, language)} asChild>
+            <DropdownMenuItem
+              key={getLocalizedUrl(item.href, language)}
+              asChild
+            >
               <a
                 href={getLocalizedUrl(item.href, language)}
                 target={isExternal ? '_blank' : '_self'}
@@ -64,7 +71,9 @@ const MobileMenu = ({ language, children }) => {
                 }`}
                 onClick={() => setIsOpen(false)}
               >
-                <span>{localizeStringFromLanguage(language, item.translations)}</span>
+                <span>
+                  {localizeStringFromLanguage(language, item.translations)}
+                </span>
                 {isExternal && (
                   <ExternalLink
                     className={`h-4 w-4 flex-shrink-0 opacity-80 ${isInsideLink ? 'text-primary' : ''}`}

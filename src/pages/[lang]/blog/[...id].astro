@@ -84,9 +84,13 @@ let tocSections: Awaited<ReturnType<typeof getTOCSections>> = []
 
 try {
   navigation = await getAdjacentPosts(currentPostId, lang)
-  parentPost = isCurrentSubpost ? await getParentPost(currentPostId, lang) : null
+  parentPost = isCurrentSubpost
+    ? await getParentPost(currentPostId, lang)
+    : null
   hasChildPosts = await hasSubposts(currentPostId, lang)
-  subpostCount = !isCurrentSubpost ? await getSubpostCount(currentPostId, lang) : 0
+  subpostCount = !isCurrentSubpost
+    ? await getSubpostCount(currentPostId, lang)
+    : 0
   postReadingTime = await getPostReadingTime(currentPostId, lang)
   combinedReadingTime =
     hasChildPosts && !isCurrentSubpost

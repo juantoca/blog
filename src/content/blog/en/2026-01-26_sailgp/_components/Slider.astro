@@ -1,28 +1,25 @@
 ---
-const{ variable, formatString, ...rest} = Astro.props
+const { variable, formatString, ...rest } = Astro.props
 ---
+
 <input
-      type="range"
-      class="animation-slider-component flex-item w-full max-w-sm items-center rotation-slider h-2 cursor-pointer appearance-none rounded-full bg-secondary accent-primary"
-      data-variable={variable}
-      data-formatstring={formatString}
-      aria-label="Rotate image"
-      {...rest}
-    />
+  type="range"
+  class="animation-slider-component flex-item rotation-slider bg-secondary accent-primary h-2 w-full max-w-sm cursor-pointer appearance-none items-center rounded-full"
+  data-variable={variable}
+  data-formatstring={formatString}
+  aria-label="Rotate image"
+  {...rest}
+/>
 
 <script>
-
   // First, checks if it isn't implemented yet.
   if (!String.prototype.format) {
-  String.prototype.format = function() {
-    var args = arguments;
-    return this.replace(/{(\d+)}/g, function(match, number) { 
-      return typeof args[number] != 'undefined'
-        ? args[number]
-        : match
-      ;
-    });
-  };
+    String.prototype.format = function () {
+      var args = arguments
+      return this.replace(/{(\d+)}/g, function (match, number) {
+        return typeof args[number] != 'undefined' ? args[number] : match
+      })
+    }
   }
 
   function setupRotatableSvgs() {
@@ -44,9 +41,11 @@ const{ variable, formatString, ...rest} = Astro.props
 
           const root = document.documentElement as HTMLElement
           root.style.setProperty(`--${variable}`, formatString.format(rotation))
-          const components = document.querySelectorAll(`.rotation-slider[data-variable='${variable}']`)
+          const components = document.querySelectorAll(
+            `.rotation-slider[data-variable='${variable}']`,
+          )
           components.forEach((component) => {
-            var comp = component as HTMLInputElement 
+            var comp = component as HTMLInputElement
             comp.value = rotation
           })
         })
