@@ -294,21 +294,21 @@ export default function PointsOfSail() {
             viento.
           </p>
         )}
-        {heading >= 25 && heading <= 45 && (
+        {heading >= 25 && heading <= 67 && (
           <p>
             <strong>Ceñida:</strong> Gran fuerza lateral (abatimiento) y la
             componente de popa aún empuja ligeramente hacia atrás. El casco
             (orza y forma) es vital para contrarrestarlo.
           </p>
         )}
-        {heading > 45 && heading <= 100 && (
+        {heading > 67 && heading <= 112 && (
           <p>
             <strong>Través:</strong> El punto más rápido en la mayoría de
             barcos. Gran fuerza de proa (avance) que vence a la componente
             lateral (través).
           </p>
         )}
-        {heading > 100 && heading <= 150 && (
+        {heading > 112 && heading <= 150 && (
           <p>
             <strong>Largo:</strong> Rumbo muy cómodo y rápido. La fuerza del
             viento se alinea casi enteramente con el avance del barco (proa).
