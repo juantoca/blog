@@ -145,24 +145,10 @@ export default function PointsOfSail() {
                   strokeLinejoin: 'miter',
                 }}
               />
-              {/* Mast & Sail */}
-              <g transform={`rotate(${-sailAngle}, 84.57, 55)`}>
-                <circle
-                  cx="84.57"
-                  cy="55"
-                  r="60"
-                  fill="none"
-                  pointerEvents="none"
-                />
-                <path
-                  fill="var(--color-foreground)"
-                  d={getSailPath(heading, sailAngle)}
-                />
-              </g>
             </g>
 
-            {/* Force Vectors */}
-            <g>
+            {/* Force Vectors - Rendered behind the sail with slight transparency */}
+            <g className="opacity-80">
               {/* Vector Través (Side Force) */}
               {travesForce > 5 && (
                 <g>
@@ -259,6 +245,23 @@ export default function PointsOfSail() {
                 </g>
               )}
             </g>
+
+            {/* Mast & Sail - Rendered on top of vectors */}
+            <g transform="translate(-84.57, -55)">
+              <g transform={`rotate(${-sailAngle}, 84.57, 55)`}>
+                <circle
+                  cx="84.57"
+                  cy="55"
+                  r="60"
+                  fill="none"
+                  pointerEvents="none"
+                />
+                <path
+                  fill="var(--color-foreground)"
+                  d={getSailPath(heading, sailAngle)}
+                />
+              </g>
+            </g>
           </g>
         </svg>
       </div>
@@ -284,14 +287,14 @@ export default function PointsOfSail() {
 
       {/* Dynamic Explanation */}
       <div className="bg-muted/30 flex min-h-[80px] w-full items-center justify-center rounded-lg p-4 text-center text-sm">
-        {heading === 0 && (
+        {heading < 25 && (
           <p>
             <strong>Aproado:</strong> Las velas flamean. La componente de popa
             (arrastre hacia atrás) es máxima debido al choque directo con el
             viento.
           </p>
         )}
-        {heading > 0 && heading <= 45 && (
+        {heading >= 25 && heading <= 45 && (
           <p>
             <strong>Ceñida:</strong> Gran fuerza lateral (abatimiento) y la
             componente de popa aún empuja ligeramente hacia atrás. El casco
