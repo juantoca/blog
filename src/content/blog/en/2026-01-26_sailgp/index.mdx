@@ -13,6 +13,7 @@ import LeewayAnimation from '@/content/blog/en/2026-01-26_sailgp/_components/Lee
 import HeelingAnimation from '@/content/blog/en/2026-01-26_sailgp/_components/HeelingAnimation.astro'
 import WindForceSlider from '@/content/blog/en/2026-01-26_sailgp/_components/WindForceSlider.astro'
 import PolarChart from '@/content/blog/en/2026-01-26_sailgp/_components/PolarChart.tsx'
+import WaveFront from '@/content/blog/en/2026-01-26_sailgp/_components/WaveFront.tsx'
 import '@/content/blog/en/2026-01-26_sailgp/_styles/animations.css'
 
 Hace unos meses, [Cantabria económica](https://www.cantabriaeconomica.com/circulo-empresarial-cantabria-economica/santander-seria-el-sitio-ideal-para-acoger-una-copa-america/)
@@ -191,6 +192,10 @@ con ello, el retraso del «punto de carena» (el centro de empuje hidrostático)
 Al desplazarse el punto de carena, la popa se hunde drásticamente, obligando al velero
 a navegar perpetuamente "cuesta arriba" contra su propia ola y multiplicando de
 forma exponencial la resistencia al avance.
+
+<AnimationWrapper>
+  <WaveFront client:visible lang="es" />
+</AnimationWrapper>
 
 Aunque los barcos más ligeros consiguen mitigar este efecto mediante el planeo
 (deslizándose por encima de la superficie del agua en lugar de apartarla), la gran
