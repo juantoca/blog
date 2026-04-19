@@ -17,12 +17,8 @@ export default function PolarChart() {
       const parts = lines[i].split(';').map(Number)
       const twa = parts[0]
       for (let j = 0; j < twsValues.length; j++) {
-        if (parts[j + 1] > 0 || twa === 0) {
-          if (twa === 0) {
-            data[j].points.push({ twa, speed: 0 })
-          } else {
-            data[j].points.push({ twa, speed: parts[j + 1] })
-          }
+        if (twa !== 0 && parts[j + 1] > 0) {
+          data[j].points.push({ twa, speed: parts[j + 1] })
         }
       }
     }
@@ -60,7 +56,7 @@ export default function PolarChart() {
   const cx = width / 2
   const cy = height / 2
   const maxRadius = 240
-  const maxSpeed = 40
+  const maxSpeed = 25
 
   const rScale = (speed: number) => (speed / maxSpeed) * maxRadius
 
@@ -85,7 +81,7 @@ export default function PolarChart() {
   }
 
   // Grid lines
-  const gridSpeeds = [5, 10, 15, 20, 25, 30, 35, 40]
+  const gridSpeeds = [5, 10, 15, 20, 25]
   const gridAngles = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
 
   const colors = [
