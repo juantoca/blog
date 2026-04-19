@@ -52,7 +52,7 @@ export default function WaveFront({ lang = 'es' }: Props) {
   // Math for wave and boat
   let wavelength = 40
   if (speed <= 75) {
-    wavelength = 40 + (speed / 75) * 120 // 40 to 160
+    wavelength = 50 + (speed / 75) * 110 // 50 to 160
   } else {
     wavelength = 160 + ((speed - 75) / 25) * 160 // 160 to 320
   }
@@ -61,7 +61,10 @@ export default function WaveFront({ lang = 'es' }: Props) {
 
   const getWaveY = (x: number) => {
     // Main bow wave (stationary relative to boat, represents the wake)
-    const bowY = -amplitude * Math.cos((2 * Math.PI * (x - 80)) / wavelength)
+    // Offset the cosine so that x=80 (bow) is roughly a crest, but x=-80 (stern) naturally falls in the trough before hull speed
+    const phaseOffset = -Math.PI / 8 // shift wave slightly right
+    const bowY =
+      -amplitude * Math.cos((2 * Math.PI * (x - 80)) / wavelength + phaseOffset)
 
     // Ambient waves moving leftwards relative to the boat.
     // They move faster when the boat moves faster.
