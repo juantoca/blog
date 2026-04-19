@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import csvRaw from '../_data/j80.csv?raw'
+import csvRaw from '../_data/volvo70.csv?raw'
 import { cn } from '@/lib/utils'
 
 interface Props {
