@@ -187,33 +187,6 @@ export default function WaveFront({ lang = 'es' }: Props) {
               d="M -10,-85 L 40,-15 L -10,-15 Z"
               style={{ fill: 'var(--sail-color)' }}
             />
-
-            {/* Bow Splash */}
-            {speed > 10 && (
-              <g transform="translate(70, 0)">
-                <circle
-                  cx="2"
-                  cy="0"
-                  r={1 + speed / 30}
-                  fill="white"
-                  className="opacity-80"
-                />
-                <circle
-                  cx="5"
-                  cy="5"
-                  r={1 + speed / 40}
-                  fill="white"
-                  className="opacity-60"
-                />
-                <circle
-                  cx="8"
-                  cy="2"
-                  r={speed / 50}
-                  fill="white"
-                  className="opacity-40"
-                />
-              </g>
-            )}
           </g>
 
           {/* Foreground semi-transparent wave to make boat look submerged */}
