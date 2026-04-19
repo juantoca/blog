@@ -34,6 +34,6 @@ const content = { en: ContentEN, es: ContentEN }[lang]
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:user' }]} />
 
   <section class="flex flex-col gap-8">
-    {lang == 'en' ? <ContentEN /> : <ContentES></ContentES>}
+    {lang == 'en' ? <ContentEN /> : <ContentES />}
   </section>
 </Layout>

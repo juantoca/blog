@@ -53,6 +53,12 @@ Pero ¿cómo se comporta el barco en cada uno de los rumbos? El vector fuerza, e
 se puede dividir en 3 componentes que facilitarán nuestro análisis. Tomándome cierta licencia de nomenclatura, las llamaremos
 componente de proa, componente de popa y componente de través:
 
+<AnimationWrapper lang="es">
+  <PointsOfSail client:visible />
+  <SailDeformer />
+</AnimationWrapper>
+
+
 Como se puede observar, para producir el avance del barco necesitamos reducir al máximo las componentes de popa y través en los
 diferentes rumbos de tal manera que la componente de proa haga el barco avanzar. En rumbos cómo el de empopada no es especialmente
 problemático pero en el través y, especialmente en las ceñidas, estas componentes nos generan problemas ya que nos desvían demasiado
@@ -61,11 +67,6 @@ el barco de la dirección deseada.
 La componente de popa es sencilla de explicar cómo se palia. Sencillamente, los barcos son anchos en la popa y se estrechan hacia
 la proa. Es decir, la popa es mucho menos hidrodinámica que la proa, generando mucha resistencia al retroceso y cancelando, en gran medida,
 la componente de popa que empujaría el barco hacia atrás. Sin embargo, la componente de través se merece su propia sección:
-
-<AnimationWrapper>
-  <PointsOfSail client:visible />
-  <SailDeformer />
-</AnimationWrapper>
 
 ### La orza y el escoramiento
 

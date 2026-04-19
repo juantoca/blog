@@ -1,16 +1,55 @@
 import { useState } from 'react'
 
-export default function PointsOfSail() {
+interface Props {
+  lang?: 'en' | 'es'
+}
+
+export default function PointsOfSail({ lang = 'es' }: Props) {
   const [heading, setHeading] = useState(45)
 
-  // Points of sail definitions
-  const rumbos = [
-    { name: 'Aproado', angle: 0 },
-    { name: 'Ceñida', angle: 45 },
-    { name: 'Través', angle: 90 },
-    { name: 'Largo', angle: 135 },
-    { name: 'Empopada', angle: 180 },
-  ]
+  const t = {
+    es: {
+      rumbos: [
+        { name: 'Aproado', angle: 0 },
+        { name: 'Ceñida', angle: 45 },
+        { name: 'Través', angle: 90 },
+        { name: 'Largo', angle: 135 },
+        { name: 'Empopada', angle: 180 },
+      ],
+      vectors: {
+        traves: 'Través',
+        proa: 'Proa',
+        popa: 'Popa',
+      },
+      controls: {
+        angle: 'Ángulo respecto al viento:',
+        min: 'Aproado (0°)',
+        max: 'Empopada (180°)',
+      },
+    },
+    en: {
+      rumbos: [
+        { name: 'In Irons', angle: 0 },
+        { name: 'Close Hauled', angle: 45 },
+        { name: 'Beam Reach', angle: 90 },
+        { name: 'Broad Reach', angle: 135 },
+        { name: 'Running', angle: 180 },
+      ],
+      vectors: {
+        traves: 'Side',
+        proa: 'Forward',
+        popa: 'Drag',
+      },
+      controls: {
+        angle: 'Wind angle:',
+        min: 'In Irons (0°)',
+        max: 'Running (180°)',
+      },
+    },
+  }
+
+  const currentT = t[lang]
+  const rumbos = currentT.rumbos
 
   // Calculate sail angle (simplified: bisects angle between heading and apparent wind)
   const sailAngle =
@@ -175,7 +214,7 @@ export default function PointsOfSail() {
                       transform={`rotate(${-heading})`}
                       className="fill-blue-600 text-[14px] font-bold dark:fill-blue-400"
                     >
-                      Través
+                      {currentT.vectors.traves}
                     </text>
                   </g>
                 </g>
@@ -207,7 +246,7 @@ export default function PointsOfSail() {
                       transform={`rotate(${-heading})`}
                       className="fill-green-600 text-[14px] font-bold dark:fill-green-400"
                     >
-                      Proa
+                      {currentT.vectors.proa}
                     </text>
                   </g>
                 </g>
@@ -239,7 +278,7 @@ export default function PointsOfSail() {
                       transform={`rotate(${-heading})`}
                       className="fill-red-600 text-[14px] font-bold dark:fill-red-400"
                     >
-                      Popa
+                      {currentT.vectors.popa}
                     </text>
                   </g>
                 </g>
@@ -269,7 +308,7 @@ export default function PointsOfSail() {
       {/* Manual Slider */}
       <div className="flex w-full max-w-sm flex-col gap-2">
         <label className="text-center text-sm font-medium">
-          Ángulo respecto al viento: {heading}°
+          {currentT.controls.angle} {heading}°
         </label>
         <input
           type="range"
@@ -280,46 +319,88 @@ export default function PointsOfSail() {
           className="accent-primary w-full"
         />
         <div className="text-muted-foreground flex justify-between text-xs">
-          <span>Aproado (0°)</span>
-          <span>Empopada (180°)</span>
+          <span>{currentT.controls.min}</span>
+          <span>{currentT.controls.max}</span>
         </div>
       </div>
 
       {/* Dynamic Explanation */}
       <div className="bg-muted/30 flex min-h-[80px] w-full items-center justify-center rounded-lg p-4 text-center text-sm">
-        {heading < 25 && (
-          <p>
-            <strong>Aproado:</strong> Las velas flamean. La componente de popa
-            (arrastre hacia atrás) es máxima debido al choque directo con el
-            viento.
-          </p>
-        )}
-        {heading >= 25 && heading <= 67 && (
-          <p>
-            <strong>Ceñida:</strong> Gran fuerza lateral (abatimiento) y la
-            componente de popa aún empuja ligeramente hacia atrás. El casco
-            (orza y forma) es vital para contrarrestarlo.
-          </p>
-        )}
-        {heading > 67 && heading <= 112 && (
-          <p>
-            <strong>Través:</strong> El punto más rápido en la mayoría de
-            barcos. Gran fuerza de proa (avance) que vence a la componente
-            lateral (través).
-          </p>
-        )}
-        {heading > 112 && heading <= 150 && (
-          <p>
-            <strong>Largo:</strong> Rumbo muy cómodo y rápido. La fuerza del
-            viento se alinea casi enteramente con el avance del barco (proa).
-          </p>
-        )}
-        {heading > 150 && (
-          <p>
-            <strong>Empopada:</strong> El viento empuja totalmente desde atrás.
-            Cero fuerza de través, pero el viento aparente disminuye limitando
-            la velocidad punta.
-          </p>
+        {lang === 'es' ? (
+          <>
+            {heading < 25 && (
+              <p>
+                <strong>Aproado:</strong> Las velas flamean. La componente de
+                popa (arrastre hacia atrás) es máxima debido al choque directo
+                con el viento.
+              </p>
+            )}
+            {heading >= 25 && heading <= 67 && (
+              <p>
+                <strong>Ceñida:</strong> Gran fuerza lateral (abatimiento) y la
+                componente de popa aún empuja ligeramente hacia atrás. El casco
+                (orza y forma) es vital para contrarrestarlo.
+              </p>
+            )}
+            {heading > 67 && heading <= 112 && (
+              <p>
+                <strong>Través:</strong> El punto más rápido en la mayoría de
+                barcos. Gran fuerza de proa (avance) que vence a la componente
+                lateral (través).
+              </p>
+            )}
+            {heading > 112 && heading <= 150 && (
+              <p>
+                <strong>Largo:</strong> Rumbo muy cómodo y rápido. La fuerza del
+                viento se alinea casi enteramente con el avance del barco
+                (proa).
+              </p>
+            )}
+            {heading > 150 && (
+              <p>
+                <strong>Empopada:</strong> El viento empuja totalmente desde
+                atrás. Cero fuerza de través, pero el viento aparente disminuye
+                limitando la velocidad punta.
+              </p>
+            )}
+          </>
+        ) : (
+          <>
+            {heading < 25 && (
+              <p>
+                <strong>In Irons:</strong> Sails are flapping. The backward
+                component (drag) is highest due to the direct impact of the
+                wind.
+              </p>
+            )}
+            {heading >= 25 && heading <= 67 && (
+              <p>
+                <strong>Close Hauled:</strong> High side force (leeway) and the
+                backward component still pushes slightly backwards. The hull
+                (keel and shape) is vital to counteract this.
+              </p>
+            )}
+            {heading > 67 && heading <= 112 && (
+              <p>
+                <strong>Beam Reach:</strong> The fastest point of sail for most
+                boats. Large forward force overcomes the side force.
+              </p>
+            )}
+            {heading > 112 && heading <= 150 && (
+              <p>
+                <strong>Broad Reach:</strong> Very comfortable and fast point of
+                sail. Wind force aligns almost entirely with the boat's forward
+                movement.
+              </p>
+            )}
+            {heading > 150 && (
+              <p>
+                <strong>Running:</strong> The wind pushes entirely from behind.
+                Zero side force, but apparent wind decreases, limiting top
+                speed.
+              </p>
+            )}
+          </>
         )}
       </div>
     </div>
