@@ -74,13 +74,14 @@ export default function WaveFront({ lang = 'es' }: Props) {
     return bowY + ambientY
   }
 
-  const yBow = getWaveY(80)
-  const yStern = getWaveY(-80)
+  // Track the wave at the exact points where the hull crosses the local y=0 waterline (x=70 and x=-70)
+  const yBow = getWaveY(70)
+  const yStern = getWaveY(-70)
 
   const cy = (yBow + yStern) / 2
-  const angleRad = Math.atan2(yBow - yStern, 160)
-  // Dampen the visual rotation slightly to feel more natural and massive
-  const angleDeg = angleRad * (180 / Math.PI) * 0.6
+  const angleRad = Math.atan2(yBow - yStern, 140)
+  // No dampening here so the waterline of the boat perfectly matches the wave slope
+  const angleDeg = angleRad * (180 / Math.PI)
 
   let wavePath = `M -200 150 `
   for (let x = -200; x <= 200; x += 5) {
@@ -169,7 +170,7 @@ export default function WaveFront({ lang = 'es' }: Props) {
             />
             {/* Hull */}
             <path
-              d="M -80,-15 L 80,-30 C 50,15 -50,15 -80,-15 Z"
+              d="M -80,-15 L 80,-30 L 70, 0 C 40,30 -40,30 -70,0 Z"
               style={{ fill: 'var(--boat-color)' }}
             />
             {/* Mast */}
