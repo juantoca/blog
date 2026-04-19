@@ -7,18 +7,17 @@ interface Props {
 }
 
 export default function PolarChart({ lang = 'es' }: Props) {
-  
   const t = {
     es: {
       maxSpeed: 'Vel. Máxima',
       run: 'Popa',
-      kn: 'kn'
+      kn: 'kn',
     },
     en: {
       maxSpeed: 'Max Speed',
       run: 'Run',
-      kn: 'kn'
-    }
+      kn: 'kn',
+    },
   }
   const currentT = t[lang]
 
@@ -94,9 +93,27 @@ export default function PolarChart({ lang = 'es' }: Props) {
       }
     })
 
-    return coords
-      .map((c, i) => `${i === 0 ? 'M' : 'L'} ${c.x} ${c.y}`)
-      .join(' ')
+    if (coords.length === 0) return ''
+
+    let path = `M ${coords[0].x} ${coords[0].y}`
+    const tension = 0.2
+
+    for (let i = 0; i < coords.length - 1; i++) {
+      const p0 = i === 0 ? coords[0] : coords[i - 1]
+      const p1 = coords[i]
+      const p2 = coords[i + 1]
+      const p3 = i + 2 < coords.length ? coords[i + 2] : coords[i + 1]
+
+      const cp1x = p1.x + (p2.x - p0.x) * tension
+      const cp1y = p1.y + (p2.y - p0.y) * tension
+
+      const cp2x = p2.x - (p3.x - p1.x) * tension
+      const cp2y = p2.y - (p3.y - p1.y) * tension
+
+      path += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`
+    }
+
+    return path
   }
 
   // Grid lines
@@ -245,7 +262,9 @@ export default function PolarChart({ lang = 'es' }: Props) {
                     fontWeight="bold"
                     textAnchor="middle"
                     dominantBaseline="middle"
-                  >{currentT.maxSpeed}</text>
+                  >
+                    {currentT.maxSpeed}
+                  </text>
 
                   <line
                     x1={cx}
@@ -295,7 +314,9 @@ export default function PolarChart({ lang = 'es' }: Props) {
                     fontWeight="bold"
                     textAnchor="middle"
                     dominantBaseline="middle"
-                  >{currentT.run}</text>
+                  >
+                    {currentT.run}
+                  </text>
                 </>
               )}
               {/* Right side */}
