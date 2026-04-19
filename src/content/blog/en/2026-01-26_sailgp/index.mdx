@@ -12,6 +12,7 @@ import Tooltip from '@/components/ui/tooltip/Tooltip'
 import LeewayAnimation from '@/content/blog/en/2026-01-26_sailgp/_components/LeewayAnimation.astro'
 import HeelingAnimation from '@/content/blog/en/2026-01-26_sailgp/_components/HeelingAnimation.astro'
 import WindForceSlider from '@/content/blog/en/2026-01-26_sailgp/_components/WindForceSlider.astro'
+import PolarChart from '@/content/blog/en/2026-01-26_sailgp/_components/PolarChart.tsx'
 import '@/content/blog/en/2026-01-26_sailgp/_styles/animations.css'
 
 Hace unos meses, [Cantabria económica](https://www.cantabriaeconomica.com/circulo-empresarial-cantabria-economica/santander-seria-el-sitio-ideal-para-acoger-una-copa-america/)
@@ -57,7 +58,6 @@ componente de proa, componente de popa y componente de través:
   <PointsOfSail client:visible />
   <SailDeformer />
 </AnimationWrapper>
-
 
 Como se puede observar, para producir el avance del barco necesitamos reducir al máximo las componentes de popa y través en los
 diferentes rumbos de tal manera que la componente de proa haga el barco avanzar. En rumbos cómo el de empopada no es especialmente
@@ -131,17 +131,11 @@ mayor.
 
 Para representar estas velocidades máximas en función del viento, se utilizan los llamados diagramas
 polares, los cuáles son intrínsecos a cada modelo de barco. Usaremos como ejemplo medidas tomadas de
-un J/80, uno de los barcos más comunes en la bahía de Santander
-(desgraciadamente, no he encontrado datos para el F50 o el AC75 :cry:):
+un J/80, uno de los barcos más comunes en la bahía de Santander:
 
-<iframe
-  width="100%"
-  height="2450px"
-  src="https://jieter.github.io/orc-data/site/#NOR/NOR477"
-></iframe>
+<PolarChart client:visible />
 
-(Créditos a [Jieter](https://github.com/jieter/orc-data/) por el software de visualización y a
-[orc.org](https://orc.org) por la recopilación de los datos)
+(Créditos a [orc.org](https://orc.org) por la recopilación de los datos)
 
 Como se puede ver, para llegar cuanto antes a un punto en sotavento, el rumbo más rápido no es
 una empopada por la pérdida de viento aparente sino un largo.
