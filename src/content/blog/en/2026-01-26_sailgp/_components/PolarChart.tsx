@@ -2,7 +2,26 @@ import { useState, useMemo } from 'react'
 import csvRaw from '../_data/j80.csv?raw'
 import { cn } from '@/lib/utils'
 
-export default function PolarChart() {
+interface Props {
+  lang?: 'en' | 'es'
+}
+
+export default function PolarChart({ lang = 'es' }: Props) {
+  
+  const t = {
+    es: {
+      maxSpeed: 'Vel. Máxima',
+      run: 'Popa',
+      kn: 'kn'
+    },
+    en: {
+      maxSpeed: 'Max Speed',
+      run: 'Run',
+      kn: 'kn'
+    }
+  }
+  const currentT = t[lang]
+
   const dataPoints = useMemo(() => {
     const lines = csvRaw.trim().split('\n')
     const twsValues = lines[0].split(';').slice(1).map(Number)
@@ -226,9 +245,7 @@ export default function PolarChart() {
                     fontWeight="bold"
                     textAnchor="middle"
                     dominantBaseline="middle"
-                  >
-                    Max Speed
-                  </text>
+                  >{currentT.maxSpeed}</text>
 
                   <line
                     x1={cx}
@@ -278,9 +295,7 @@ export default function PolarChart() {
                     fontWeight="bold"
                     textAnchor="middle"
                     dominantBaseline="middle"
-                  >
-                    Run
-                  </text>
+                  >{currentT.run}</text>
                 </>
               )}
               {/* Right side */}
@@ -337,7 +352,7 @@ export default function PolarChart() {
               onMouseEnter={() => setHoveredTws(tws)}
               onMouseLeave={() => setHoveredTws(null)}
             >
-              {tws} kn
+              {tws} {currentT.kn}
             </div>
           )
         })}
