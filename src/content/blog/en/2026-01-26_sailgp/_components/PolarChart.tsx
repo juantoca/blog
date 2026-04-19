@@ -9,15 +9,47 @@ export default function PolarChart() {
     const data = twsValues.map((tws) => ({
       tws,
       points: [] as { twa: number; speed: number }[],
+      maxSpeedPoint: { twa: 0, speed: 0 },
+      runPoint: { twa: 0, speed: 0 },
     }))
 
     for (let i = 1; i < lines.length; i++) {
       const parts = lines[i].split(';').map(Number)
       const twa = parts[0]
       for (let j = 0; j < twsValues.length; j++) {
-        data[j].points.push({ twa, speed: parts[j + 1] })
+        if (parts[j + 1] > 0 || twa === 0) {
+          if (twa === 0) {
+            data[j].points.push({ twa, speed: 0 })
+          } else {
+            data[j].points.push({ twa, speed: parts[j + 1] })
+          }
+        }
       }
     }
+
+    data.forEach((d) => {
+      d.points.sort((a, b) => a.twa - b.twa)
+
+      let maxSpeedPoint = d.points[0]
+      for (const p of d.points) {
+        if (p.speed > maxSpeedPoint.speed) maxSpeedPoint = p
+      }
+      d.maxSpeedPoint = maxSpeedPoint
+
+      let maxVmgDown = -100
+      let runPoint = d.points[0]
+      for (const p of d.points) {
+        if (p.twa >= 90) {
+          const vmg = p.speed * Math.cos((180 - p.twa) * (Math.PI / 180))
+          if (vmg > maxVmgDown) {
+            maxVmgDown = vmg
+            runPoint = p
+          }
+        }
+      }
+      d.runPoint = runPoint
+    })
+
     return data
   }, [])
 
@@ -28,7 +60,7 @@ export default function PolarChart() {
   const cx = width / 2
   const cy = height / 2
   const maxRadius = 240
-  const maxSpeed = 14
+  const maxSpeed = 40
 
   const rScale = (speed: number) => (speed / maxSpeed) * maxRadius
 
@@ -53,7 +85,7 @@ export default function PolarChart() {
   }
 
   // Grid lines
-  const gridSpeeds = [2, 4, 6, 8, 10, 12, 14]
+  const gridSpeeds = [5, 10, 15, 20, 25, 30, 35, 40]
   const gridAngles = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
 
   const colors = [
@@ -135,7 +167,7 @@ export default function PolarChart() {
         })}
 
         {/* Draw polar lines */}
-        {dataPoints.map(({ tws, points }, index) => {
+        {dataPoints.map(({ tws, points, maxSpeedPoint, runPoint }, index) => {
           const isHovered = hoveredTws === tws
           const isFaded = hoveredTws !== null && hoveredTws !== tws
           const color = colors[index % colors.length]
@@ -148,6 +180,113 @@ export default function PolarChart() {
               className="cursor-pointer transition-opacity duration-200"
               style={{ opacity: isFaded ? 0.2 : 1 }}
             >
+              {isHovered && (
+                <>
+                  <line
+                    x1={cx}
+                    y1={cy}
+                    x2={
+                      cx +
+                      rScale(maxSpeedPoint.speed) *
+                        Math.cos(((maxSpeedPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    y2={
+                      cy +
+                      rScale(maxSpeedPoint.speed) *
+                        Math.sin(((maxSpeedPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    stroke={color}
+                    strokeDasharray="4 4"
+                    strokeWidth={1.5}
+                    opacity={0.8}
+                  />
+                  <circle
+                    cx={
+                      cx +
+                      rScale(maxSpeedPoint.speed) *
+                        Math.cos(((maxSpeedPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    cy={
+                      cy +
+                      rScale(maxSpeedPoint.speed) *
+                        Math.sin(((maxSpeedPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    r={5}
+                    fill={color}
+                  />
+                  <text
+                    x={
+                      cx +
+                      (rScale(maxSpeedPoint.speed) + 15) *
+                        Math.cos(((maxSpeedPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    y={
+                      cy +
+                      (rScale(maxSpeedPoint.speed) + 15) *
+                        Math.sin(((maxSpeedPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    fill={color}
+                    fontSize={12}
+                    fontWeight="bold"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                  >
+                    Max Speed
+                  </text>
+
+                  <line
+                    x1={cx}
+                    y1={cy}
+                    x2={
+                      cx +
+                      rScale(runPoint.speed) *
+                        Math.cos(((runPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    y2={
+                      cy +
+                      rScale(runPoint.speed) *
+                        Math.sin(((runPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    stroke={color}
+                    strokeDasharray="4 4"
+                    strokeWidth={1.5}
+                    opacity={0.8}
+                  />
+                  <circle
+                    cx={
+                      cx +
+                      rScale(runPoint.speed) *
+                        Math.cos(((runPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    cy={
+                      cy +
+                      rScale(runPoint.speed) *
+                        Math.sin(((runPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    r={5}
+                    fill={color}
+                  />
+                  <text
+                    x={
+                      cx +
+                      (rScale(runPoint.speed) + 15) *
+                        Math.cos(((runPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    y={
+                      cy +
+                      (rScale(runPoint.speed) + 15) *
+                        Math.sin(((runPoint.twa - 90) * Math.PI) / 180)
+                    }
+                    fill={color}
+                    fontSize={12}
+                    fontWeight="bold"
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                  >
+                    Run
+                  </text>
+                </>
+              )}
               {/* Right side */}
               <path
                 d={generatePath(points, false)}
