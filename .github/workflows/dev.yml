@@ -27,6 +27,7 @@ jobs:
         - name: Build website
           run: |
             npm install
+            npx playwright install
             npm run build
 
         - name: Cleanup previous deployment
