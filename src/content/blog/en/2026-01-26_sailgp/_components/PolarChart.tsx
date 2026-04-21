@@ -133,7 +133,7 @@ export default function PolarChart({ lang = 'es' }: Props) {
   ]
 
   return (
-    <div className="mx-auto my-8 flex w-full max-w-2xl flex-col items-center">
+    <div className="flex w-full max-w-2xl flex-col items-center">
       <svg
         viewBox={`0 0 ${width} ${height}`}
         className="text-foreground h-auto w-full font-sans"

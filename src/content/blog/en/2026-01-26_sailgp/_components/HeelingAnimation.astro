@@ -1,5 +1,17 @@
 ---
+const { lang = 'es' } = Astro.props
 
+const labels = {
+  en: {
+    windForce: 'Wind Force',
+    hydroRes: 'Drag (Keel)',
+  },
+  es: {
+    windForce: 'Fuerza del Viento',
+    hydroRes: 'Resistencia (Orza)',
+  },
+}
+const t = labels[lang] || labels['es']
 ---
 
 <div
@@ -59,8 +71,7 @@
       y="-200"
       width="400"
       height="200"
-      fill="#f0f9ff"
-      opacity="0.5"></rect>
+      class="fill-sky-50/50 dark:fill-sky-950/20"></rect>
 
     <!-- Background (Water) -->
     <rect x="-200" y="0" width="400" height="200" fill="#1e3a8a" opacity="0.1"
@@ -89,7 +100,7 @@
         text-anchor="middle"
         font-size="14"
         fill="#3b82f6"
-        font-weight="bold">Fuerza del Viento</text
+        font-weight="bold">{t.windForce}</text
       >
     </g>
 
@@ -108,7 +119,7 @@
         text-anchor="middle"
         font-size="14"
         fill="#ef4444"
-        font-weight="bold">Resistencia (Orza)</text
+        font-weight="bold">{t.hydroRes}</text
       >
     </g>
 

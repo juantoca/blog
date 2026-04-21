@@ -1,0 +1,36 @@
+---
+import Tooltip from '@/components/ui/tooltip/Tooltip'
+import { Image } from 'astro:assets'
+
+import ac75Img from '../AC75.png'
+import f50Img from '../F50.png'
+import volvo70Img from '../Volvo70.png'
+
+interface Props {
+  boat: 'AC75' | 'F50' | 'Volvo70'
+  text?: string
+}
+
+const { boat, text } = Astro.props
+
+const images = {
+  AC75: ac75Img,
+  F50: f50Img,
+  Volvo70: volvo70Img,
+}
+
+const img = images[boat]
+---
+
+<Tooltip client:idle>
+  <u slot="trigger">{text || boat}</u>
+  <div slot="content" class="h-[200px] w-[300px] overflow-hidden rounded-md">
+    <Image
+      src={img}
+      alt={text || boat}
+      width={300}
+      height={200}
+      class="h-full w-full object-cover object-center"
+    />
+  </div>
+</Tooltip>
