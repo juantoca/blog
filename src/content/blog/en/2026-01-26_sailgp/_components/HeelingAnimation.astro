@@ -1,0 +1,252 @@
+---
+
+---
+
+<div
+  class="heeling-animation-container flex h-full w-full items-center justify-center p-4"
+>
+  <svg
+    viewBox="-200 -200 400 400"
+    class="h-auto w-full max-w-md overflow-visible"
+    aria-label="Animación del escoramiento de un velero"
+  >
+    <defs>
+      <!-- Water Pattern -->
+      <pattern
+        id="water-pattern"
+        x="0"
+        y="0"
+        width="40"
+        height="20"
+        patternUnits="userSpaceOnUse"
+      >
+        <path
+          d="M 0,10 Q 10,0 20,10 T 40,10"
+          fill="none"
+          stroke="#3b82f6"
+          stroke-width="1.5"
+          opacity="0.3"></path>
+      </pattern>
+
+      <!-- Wind Arrow Marker -->
+      <marker
+        id="arrowhead"
+        markerWidth="10"
+        markerHeight="7"
+        refX="9"
+        refY="3.5"
+        orient="auto"
+      >
+        <polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6"></polygon>
+      </marker>
+
+      <!-- Force Arrow Marker (Red) -->
+      <marker
+        id="force-arrowhead"
+        markerWidth="10"
+        markerHeight="7"
+        refX="9"
+        refY="3.5"
+        orient="auto"
+      >
+        <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"></polygon>
+      </marker>
+    </defs>
+
+    <!-- Background (Air) -->
+    <rect
+      x="-200"
+      y="-200"
+      width="400"
+      height="200"
+      fill="#f0f9ff"
+      opacity="0.5"></rect>
+
+    <!-- Background (Water) -->
+    <rect x="-200" y="0" width="400" height="200" fill="#1e3a8a" opacity="0.1"
+    ></rect>
+    <rect x="-200" y="0" width="400" height="200" fill="url(#water-pattern)"
+    ></rect>
+
+    <!-- Water Line -->
+    <line x1="-200" y1="0" x2="200" y2="0" stroke="#2563eb" stroke-width="3"
+    ></line>
+
+    <!-- Static Elements (Labels and Forces that don't rotate with the boat) -->
+
+    <!-- Wind Force Vector (Top) - Updates via JS to avoid scaling distortion -->
+    <g class="wind-force-vector">
+      <path
+        id="heeling-wind-arrow"
+        d="M -150,-100 L -30,-100"
+        stroke="#3b82f6"
+        stroke-width="4"
+        marker-end="url(#arrowhead)"></path>
+      <text
+        id="heeling-wind-text"
+        x="-90"
+        y="-110"
+        text-anchor="middle"
+        font-size="14"
+        fill="#3b82f6"
+        font-weight="bold">Fuerza del Viento</text
+      >
+    </g>
+
+    <!-- Hydrodynamic Resistance Vector (Bottom) -->
+    <g class="hydro-force-vector">
+      <path
+        id="heeling-hydro-arrow"
+        d="M 150,100 L 30,100"
+        stroke="#ef4444"
+        stroke-width="4"
+        marker-end="url(#force-arrowhead)"></path>
+      <text
+        id="heeling-hydro-text"
+        x="90"
+        y="125"
+        text-anchor="middle"
+        font-size="14"
+        fill="#ef4444"
+        font-weight="bold">Resistencia (Orza)</text
+      >
+    </g>
+
+    <!-- Center of gravity/rotation marker -->
+    <circle cx="0" cy="0" r="4" fill="#10b981" opacity="0.8"></circle>
+
+    <!-- Rotatable Boat Assembly -->
+    <g
+      class="boat-assembly"
+      style="transform: rotate(calc(var(--wind-force, 15) * 1deg)); transition: transform 0.3s ease-out; transform-origin: 0 0;"
+    >
+      <!-- Mast -->
+      <line
+        x1="0"
+        y1="-160"
+        x2="0"
+        y2="10"
+        stroke="#4b5563"
+        stroke-width="6"
+        stroke-linecap="round"></line>
+
+      <!-- Sail -->
+      <!-- A curved path representing a sail filled with wind from the left -->
+      <path
+        d="M 0,-150 Q 60,-80 0,-20"
+        fill="#f8fafc"
+        stroke="#cbd5e1"
+        stroke-width="2"></path>
+      <path
+        d="M 0,-150 Q 60,-80 0,-20"
+        fill="none"
+        stroke="#94a3b8"
+        stroke-width="1"
+        opacity="0.5"></path>
+      <!-- Fold detail -->
+
+      <!-- Hull (Cross-section) -->
+      <path
+        d="M -40,-15 C -40,10 40,10 40,-15 Z"
+        fill="#6e3a02"
+        stroke="#452401"
+        stroke-width="2"></path>
+      <!-- Deck -->
+      <line
+        x1="-40"
+        y1="-15"
+        x2="40"
+        y2="-15"
+        stroke="#d1d5db"
+        stroke-width="3"
+        stroke-linecap="round"></line>
+
+      <!-- Keel / Orza -->
+      <path
+        d="M -5,10 L -3,50 L 3,50 L 5,10 Z"
+        fill="#374151"
+        stroke="#1f2937"
+        stroke-width="1"></path>
+      <!-- Keel Bulb (Contrapeso) -->
+      <ellipse cx="0" cy="50" rx="8" ry="4" fill="#1f2937"></ellipse>
+    </g>
+  </svg>
+</div>
+
+<style>
+  /* Base styles for smooth transitions are inline to use CSS variables easily */
+  .boat-assembly {
+    will-change: transform;
+  }
+  #heeling-wind-arrow,
+  #heeling-hydro-arrow,
+  #heeling-wind-text,
+  #heeling-hydro-text {
+    transition: all 0.3s ease-out;
+  }
+</style>
+
+<script>
+  function updateHeelingArrows() {
+    const windForceStr =
+      document.documentElement.style.getPropertyValue('--wind-force').trim() ||
+      '15'
+    const force = parseFloat(windForceStr)
+    if (isNaN(force)) return
+
+    // Scale from 0.1 to 1.0 based on 0-50 wind force
+    const scale = Math.max(force / 50, 0.1)
+
+    const windArrow = document.getElementById('heeling-wind-arrow')
+    const windText = document.getElementById('heeling-wind-text')
+    const hydroArrow = document.getElementById('heeling-hydro-arrow')
+    const hydroText = document.getElementById('heeling-hydro-text')
+
+    if (windArrow) {
+      const endX = -150 + 120 * scale
+      windArrow.setAttribute('d', `M -150,-100 L ${endX},-100`)
+      if (windText) windText.setAttribute('x', String((-150 + endX) / 2))
+    }
+
+    if (hydroArrow) {
+      const endX = 150 - 120 * scale
+      hydroArrow.setAttribute('d', `M 150,100 L ${endX},100`)
+      if (hydroText) hydroText.setAttribute('x', String((150 + endX) / 2))
+    }
+  }
+
+  function initHeelingObserver() {
+    updateHeelingArrows() // Initial run
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'style'
+        ) {
+          updateHeelingArrows()
+        }
+      })
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['style'],
+    })
+
+    // Cleanup old observers if Astro View Transitions re-runs this script
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        observer.disconnect()
+      },
+      { once: true },
+    )
+  }
+
+  // Initialize
+  initHeelingObserver()
+  document.addEventListener('astro:page-load', () => {
+    initHeelingObserver()
+  })
+</script>

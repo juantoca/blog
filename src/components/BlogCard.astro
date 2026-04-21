@@ -15,13 +15,14 @@ interface Props {
   entry: CollectionEntry<'blog'>
 }
 
-
 const lang = getLanguageFromUrl(Astro.originPathname)
 const { entry } = Astro.props
 const formattedDate = formatDate(entry.data.date, lang)
 const readTime = await getCombinedReadingTime(entry.id, lang)
 const authors = await parseAuthors(entry.data.authors ?? [])
-const subpostCount = !isSubpost(entry.id) ? await getSubpostCount(entry.id, lang) : 0
+const subpostCount = !isSubpost(entry.id)
+  ? await getSubpostCount(entry.id, lang)
+  : 0
 ---
 
 <Link

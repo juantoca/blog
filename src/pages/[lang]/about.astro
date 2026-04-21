@@ -14,20 +14,15 @@ const personSchema = {
 }
 
 export async function getStaticPaths() {
-
-  return [
-    {params: { lang: "en" }},
-    {params: { lang: "es" }}
-  ]
+  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }]
 }
 
 const { lang } = Astro.params
 
-import { Content as ContentEN } from "./_about/en.mdx"
-import { Content as ContentES } from "./_about/es.mdx"
+import { Content as ContentEN } from './_about/en.mdx'
+import { Content as ContentES } from './_about/es.mdx'
 
-const content = {en: ContentEN, es: ContentEN}[lang] 
-
+const content = { en: ContentEN, es: ContentEN }[lang]
 ---
 
 <Layout class="max-w-3xl">
@@ -39,8 +34,6 @@ const content = {en: ContentEN, es: ContentEN}[lang]
   <Breadcrumbs items={[{ label: 'About', icon: 'lucide:user' }]} />
 
   <section class="flex flex-col gap-8">
-    {
-      lang== "en" ? <ContentEN/> : <ContentES>
-    }
+    {lang == 'en' ? <ContentEN /> : <ContentES />}
   </section>
 </Layout>

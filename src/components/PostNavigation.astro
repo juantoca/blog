@@ -1,7 +1,7 @@
 ---
 import Link from '@/components/Link.astro'
 import { buttonVariants } from '@/components/ui/button'
-import { localizeUrl, localizeString } from '@/lib/i18n'
+import { localizeString, localizeUrl } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 import { Icon } from 'astro-icon/components'
 
@@ -30,25 +30,30 @@ const isSubpost = !!parentPost
     />
     <div class="flex flex-col items-start overflow-hidden text-wrap">
       <span class="text-muted-foreground text-left text-xs">
-        {isSubpost ? 
-          localizeString(Astro, {
-                en: 'Previous subpost', 
-                es: 'Subentrada previa'})
-          : localizeString(Astro, {
-                en: 'Previous post', 
-                es: 'Entrada previa'}) }
+        {
+          isSubpost
+            ? localizeString(Astro, {
+                en: 'Previous subpost',
+                es: 'Subentrada previa',
+              })
+            : localizeString(Astro, {
+                en: 'Previous post',
+                es: 'Entrada previa',
+              })
+        }
       </span>
       <span class="w-full text-left text-sm text-balance text-ellipsis">
         {
           olderPost?.data.title ||
-            (isSubpost ? 
-              localizeString(Astro, {
-                en: 'No older subpost', 
-                es: 'No hay subposts más antiguos'}) 
-            : localizeString(Astro, {
-                en: "You're at the oldest post!",
-                es: "¡No hay entradas más antiguas!"
-            }))
+            (isSubpost
+              ? localizeString(Astro, {
+                  en: 'No older subpost',
+                  es: 'No hay subposts más antiguos',
+                })
+              : localizeString(Astro, {
+                  en: "You're at the oldest post!",
+                  es: '¡No hay entradas más antiguas!',
+                }))
         }
       </span>
     </div>
@@ -71,13 +76,16 @@ const isSubpost = !!parentPost
         <div class="flex flex-col items-center overflow-hidden text-wrap">
           <span class="text-muted-foreground text-center text-xs">
             {localizeString(Astro, {
-                en: 'Parent post', 
-                es: 'Entrada padre'})}
+              en: 'Parent post',
+              es: 'Entrada padre',
+            })}
           </span>
           <span class="w-full text-center text-sm text-balance text-ellipsis">
-            {parentPost?.data.title || localizeString(Astro, {
-                en: 'No parent post', 
-                es: 'No hay entrada padre'}) }
+            {parentPost?.data.title ||
+              localizeString(Astro, {
+                en: 'No parent post',
+                es: 'No hay entrada padre',
+              })}
           </span>
         </div>
       </Link>
@@ -95,24 +103,30 @@ const isSubpost = !!parentPost
   >
     <div class="flex flex-col items-end overflow-hidden text-wrap">
       <span class="text-muted-foreground text-right text-xs">
-        {isSubpost ? 
-          localizeString(Astro, {
-                en: 'Next subpost', 
-                es: 'Siguiente subentrada'}): 
-          localizeString(Astro, {
-                en: 'Next post', 
-                es: 'Siguiente entrada'}) }
+        {
+          isSubpost
+            ? localizeString(Astro, {
+                en: 'Next subpost',
+                es: 'Siguiente subentrada',
+              })
+            : localizeString(Astro, {
+                en: 'Next post',
+                es: 'Siguiente entrada',
+              })
+        }
       </span>
       <span class="w-full text-right text-sm text-balance text-ellipsis">
         {
           newerPost?.data.title ||
-            (isSubpost ? 
-            localizeString(Astro, {
-                en: 'No newer subpost', 
-                es: 'No hay subentradas más nuevas'}): 
-            localizeString(Astro, {
-                en: 'No newer post', 
-                es: '¡No hay entradas más nuevas!'}) )
+            (isSubpost
+              ? localizeString(Astro, {
+                  en: 'No newer subpost',
+                  es: 'No hay subentradas más nuevas',
+                })
+              : localizeString(Astro, {
+                  en: 'No newer post',
+                  es: '¡No hay entradas más nuevas!',
+                }))
         }
       </span>
     </div>

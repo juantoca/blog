@@ -1,0 +1,29 @@
+---
+import Slider from '@/content/blog/en/2026-01-26_sailgp/_components/Slider.astro'
+
+interface Props {
+  lang?: 'es' | 'en'
+  [key: string]: any
+}
+
+const { lang = 'es', ...rest } = Astro.props
+
+const descriptions = {
+  es: 'Desliza el control para ajustar la fuerza del viento y observar su efecto sobre el escoramiento.',
+  en: 'Slide the control to adjust the wind force and observe its effect on heeling.',
+}
+---
+
+<div class="mt-4 flex w-full flex-col items-center justify-center gap-2">
+  <p class="text-muted-foreground text-center text-sm">
+    {descriptions[lang]}
+  </p>
+  <Slider
+    variable="wind-force"
+    formatString="{0}"
+    min="0"
+    max="50"
+    value="15"
+    {...rest}
+  />
+</div>

@@ -28,11 +28,12 @@ const parentId = isCurrentSubpost ? getParentId(currentPostId) : currentPostId
         data-toc-scroll-area
       >
         <div class="flex flex-col gap-2 px-4">
-          <span class="text-lg font-medium">{
-            localizeString(Astro, {
-                en: 'Table of Contents', 
-                es: 'Tabla de Contenidos'})
-          } </span>
+          <span class="text-lg font-medium">
+            {localizeString(Astro, {
+              en: 'Table of Contents',
+              es: 'Tabla de Contenidos',
+            })}{' '}
+          </span>
           {sections.map((section, index) => {
             const isFirstSubpost =
               section.type === 'subpost' &&
@@ -45,9 +46,9 @@ const parentId = isCurrentSubpost ? getParentId(currentPostId) : currentPostId
                     <div class="bg-border h-px flex-1" />
                     <span class="text-muted-foreground text-xs font-medium">
                       {localizeString(Astro, {
-                        en: 'Subposts', 
-                        es: 'Subentradas'})
-                      }
+                        en: 'Subposts',
+                        es: 'Subentradas',
+                      })}
                     </span>
                     <div class="bg-border h-px flex-1" />
                   </div>
@@ -68,7 +69,10 @@ const parentId = isCurrentSubpost ? getParentId(currentPostId) : currentPostId
                         <a
                           href={
                             isCurrentSubpost
-                              ? localizeUrl(`/blog/${parentId}#${heading.slug}`, Astro)
+                              ? localizeUrl(
+                                  `/blog/${parentId}#${heading.slug}`,
+                                  Astro,
+                                )
                               : `#${heading.slug}`
                           }
                           class="marker:text-foreground/30 list-none underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
@@ -125,7 +129,10 @@ const parentId = isCurrentSubpost ? getParentId(currentPostId) : currentPostId
                             href={
                               section.subpostId === currentPostId
                                 ? `#${heading.slug}`
-                                : localizeUrl(`/blog/${section.subpostId}#${heading.slug}`, Astro)
+                                : localizeUrl(
+                                    `/blog/${section.subpostId}#${heading.slug}`,
+                                    Astro,
+                                  )
                             }
                             class="marker:text-foreground/30 hover:text-foreground/60 list-none underline decoration-transparent underline-offset-[3px] transition-colors duration-200 hover:decoration-inherit"
                             data-heading-link={

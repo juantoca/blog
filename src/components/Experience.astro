@@ -1,6 +1,6 @@
 ---
+import { localizeString } from '@/lib/i18n'
 import { Icon } from 'astro-icon/components'
-import { localizeString } from "@/lib/i18n"
 
 // Experience Timeline - Customize with your own experience
 type ExperienceItem = {
@@ -21,8 +21,8 @@ const experience: ExperienceItem[] = [
     current: true,
     icon: 'lucide:database',
     key: localizeString(Astro, {
-      en: "I worked in the AITRIOS project, developing and operating ETL pipelines and training services for artificial vision models.",
-      es: "Trabajé en el proyecto AITRIOS, desarrollando y operando pipelines ETL y servicios de entrenamiento de modelos de visión artificial."
+      en: 'I worked in the AITRIOS project, developing and operating ETL pipelines and training services for artificial vision models.',
+      es: 'Trabajé en el proyecto AITRIOS, desarrollando y operando pipelines ETL y servicios de entrenamiento de modelos de visión artificial.',
     }),
   },
   {
@@ -31,23 +31,26 @@ const experience: ExperienceItem[] = [
     period: '2021 - 2022',
     icon: 'lucide:brain-cog',
     key: localizeString(Astro, {
-      en: "I trained, deployed and monitored visual inspection AI models for companies like Acciona and the automotive sector for quality control and safety assurance.",
-      es: "Entrené, desplegué y monitoricé modelos de IA de inspección visual para compañías como Acciona y el sector automotriz para control de calidad y prevención de riesgos laborales."
+      en: 'I trained, deployed and monitored visual inspection AI models for companies like Acciona and the automotive sector for quality control and safety assurance.',
+      es: 'Entrené, desplegué y monitoricé modelos de IA de inspección visual para compañías como Acciona y el sector automotriz para control de calidad y prevención de riesgos laborales.',
     }),
-  }
+  },
 ]
 ---
 
 <!-- Experience Timeline -->
 <section class="mt-8">
   <div class="mb-6">
-    <h2 class="mb-2 text-2xl font-semibold">{localizeString(Astro,  {en: "Experience", es: "Experiencia"})}</h2>
+    <h2 class="mb-2 text-2xl font-semibold">
+      {localizeString(Astro, { en: 'Experience', es: 'Experiencia' })}
+    </h2>
     <p class="text-muted-foreground text-sm">
-
-      {localizeString(Astro, {
-        en: "Professional journey and achievements",
-        es: "Carrera profesional y logros"
-      })}
+      {
+        localizeString(Astro, {
+          en: 'Professional journey and achievements',
+          es: 'Carrera profesional y logros',
+        })
+      }
     </p>
   </div>
 

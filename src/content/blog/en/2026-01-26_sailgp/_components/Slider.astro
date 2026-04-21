@@ -1,0 +1,61 @@
+---
+const { variable, formatString, ...rest } = Astro.props
+---
+
+<input
+  type="range"
+  class="animation-slider-component flex-item rotation-slider bg-secondary accent-primary h-2 w-full max-w-sm cursor-pointer appearance-none items-center rounded-full"
+  data-variable={variable}
+  data-formatstring={formatString}
+  aria-label="Rotate image"
+  {...rest}
+/>
+
+<script>
+  // First, checks if it isn't implemented yet.
+  if (!String.prototype.format) {
+    String.prototype.format = function () {
+      var args = arguments
+      return this.replace(/{(\d+)}/g, function (match, number) {
+        return typeof args[number] != 'undefined' ? args[number] : match
+      })
+    }
+  }
+
+  function setupRotatableSvgs() {
+    const components = document.querySelectorAll('.rotation-slider')
+
+    components.forEach((component) => {
+      // Check if already initialized to prevent double-binding
+      if (component.hasAttribute('data-initialized')) return
+      component.setAttribute('data-initialized', 'true')
+
+      const slider = component as HTMLInputElement
+      const variable = slider.dataset.variable
+      const formatString = slider.dataset.formatstring
+
+      if (slider && variable) {
+        slider.addEventListener('input', (e) => {
+          const target = e.target as HTMLInputElement
+          const rotation = target.value
+
+          const root = document.documentElement as HTMLElement
+          root.style.setProperty(`--${variable}`, formatString.format(rotation))
+          const components = document.querySelectorAll(
+            `.rotation-slider[data-variable='${variable}']`,
+          )
+          components.forEach((component) => {
+            var comp = component as HTMLInputElement
+            comp.value = rotation
+          })
+        })
+      }
+    })
+  }
+
+  // Initial setup
+  setupRotatableSvgs()
+
+  // Re-run on View Transitions navigation
+  document.addEventListener('astro:page-load', setupRotatableSvgs)
+</script>

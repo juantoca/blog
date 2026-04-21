@@ -1,0 +1,48 @@
+---
+import Tooltip from '@/components/ui/tooltip/Tooltip'
+import { getLanguageFromUrl } from '@/lib/i18n'
+
+const { concept, text } = Astro.props
+
+const lang = getLanguageFromUrl(Astro.originPathname)
+
+const concepts: Record<string, Record<string, string>> = {
+  en: {
+    barlovento: 'Direction from which the wind is coming',
+    sotavento: 'Direction towards which the wind is blowing',
+    amura: 'Part of the boat between the bow and the beam',
+    aleta: 'Part of the boat between the beam and the stern',
+    proa: 'Front part of the boat',
+    popa: 'Rear part of the boat',
+    orzar: 'To turn the bow of the boat towards the wind',
+    eslora: 'Total length of the boat',
+    carena: 'The submerged part of a boat hull',
+    abatimiento: 'Sideways drift of the boat caused by the wind',
+    orza: 'Vertical fin under the hull that prevents leeway',
+  },
+  es: {
+    barlovento: 'Dirección o rumbo desde dónde viene el viento',
+    sotavento: 'Dirección o rumbo hacia dónde va el viento',
+    amura: 'Parte del barco comprendida entre la proa y el través',
+    aleta: 'Parte del barco comprendida entre el través y la popa',
+    proa: 'Parte delantera del barco',
+    popa: 'Parte trasera del barco',
+    orzar: 'Girar la proa del barco hacia la dirección del viento',
+    eslora: 'Longitud total de la embarcación',
+    carena: 'Parte sumergida del casco de un barco',
+    abatimiento: 'Desvío de la nave hacia sotavento por el empuje del viento',
+    orza: 'Pieza vertical bajo el casco que opone resistencia al abatimiento',
+  },
+}
+
+function hola() {
+  throw 'Hola'
+}
+---
+
+<Tooltip client:idle>
+  <u slot="trigger">{text || concept}</u>
+  <p slot="content">
+    {concepts[lang][concept] ? concepts[lang][concept] : hola()}
+  </p>
+</Tooltip>

@@ -34,7 +34,7 @@ const isExternalLink = (href: string) => {
         alt="index"
         width="64"
         height="64"
-        class="hidden min-[400px]:block rounded-full"
+        class="hidden rounded-full min-[400px]:block"
         loading="eager"
         fetchpriority="high"
       />
@@ -43,7 +43,7 @@ const isExternalLink = (href: string) => {
         alt="index"
         width="48"
         height="48"
-        class="hidden max-[400px]:block rounded-full"
+        class="hidden rounded-full max-[400px]:block"
         loading="eager"
         fetchpriority="high"
       />
@@ -69,9 +69,7 @@ const isExternalLink = (href: string) => {
                     : 'text-foreground/60 hover:text-foreground/80 flex items-center gap-1.5 capitalize transition-colors'
                 }
               >
-                <span>{
-                  localizeString(Astro, item.translations)
-                }</span>
+                <span>{localizeString(Astro, item.translations)}</span>
                 {isExternal && (
                   <Icon
                     name="lucide:external-link"
@@ -92,8 +90,15 @@ const isExternalLink = (href: string) => {
       </div>
       <SearchButton client:idle />
       <LanguageSwitcher currentPath={currentPath} class="md:block" />
-      <MobileMenu language={getLanguageFromUrl(currentPath)} client:idle client:only="react" transition:persist>
-        <div class="flex-item items-left hidden max-[460px]:block social-icons-mobile-menu">
+      <MobileMenu
+        language={getLanguageFromUrl(currentPath)}
+        client:idle
+        client:only="react"
+        transition:persist
+      >
+        <div
+          class="flex-item items-left social-icons-mobile-menu hidden max-[460px]:block"
+        >
           <SocialIcons links={SOCIAL_LINKS} />
         </div>
       </MobileMenu>
