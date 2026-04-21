@@ -6,7 +6,7 @@ const Tooltip = (props) => {
     <TooltipReact.Provider>
       <TooltipReact.Root delayDuration={0}>
         <TooltipReact.Trigger asChild>
-          <div className="TooltipTrigger">{props.trigger}</div>
+          <span className="TooltipTrigger">{props.trigger}</span>
         </TooltipReact.Trigger>
         <TooltipReact.Portal>
           <TooltipReact.Content className="TooltipContent" sideOffset={5}>
