@@ -1,6 +1,6 @@
 ---
-title: Veleros bala
-description: ¿Cómo puede un velero adelantar al viento y llegar a los 100km/h?
+title: Bullet sailboats
+description: How can a sailboat outrun the wind and reach 100km/h?
 date: 2026-01-26
 draft: false
 ---
@@ -19,89 +19,92 @@ import TFoilDiagram from '@/content/blog/en/2026-01-26_sailgp/_components/TFoilD
 import BoatTooltip from '@/content/blog/en/2026-01-26_sailgp/_components/BoatTooltip.astro'
 import '@/content/blog/en/2026-01-26_sailgp/_styles/animations.css'
 
-Hace unos meses, [Cantabria económica](https://www.cantabriaeconomica.com/circulo-empresarial-cantabria-economica/santander-seria-el-sitio-ideal-para-acoger-una-copa-america/)
-publicó un artículo discutiendo si Santander sería una buena sede para
-la celebración de la Copa América. Aún dejando caer en el artículo que
-la falta de infraestructura dificultaría una hipotética candidatura,
-no cabía de la emoción de ver en vivo los veleros de la Copa América por la
-bahía de Santander.
+A few months ago, [Cantabria económica](https://www.cantabriaeconomica.com/circulo-empresarial-cantabria-economica/santander-seria-el-sitio-ideal-para-acoger-una-copa-america/)
+published an article discussing whether Santander would be a good host for
+the America's Cup. Even dropping in the article that
+the lack of infrastructure would make a hypothetical candidacy difficult,
+I couldn't contain my excitement at the thought of seeing America's Cup sailboats live in the
+Santander bay.
 
-Pero Juan ¿Qué tienen de especial estos veleros? Pues que los <BoatTooltip boat="AC75" />
-o los <BoatTooltip boat="F50" /> son verdaderas obras de ingeniería. Como aficionado a la navegación a vela,
-intentaré explicar en esta entrada cómo hemos pasado de solo poder navegar a favor
-del viento a recibir multas de tráfico al pillarnos los radares :wink:.
+But Juan, what makes these sailboats special? Well, the <BoatTooltip boat="AC75" />
+or the <BoatTooltip boat="F50" /> are true works of engineering. As a sailing enthusiast,
+I will try to explain in this post how we went from only being able to sail downwind
+to getting speeding tickets from speed cameras :wink:.
 
-# ¿Nuestro motor? El viento
+# Our engine? The wind
 
-### Rumbos
+### Points of sail
 
-Uno de los conocimientos vitales en navegación a vela es comprender como afecta el viento a nuestra embarcación.
-Empecemos con un poco de nomenclatura básica sobre los rumbos:
+One of the vital pieces of knowledge in sailing is understanding how the wind affects our boat.
+Let's start with some basic nomenclature about the points of sail:
 
-- <b>Empopado</b>: Es el rumbo que todos nos imaginamos cuando pensamos en un
-  velero. El viento nos llega desde la <Concept concept="popa" /> del barco y
-  navegamos a favor del viento.
-- <b>De través</b>: Es el rumbo que tiene un barco cuando el viento le llega por
-  su través, es decir, perpendicular a la dirección hacia dónde se dirige.
-- <b>Largo</b>: El rumbo intermedio entre una empopada y de través, es decir,
-  recibimos el viento por la <Concept concept="aleta" /> del barco.
-- <b>Ceñida</b>: Es el rumbo más antiintuitivo. El barco avanza contra el viento
-  recibiéndolo por su <Concept concept="amura" />, es decir, lo recibimos entre
-  el través y la <Concept concept="proa" />.
-- <b>Aproado</b>: En este rumbo no se puede avanzar. El viento nos llega desde
-  la <Concept concept="proa" />, es decir, la parte delantera del barco y
-  llevamos rumbo a <Concept concept="barlovento" />.
+- <b>Running</b>: This is the point of sail we all imagine when we think of a
+  sailboat. The wind reaches us from the <Concept concept="popa" text="stern" />
+  of the boat and we sail downwind.
+- <b>Reaching</b>: This is a boat's point of sail when the wind hits it on its
+  beam, that is, perpendicular to the direction it is heading.
+- <b>Broad reach</b>: The intermediate course between running and reaching, that
+  is, we receive the wind on the boat's
+  <Concept concept="aleta" text="quarter" />.
+- <b>Close-hauled</b>: This is the most counterintuitive point of sail. The boat
+  moves against the wind, receiving it on its
+  <Concept concept="amura" text="bow" />, meaning we receive it between the beam
+  and the <Concept concept="proa" text="bow" />.
+- <b>In irons</b>: In this point of sail, you cannot move forward. The wind
+  reaches us from the <Concept concept="proa" text="bow" />, meaning the front
+  of the boat, and we are heading
+  <Concept concept="barlovento" text="windward" />.
 
-Si os tenéis que quedar con algo de este artículo es que cuando Jack Sparrow dice "poned rumbo a <Concept concept="barlovento" />", por
-muy épico que quede, le está diciendo a su tripulación que pare el barco ya que van a aproar el barco y no
-van a recibir nada de viento.
+If you have to take anything away from this article, it's that when Jack Sparrow says "set sail <Concept concept="barlovento" text="windward" />", as
+epic as it may sound, he's telling his crew to stop the boat since they will go in irons and
+won't catch any wind.
 
-Pero ¿cómo se comporta el barco en cada uno de los rumbos? El vector fuerza, el cuál es el que define cómo se moverá el barco,
-se puede dividir en 3 componentes que facilitarán nuestro análisis. Tomándome cierta licencia de nomenclatura, las llamaremos
-componente de proa, componente de popa y componente de través:
+But how does the boat behave on each of the points of sail? The force vector, which defines how the boat will move,
+can be divided into 3 components that will make our analysis easier. Taking some naming liberties, we will call them
+the bow component, the stern component, and the beam component:
 
-<AnimationWrapper lang="es">
-  <PointsOfSail client:visible />
+<AnimationWrapper lang="en">
+  <PointsOfSail client:visible lang="en" />
   <SailDeformer />
 </AnimationWrapper>
 
-Como se puede observar, para producir el avance del barco necesitamos reducir al máximo las componentes de popa y través en los
-diferentes rumbos de tal manera que la componente de proa haga el barco avanzar. En rumbos cómo el de empopada no es especialmente
-problemático pero en el través y, especialmente en las ceñidas, estas componentes nos generan problemas ya que nos desvían demasiado
-el barco de la dirección deseada.
+As can be seen, to produce the boat's forward movement we need to minimize the stern and beam components as much as possible on the
+different points of sail so that the bow component makes the boat move forward. On points of sail like running, it is not particularly
+problematic, but on reaching and, especially on close-hauled, these components cause us problems as they deviate the boat too much
+from the desired direction.
 
-La componente de popa es sencilla de explicar cómo se palia. Sencillamente, los barcos son anchos en la popa y se estrechan hacia
-la proa. Es decir, la popa es mucho menos hidrodinámica que la proa, generando mucha resistencia al retroceso y cancelando, en gran medida,
-la componente de <Concept concept="popa" /> que empujaría el barco hacia atrás. Sin embargo, la componente de través se merece su propia sección:
+The stern component is easy to explain how to mitigate. Simply, boats are wide at the stern and narrow towards
+the bow. That is, the stern is much less hydrodynamic than the bow, generating a lot of drag to backward movement and canceling, to a large extent,
+the <Concept concept="popa" text="stern" /> component that would push the boat backward. However, the beam component deserves its own section:
 
-### La orza y el escoramiento
+### The keel and heeling
 
-¿Cómo evitamos que la componente de través nos lleve el barco lejos de nuestro destino(abatimiento)?
-La respuesta es la <Concept concept="orza" />. Esta parte del barco es una prolongación submarina del barco que genera
-resistencia al movimiento lateral del barco. Sin embargo y como contrapartida, el barco se escora y,
-si no se controla, puede volcar.
+How do we prevent the beam component from taking the boat far away from our destination (leeway)?
+The answer is the <Concept concept="orza" text="keel" />. This part of the boat is an underwater extension of the boat that generates
+resistance to the boat's lateral movement. However, as a counterpart, the boat heels and,
+if not controlled, can capsize.
 
 <AnimationWrapper>
-  <HeelingAnimation />
-  <WindForceSlider />
+  <HeelingAnimation lang="en" />
+  <WindForceSlider lang="en" />
 </AnimationWrapper>
 
-<LeewayAnimation />
+<LeewayAnimation lang="en" />
 
-¿Pero, si la orza es tan pequeña comparada con la vela, cómo es posible que oponga tanta resistencia
-al <Concept concept="abatimiento" />? La respuesta es la diferencia de densidad entre los 2 fluidos: el aire/viento que
-afecta sobre la vela y el agua que ejerce la resistencia sobre la orza. El peso de agua desplazada,
-aún teniendo poco volumen, sirve de contrapeso a la fuerza ejercida por el viento sobre la vela equilibrando
-la embarcación.
+But, if the keel is so small compared to the sail, how is it possible that it opposes so much resistance
+to <Concept concept="abatimiento" text="leeway" />? The answer is the difference in density between the 2 fluids: the air/wind that
+acts on the sail and the water that exerts resistance on the keel. The weight of the displaced water,
+even having little volume, acts as a counterweight to the force exerted by the wind on the sail, balancing
+the boat.
 
-### El problema del viento aparente
+### The apparent wind problem
 
-Habiendo paliado las dos componentes del viento de popa y través, ahora podemos concluir el rumbo más
-rápido de la embarcación. Como es obvio, el rumbo más rápido es aquel que maximiza la componente de proa.
-Por tanto, podemos concluir que es cuando el barco está en empopada ¿no?
+Having mitigated the two wind components of stern and beam, we can now conclude the fastest point of sail
+for the boat. As is obvious, the fastest point of sail is the one that maximizes the bow component.
+Therefore, we can conclude that it is when the boat is running, right?
 
-No del todo, si observamos una regata de SailGP podemos ver que el rumbo que toman al quedar la
-siguiente boya a <Concept concept="sotavento" /> es un largo y no una empopada:
+Not quite, if we watch a SailGP race we can see that the course they take when the
+next mark is to <Concept concept="sotavento" text="leeward" /> is a broad reach and not running:
 
 <div class="flex items-center justify-center">
   <iframe
@@ -117,37 +120,37 @@ siguiente boya a <Concept concept="sotavento" /> es un largo y no una empopada:
   ></iframe>
 </div>
 
-¿Por qué ocurre esto? Pues, cómo diría nuestro amigo Albert Einstein, todo es relativo.
-Hasta ahora en nuestra explicación hemos hablado de la velocidad del viento absoluta, es decir,
-asumiendo que el barco está inmovilizado. Sin embargo, la fuerza que ejerce el viento sobre
-la embarcación depende de la velocidad del viento relativa a la velocidad de la embarcación llamado
-viento aparente.
+Why does this happen? Well, as our friend Albert Einstein would say, everything is relative.
+So far in our explanation, we have talked about absolute wind speed, that is,
+assuming the boat is stationary. However, the force exerted by the wind on
+the boat depends on the wind speed relative to the boat's speed, called
+apparent wind.
 
-¿Esto qué significa? Que un barco que avanza a favor del viento va perdiendo viento aparente ya que
-este cada vez es menor al restar la velocidad del viento a la velocidad del barco. Y al revés, un barco que
-navega en contra del viento tiene un viento aparente cada vez más fuerte conforme su velocidad
-aumenta.
+What does this mean? That a boat moving downwind loses apparent wind since
+it gets weaker by subtracting the wind speed from the boat speed. And conversely, a boat that
+sails against the wind has an increasingly stronger apparent wind as its speed
+increases.
 
-Teniendo esto en cuenta, nos damos cuenta que dependiendo de la velocidad del viento absoluto y
-la velocidad de la embarcación nos interesa tomar un rumbo u otro para llegar a nuestro destino.
-Por ejemplo, si queremos llegar a un punto que nos queda en <Concept concept="sotavento" /> desde una posición en reposo,
-el rumbo óptimo será ganar velocidad con una empopada y, conforme vamos perdiendo viento aparente al
-ganar velocidad, <Concept concept="orzar" text="orzar" /> hacia un largo para seguir teniendo aparente y mantener una velocidad máxima
-mayor.
+Taking this into account, we realize that depending on the absolute wind speed and
+the boat speed, we are interested in taking one course or another to reach our destination.
+For example, if we want to reach a point that is to <Concept concept="sotavento" text="leeward" /> from a resting position,
+the optimal course will be to gain speed with a running course and, as we lose apparent wind when
+gaining speed, <Concept concept="orzar" text="luff" /> towards a broad reach to continue having apparent wind and maintain a higher maximum
+speed.
 
-Para representar estas velocidades máximas en función del viento, se utilizan los llamados diagramas
-polares, los cuáles son intrínsecos a cada modelo de barco. Usaremos como ejemplo medidas tomadas de
-un <BoatTooltip boat="Volvo70" text="Volvo Open 70" />:
+To represent these maximum speeds as a function of the wind, polar diagrams are used,
+which are intrinsic to each boat model. We will use as an example measurements taken from
+a <BoatTooltip boat="Volvo70" text="Volvo Open 70" />:
 
 <PolarChart client:visible />
 
-(Créditos a [orc.org](https://orc.org) por la recopilación de los datos)
+(Credits to [orc.org](https://orc.org) for data collection)
 
-Como se puede ver, para llegar cuanto antes a un punto en sotavento, el rumbo más rápido no es
-una empopada por la pérdida de viento aparente sino un largo(de hecho, en los datos
-ni se incluye este rumbo pues es inestable)
+As can be seen, to get to a leeward point as soon as possible, the fastest course is not
+running due to the loss of apparent wind but a broad reach (in fact, in the data
+this course is not even included because it is unstable)
 
-Ahora, veamos el record de velocidad obtenido en la competición de SailGP:
+Now, let's look at the speed record obtained in the SailGP competition:
 
 <div class="flex items-center justify-center">
   <iframe
@@ -163,69 +166,69 @@ Ahora, veamos el record de velocidad obtenido en la competición de SailGP:
   ></iframe>
 </div>
 
-De manera bastante contraintuitiva ¡la velocidad más rápida se consigue con un viento de través y coincide
-con los datos del diagrama! Siendo más precisos, la velocidad punta se consigue tras dejarse caer unos grados a favor del viento
-tras haber logrado acelerar estando de través.
+Quite counterintuitively, the fastest speed is achieved with a reaching wind and it coincides
+with the diagram data! Being more precise, the top speed is achieved after bearing away a few degrees downwind
+after having managed to accelerate while reaching.
 
-Aunque parezca extraño, tras haber explicado como funciona el viento aparente y las componentes
-de la fuerza ¡Tiene todo el sentido! Al ir totalmente perpendiculares al viento, no perdemos viento al avanzar
-y por tanto la fuerza del viento se mantiene, idealmente, constante pudiendo conseguir, en nuestro simplificado
-modelo sin rozamiento dónde las vacas son esféricas y PI=3, la velocidad que queramos.
+Although it seems strange, after explaining how apparent wind and the components
+of force work, it makes perfect sense! By going totally perpendicular to the wind, we don't lose wind as we move forward
+and therefore the force of the wind remains, ideally, constant, being able to achieve, in our simplified
+frictionless model where cows are spherical and PI=3, whatever speed we want.
 
-# ¿El reto? El mar
+# The challenge? The sea
 
-Ya hemos visto cómo exprimir al máximo la energía del viento jugando
-con los rumbos y el viento aparente para generar la mayor fuerza posible.
-Sin embargo, lamentablemente en el mundo real el rozamiento existe y
-existe un gran muro físico que nos frena: el mar.
+We've already seen how to squeeze the most energy out of the wind by playing
+with the points of sail and the apparent wind to generate the greatest possible force.
+However, unfortunately in the real world friction exists and
+there is a great physical wall that slows us down: the sea.
 
-### Resistencia al avance
+### Drag
 
-El agua es aproximadamente 800 veces más densa que el aire. Por mucha
-fuerza que logremos capturar en nuestras velas, empujar el casco de un
-barco a través de un fluido tan pesado genera un rozamiento colosal.
+Water is approximately 800 times denser than air. No matter how much
+force we manage to capture in our sails, pushing a boat's hull
+through such a heavy fluid generates colossal friction.
 
-Históricamente, la velocidad de un velero tradicional estaba condicionada
-por su «velocidad de casco», un límite hidrodinámico en el que el barco queda
-atrapado por el propio tren de olas que genera al desplazarse.
+Historically, the speed of a traditional sailboat was conditioned
+by its "hull speed", a hydrodynamic limit at which the boat gets
+trapped by the very wave train it generates as it moves.
 
-A medida que el barco acelera, la ola generada por su proa se hace cada vez más larga.
-Cuando se alcanza la velocidad de casco, la longitud de dicha ola se iguala a la
-eslora de la embarcación, dejando la proa montada sobre la cresta y la popa cayendo en el valle.
-Físicamente, este desnivel provoca un desplazamiento hacia popa del volumen sumergido y,
-con ello, el retraso del «centro de <Concept concept="carena" />» (el centro de empuje hidrostático).
-Al desplazarse el punto de carena, la popa se hunde drásticamente, obligando al velero
-a navegar perpetuamente "cuesta arriba" contra su propia ola y multiplicando de
-forma exponencial la resistencia al avance.
+As the boat accelerates, the wave generated by its bow becomes longer and longer.
+When hull speed is reached, the length of this wave equals the
+boat's length, leaving the bow riding on the crest and the stern falling into the trough.
+Physically, this slope causes an aft shift of the submerged volume and,
+with it, the delay of the "center of <Concept concept="carena" text="buoyancy" />" (the center of hydrostatic thrust).
+As the center of buoyancy shifts, the stern sinks drastically, forcing the sailboat
+to perpetually sail "uphill" against its own wave and exponentially multiplying
+the drag.
 
 <AnimationWrapper>
-  <WaveFront client:visible lang="es" />
+  <WaveFront client:visible lang="en" />
 </AnimationWrapper>
 
-Aunque los barcos más ligeros consiguen mitigar este efecto mediante el planeo
-(deslizándose por encima de la superficie del agua en lugar de apartarla), la gran
-superficie en contacto con el mar sigue frenando enormemente la embarcación.
+Although lighter boats manage to mitigate this effect by planing
+(skimming over the surface of the water instead of pushing it aside), the large
+surface in contact with the sea still slows the boat down enormously.
 
-Entonces, si el roce con el agua es el problema... ¿por qué no evitar el agua?
+So, if friction with the water is the problem... why not avoid the water?
 
 ### _Hydrofoil_
 
-Aquí es donde la espectacular ingeniería moderna entra en juego con los _hydrofoils_.
-Si observas con atención los catamaranes <BoatTooltip boat="F50" /> de SailGP o los monocascos <BoatTooltip boat="AC75" /> de la Copa América,
-verás unos grandes apéndices de carbono sumergidos en forma de 'L', 'T' o 'Y'.
+This is where spectacular modern engineering comes into play with _hydrofoils_.
+If you look closely at the <BoatTooltip boat="F50" /> catamarans of SailGP or the <BoatTooltip boat="AC75" /> monohulls of the America's Cup,
+you will see large carbon appendages submerged in the shape of 'L', 'T' or 'Y'.
 
-Su principio de funcionamiento es exactamente el mismo que el de las alas de un avión, pero aplicados
-a un fluido mucho más denso. Conforme el barco acelera empujado por el viento, el flujo del agua atraviesa
-los perfiles asimétricos de los _foils_ generando una gran fuerza de sustentación hacia arriba.
+Their operating principle is exactly the same as that of airplane wings, but applied
+to a much denser fluid. As the boat accelerates pushed by the wind, the water flow passes through
+the asymmetrical profiles of the _foils_, generating a great upward lift force.
 
-Al alcanzar cierta velocidad crítica, esta sustentación se vuelve mayor que el propio peso de la embarcación,
-levantando el casco por completo y sacándolo fuera del agua. De un momento a otro, la resistencia hidrodinámica
-se desploma drásticamente, ya que la única superficie en contacto con el mar pasa a ser la parte inferior de los
-propios _foils_ y las palas del timón.
+Upon reaching a certain critical speed, this lift becomes greater than the boat's own weight,
+lifting the hull completely and lifting it out of the water. From one moment to the next, hydrodynamic drag
+drops drastically, since the only surface in contact with the sea becomes the bottom part of the
+_foils_ themselves and the rudder blades.
 
-<TFoilDiagram client:visible lang="es" />
+<TFoilDiagram client:visible lang="en" />
 
-Gracias a esta reducción masiva del rozamiento, combinada con el efecto multiplicador del viento aparente que vimos
-antes, el barco queda "liberado". El velero sigue acelerando hasta multiplicar por tres o por cuatro la velocidad del
-viento real, catapultando a la tripulación hasta alcanzar la alucinante cifra de 100 km/h (casi 55 nudos) sobre la
-superficie del océano. ¡Pura física trabajando en perfecta armonía!
+Thanks to this massive reduction in friction, combined with the multiplying effect of the apparent wind we saw
+earlier, the boat is "freed". The sailboat continues accelerating until it multiplies the real wind speed
+by three or four, catapulting the crew to reach the mind-boggling figure of 100 km/h (almost 55 knots) over the
+surface of the ocean. Pure physics working in perfect harmony!
