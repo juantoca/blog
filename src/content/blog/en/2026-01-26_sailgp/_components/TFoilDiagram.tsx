@@ -84,7 +84,7 @@ export default function TFoilDiagram({ lang = 'es' }: Props) {
   }
 
   return (
-    <div className="bg-background my-8 flex flex-col items-center gap-6 rounded-xl border p-6 shadow-sm">
+    <div className="flex w-full flex-col items-center gap-6">
       <div className="text-center">
         <h3 className="mt-0 text-2xl font-bold">{texts.title}</h3>
         <p className="text-muted-foreground mx-auto mt-2 max-w-xl text-sm">
@@ -359,7 +359,7 @@ export default function TFoilDiagram({ lang = 'es' }: Props) {
             max={maxSpeed}
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
-            className="bg-secondary accent-primary h-2 w-full cursor-pointer appearance-none rounded-lg"
+            className="accent-primary w-full"
           />
           <div className="text-muted-foreground flex justify-between text-xs">
             <span>{texts.kts0}</span>

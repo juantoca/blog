@@ -86,7 +86,9 @@ si no se controla, puede volcar.
   <WindForceSlider />
 </AnimationWrapper>
 
-<LeewayAnimation />
+<AnimationWrapper>
+  <LeewayAnimation />
+</AnimationWrapper>
 
 ¿Pero, si la orza es tan pequeña comparada con la vela, cómo es posible que oponga tanta resistencia
 al <Concept concept="abatimiento" />? La respuesta es la diferencia de densidad entre los 2 fluidos: el aire/viento que
@@ -139,7 +141,9 @@ Para representar estas velocidades máximas en función del viento, se utilizan 
 polares, los cuáles son intrínsecos a cada modelo de barco. Usaremos como ejemplo medidas tomadas de
 un <BoatTooltip boat="Volvo70" text="Volvo Open 70" />:
 
-<PolarChart client:visible />
+<AnimationWrapper>
+  <PolarChart client:visible />
+</AnimationWrapper>
 
 (Créditos a [orc.org](https://orc.org) por la recopilación de los datos)
 
@@ -223,7 +227,9 @@ levantando el casco por completo y sacándolo fuera del agua. De un momento a ot
 se desploma drásticamente, ya que la única superficie en contacto con el mar pasa a ser la parte inferior de los
 propios _foils_ y las palas del timón.
 
-<TFoilDiagram client:visible lang="es" />
+<AnimationWrapper>
+  <TFoilDiagram client:visible lang="es" />
+</AnimationWrapper>
 
 Gracias a esta reducción masiva del rozamiento, combinada con el efecto multiplicador del viento aparente que vimos
 antes, el barco queda "liberado". El velero sigue acelerando hasta multiplicar por tres o por cuatro la velocidad del

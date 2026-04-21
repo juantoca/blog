@@ -89,7 +89,9 @@ if not controlled, can capsize.
   <WindForceSlider lang="en" />
 </AnimationWrapper>
 
-<LeewayAnimation lang="en" />
+<AnimationWrapper>
+  <LeewayAnimation lang="en" />
+</AnimationWrapper>
 
 But, if the keel is so small compared to the sail, how is it possible that it opposes so much resistance
 to <Concept concept="abatimiento" text="leeway" />? The answer is the difference in density between the 2 fluids: the air/wind that
@@ -142,7 +144,9 @@ To represent these maximum speeds as a function of the wind, polar diagrams are 
 which are intrinsic to each boat model. We will use as an example measurements taken from
 a <BoatTooltip boat="Volvo70" text="Volvo Open 70" />:
 
-<PolarChart client:visible />
+<AnimationWrapper>
+  <PolarChart client:visible />
+</AnimationWrapper>
 
 (Credits to [orc.org](https://orc.org) for data collection)
 
@@ -226,7 +230,9 @@ lifting the hull completely and lifting it out of the water. From one moment to 
 drops drastically, since the only surface in contact with the sea becomes the bottom part of the
 _foils_ themselves and the rudder blades.
 
-<TFoilDiagram client:visible lang="en" />
+<AnimationWrapper>
+  <TFoilDiagram client:visible lang="en" />
+</AnimationWrapper>
 
 Thanks to this massive reduction in friction, combined with the multiplying effect of the apparent wind we saw
 earlier, the boat is "freed". The sailboat continues accelerating until it multiplies the real wind speed
