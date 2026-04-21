@@ -345,7 +345,7 @@ export default function PointsOfSail({ lang = 'es' }: Props) {
             {heading > 67 && heading <= 112 && (
               <p>
                 <strong>Través:</strong> El punto más rápido en la mayoría de
-                barcos. Gran fuerza de proa (avance) que vence a la componente
+                barcos. Gran fuerza de proa (avance) y componente
                 lateral (través).
               </p>
             )}
@@ -360,7 +360,8 @@ export default function PointsOfSail({ lang = 'es' }: Props) {
               <p>
                 <strong>Empopada:</strong> El viento empuja totalmente desde
                 atrás. Cero fuerza de través, pero el viento aparente disminuye
-                limitando la velocidad punta.
+                limitando la velocidad punta y genera inestabilidad en el barco
+                al ser fácil trasluchar si no se maneja cuidadosamente.
               </p>
             )}
           </>
@@ -383,7 +384,7 @@ export default function PointsOfSail({ lang = 'es' }: Props) {
             {heading > 67 && heading <= 112 && (
               <p>
                 <strong>Beam Reach:</strong> The fastest point of sail for most
-                boats. Large forward force overcomes the side force.
+                boats. Large forward force and the side force.
               </p>
             )}
             {heading > 112 && heading <= 150 && (
@@ -397,7 +398,8 @@ export default function PointsOfSail({ lang = 'es' }: Props) {
               <p>
                 <strong>Running:</strong> The wind pushes entirely from behind.
                 Zero side force, but apparent wind decreases, limiting top
-                speed.
+                speed. It's also an unstable point of sail, as the boat can 
+                easily broach if not handled carefully.
               </p>
             )}
           </>
