@@ -25,12 +25,12 @@ export const GET: APIRoute = async ({ params, request }) => {
   return rss({
     title: SITE.title,
     description: SITE.description,
-    site: SITE.href,
+    site: SITE.href + "/" + params.lang + "/",
     items: posts.map((post) => ({
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.date,
-      link: `/blog/${post.id}/`,
+      link: `${params.lang}/blog/${post.id}/`,
     })),
   })
 };
