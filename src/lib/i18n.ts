@@ -1,9 +1,44 @@
-import { DEFAULT_LANGUAGE, LANGUAGES} from '@/consts'
-import type { Language, Translation, Translations } from '@/types'
+import { DEFAULT_LANGUAGE, LANGUAGES, SITE } from '@/consts'
+import type { Language, Translations } from '@/types'
 
 
 export function localizeUrl(url: string, astro: any){
   return getLocalizedUrl(url, getLanguageFromUrl(astro.originPathname))
+}
+
+export interface AlternateLink {
+  lang: string
+  url: string
+}
+
+/**
+ * Get the locale (e.g. "en-US", "es-ES") for a given language code.
+ */
+export function getLocaleForLanguage(language: string): string {
+  return LANGUAGES[language]?.locale ?? LANGUAGES[DEFAULT_LANGUAGE].locale
+}
+
+/**
+ * Generate hreflang alternate links for a given pathname.
+ * The pathname may include the language prefix (e.g. "/en/blog/").
+ * Returns absolute URLs for every configured language.
+ */
+export function getAlternateLinks(pathname: string): AlternateLink[] {
+  const segments = pathname.split('/').filter(Boolean)
+  const first = segments[0]
+  const basePath =
+    first && isValidLanguage(first)
+      ? segments.slice(1).join('/')
+      : segments.join('/')
+  const trailingSlash = pathname.endsWith('/') ? '/' : ''
+  const pathForLocalize = basePath
+    ? `/${basePath}${trailingSlash}`
+    : trailingSlash
+
+  return getAvailableLanguages().map((lang) => ({
+    lang: lang.code,
+    url: new URL(getLocalizedUrl(pathForLocalize, lang.code), SITE.href).href,
+  }))
 }
 
 

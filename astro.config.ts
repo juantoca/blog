@@ -147,7 +147,17 @@ export default defineConfig({
     }),
     mdx(),
     react(),
-    sitemap(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en-US',
+          es: 'es-ES',
+        },
+      },
+      // Exclude the root redirect page (index.astro) which only meta-refreshes to /en/
+      filter: (page) => new URL(page).pathname !== '/',
+    }),
     icon(),
   ],
   vite: {

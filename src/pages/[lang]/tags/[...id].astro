@@ -6,21 +6,25 @@ import Layout from '@/layouts/Layout.astro'
 import { getAllTags, getPostsByTag } from '@/lib/data-utils'
 
 export async function getStaticPaths() {
-  const tagMap = await getAllTags()
-  const uniqueTags = Array.from(tagMap.keys())
+  const pages = []
 
-  return Promise.all(
-    uniqueTags.map(async (tag) => {
-      const posts = await getPostsByTag(tag)
-      return {
-        params: { id: tag },
+  for (const lang of ['en', 'es']) {
+    const tagMap = await getAllTags(lang)
+    const uniqueTags = Array.from(tagMap.keys())
+
+    for (const tag of uniqueTags) {
+      const posts = await getPostsByTag(tag, lang)
+      pages.push({
+        params: { lang, id: tag },
         props: {
           tag,
           posts,
         },
-      }
-    }),
-  )
+      })
+    }
+  }
+
+  return pages
 }
 
 const { tag, posts } = Astro.props

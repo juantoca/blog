@@ -5,7 +5,7 @@ import '@/styles/typography.css'
 import FloatingSidebar from '@/components/FloatingSidebar.astro'
 import Head from '@/components/Head.astro'
 import Header from '@/components/Header.astro'
-import { SITE } from '@/consts'
+import { getLanguageFromUrl, getLocaleForLanguage } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
 interface Props {
@@ -14,13 +14,12 @@ interface Props {
 }
 
 const { class: className, hideFloatingSidebar = false } = Astro.props
+
+const htmlLang = getLocaleForLanguage(getLanguageFromUrl(Astro.originPathname))
 ---
 
 <!doctype html>
-<html
-  class="bg-background text-foreground scheme-light-dark"
-  lang={SITE.locale}
->
+<html class="bg-background text-foreground scheme-light-dark" lang={htmlLang}>
   <Head>
     <slot name="head" />
   </Head>

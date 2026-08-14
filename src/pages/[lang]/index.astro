@@ -9,10 +9,16 @@ import { getRecentPosts } from '@/lib/data-utils'
 import { localizeString, localizeUrl } from '@/lib/i18n'
 import { Icon } from 'astro-icon/components'
 
+export async function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }]
+}
+
+const { lang } = Astro.params
+
 // Error handling for fetching recent posts
 let latestPosts: Awaited<ReturnType<typeof getRecentPosts>> = []
 try {
-  latestPosts = await getRecentPosts(4, Astro.currentLocale)
+  latestPosts = await getRecentPosts(4, lang)
 } catch (error) {
   console.error('Error fetching recent posts:', error)
 }

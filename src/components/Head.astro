@@ -1,6 +1,6 @@
 ---
-import { SITE } from '@/consts'
-import { getLanguageFromUrl } from '@/lib/i18n'
+import { DEFAULT_LANGUAGE, SITE } from '@/consts'
+import { getAlternateLinks, getLanguageFromUrl } from '@/lib/i18n'
 import Favicons from './Favicons.astro'
 
 interface Props {
@@ -16,8 +16,10 @@ const {
 } = Astro.props
 
 const canonicalURL = new URL(Astro.originPathname, Astro.site).href
-const cleanPathname = Astro.originPathname.replace(/\/$/, '')
-console.log(cleanPathname)
+const alternateLinks = getAlternateLinks(Astro.originPathname)
+const defaultAlternate =
+  alternateLinks.find((alt) => alt.lang === DEFAULT_LANGUAGE)?.url ??
+  canonicalURL
 const ogImage =
   image ||
   new URL(
@@ -58,6 +60,14 @@ const ogImage =
     })()
   }
   <link rel="canonical" href={canonicalURL} />
+
+  <!-- Hreflang alternate links for internationalization -->
+  {
+    alternateLinks.map((alt) => (
+      <link rel="alternate" hreflang={alt.lang} href={alt.url} />
+    ))
+  }
+  <link rel="alternate" hreflang="x-default" href={defaultAlternate} />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
